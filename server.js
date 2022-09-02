@@ -11,6 +11,7 @@ const mainRoutes = require('./routes/main')
 const todoRoutes = require('./routes/todos')
 const petRoutes = require('./routes/pets')
 
+
 require('dotenv').config({path: './config/.env'})
 
 // Passport config

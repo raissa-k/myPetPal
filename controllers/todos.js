@@ -1,5 +1,9 @@
 const Todo = require('../models/Todo')
 const Pet = require('../models/Pet')
+var moment = require('moment');
+exports.index = function(req, res) {
+    res.render('index', { moment: moment });
+}
 
 module.exports = {
     getTodos: async (req,res)=>{
@@ -8,16 +12,17 @@ module.exports = {
             const todoItems = await Todo.find({userId:req.user.id})
             const pets = await Pet.find({userId:req.user.id})
             const petCount = await Pet.countDocuments({userId:req.user.id})
-            const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
+            const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})  
             const date = await Todo.find({userId:req.user.id}).sort({date:-1})
             res.render('todos.ejs', {
                 todos: todoItems, 
                 pets: pets, 
                 petCount: petCount, 
                 left: itemsLeft,
-                date: date, 
+                date: date,
                 user: req.user
             })
+            
         }catch (err) {
             console.log(err)
         }
