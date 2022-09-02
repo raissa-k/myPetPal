@@ -1,19 +1,30 @@
 const Todo = require('../models/Todo')
+const Pet = require('../models/Pet')
 
 module.exports = {
     getTodos: async (req,res)=>{
         console.log(req.user)
-        try{
+        try {
             const todoItems = await Todo.find({userId:req.user.id})
+            const pets = await Pet.find({userId:req.user.id})
+            const petCount = await Pet.countDocuments({userId:req.user.id})
             const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
-            res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user})
-        }catch(err){
+            const date = await Todo.find({userId:req.user.id}).sort({date:-1})
+            res.render('todos.ejs', {
+                todos: todoItems, 
+                pets: pets, 
+                petCount: petCount, 
+                left: itemsLeft,
+                date: date, 
+                user: req.user
+            })
+        }catch (err) {
             console.log(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id})
+            await Todo.create({todo: req.body.todoItem, petName: req.body.petName, completed: false, userId: req.user.id})
             console.log('Todo has been added!')
             res.redirect('/todos')
         }catch(err){
