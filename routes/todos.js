@@ -13,4 +13,8 @@ router.put('/markIncomplete', todosController.markIncomplete)
 
 router.delete('/deleteTodo', todosController.deleteTodo)
 
+// router.get('/previous', todosController.getPreviousDay)
+
+// router.get('/next', todosController.getNextDay)
+
 module.exports = router

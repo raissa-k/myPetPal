@@ -67,5 +67,20 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
-    }
+    },
+    // getPreviousDay: async (req, res) => {
+    //     const date = new Date()
+    //     const previous = new Date(date.getTime())
+    //     previous.setDate(date.getDate() - 1)
+
+    //     return previous
+    // },
+    // getNextDay: async (req, res) => {
+    //     const date = new Date()
+    //     const next = new Date(date.getTime())
+    //     previous.setDate(date.getDate() + 1)
+
+    //     return next
+
+    // }
 }    
