@@ -69,8 +69,14 @@
             <p class="lead mb-4">Click on an item to mark it as completed or incomplete.</p>
         </div>
 
+        <div>
+            <label for="dates">Go to another date: </label>
+            <input type="date" name="date" id="date">
+        </div>
+
         <!-- todo list -->
         <div class="row mb-5">
+            <h2>Today:</h2>
             <div class="col-md-6 mb-4">
                 <img class="mb-3" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="72" height="57">
                 <p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>

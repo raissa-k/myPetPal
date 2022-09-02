@@ -2,6 +2,7 @@ const deleteBtn = document.querySelectorAll('.del')
 const deletePets = document.querySelectorAll('.delpet')
 const todoItem = document.querySelectorAll('span.not')
 const todoComplete = document.querySelectorAll('span.completed')
+const currentDate = document.getElementById('date').value = new Date().toLocaleString()
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
@@ -90,7 +91,3 @@ async function markIncomplete(){
         console.log(err)
     }
 }
-
-// async function todaysDate() {
-
-// }
