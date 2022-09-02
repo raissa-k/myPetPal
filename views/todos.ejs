@@ -38,69 +38,94 @@
     }
     </style>
 </head>
-<body class="px-4 py-5 my-3 mx-3 text-center">
-
-    <!-- users name -->
-    <div>
-        <h1 class="display-5 fw-bold mb-3"><%= user.userName %>'s Pet Helper list</h1>
-        <p class="lead mb-4">Click on an item to mark it as completed or incomplete.</p>
-    </div>
-
-    <!-- todo list -->
-    <div class="row mb-5">
-        <div class="col-md-6 mb-4">
-            <img class="mb-3" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="72" height="57">
-            <p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>
-            <ul class="list-group mb-4">
-            <% todos.forEach( el => { %>
-                    <li class='todoItem list-group-item d-flex justify-content-between align-items-center' data-id='<%=el._id%>'>
-                        <span class='pet badge bg-success disabled rounded-pill'><%= el.petName %></span>
-                        <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
-                        <span class="pet badge bg-success disabled rounded-pill"><%= el.date %></span>
-                        <span class='del badge bg-danger disabled rounded-pill'> Delete </span>
-                    </li>
-            <% }) %>    
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Home
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
             </ul>
-
-            <img class="mb-3" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" alt="Clipboard with a pencil" width="72" height="57">
-            <p class="text-primary mb-3">Add a task:</p>
-            <form action="/todos/createTodo" method="POST" class="mb-0">
-                <select name="petName" class="form-select mb-3">
-                    <% pets.forEach( el => { %>
-                        <option value="<%= el.petName %>"><%= el.petName %></option>
-                <% }) %>     
-                </select>
-                <input type="text" placeholder="Enter Todo Item" name='todoItem' class="form-control" id="floatingTodo">
-                <label for="floatingTodo" class="mb-0">Email</label>
-                <input type="submit" class="btn btn-lg btn-primary mt-3">
-            </form>
+          </div>
         </div>
-        <div class="col-md-6 mx-auto">
-
-            <img class="mb-3" src="https://www.svgrepo.com/show/163512/pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star.svg" alt="a dog and a cat in a circle" width="72" height="57">
-            <p class="text-primary mb-3"><%= user.userName %> has <%= petCount %> pet(s).</p>
-            <ul class="list-group mb-4">
-            <% pets.forEach( el => { %>
-                    <li class='petList list-group-item d-flex justify-content-between align-items-center' data-id='<%=el._id%>'>
-                        <span class='pet text-primary'><%= el.petName %></span>
-                        <span class='delpet badge bg-danger disabled rounded-pill'> Delete </span>
-                    </li>
-            <% }) %>    
-            </ul>
-
-            <img class="mb-3" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="72" height="57">
-            <p class="text-primary mb-3">Add a pet:</p>
-            <form action="/pets/createPet" method="POST" class="mb-0">
-                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet">
-                <label for="floatingPet" class="mb-0">Pet name</label>
-                <input type="submit" class="btn btn-lg btn-primary mt-3">
-            </form>
+    </nav>
+    <div class="px-4 py-5 my-3 mx-3 text-center">
+        <!-- users name -->
+        <div>
+            <h1 class="display-5 fw-bold mb-3"><%= user.userName %>'s Pet Helper list</h1>
+            <p class="lead mb-4">Click on an item to mark it as completed or incomplete.</p>
         </div>
 
-        <div class="col-md-6 mx-auto">
-            
+        <!-- todo list -->
+        <div class="row mb-5">
+            <div class="col-md-6 mb-4">
+                <img class="mb-3" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="72" height="57">
+                <p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>
+                <ul class="list-group mb-4">
+                <% todos.forEach( el => { %>
+                        <li class='todoItem list-group-item d-flex justify-content-between align-items-center' data-id='<%=el._id%>'>
+                            <span class='pet badge bg-success disabled rounded-pill'><%= el.petName %></span>
+                            <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
+                            <span class="pet badge bg-success disabled rounded-pill"><%= el.date %></span>
+                            <span class='del badge bg-danger disabled rounded-pill'> Delete </span>
+                        </li>
+                <% }) %>    
+                </ul>
+
+                <img class="mb-3" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" alt="Clipboard with a pencil" width="72" height="57">
+                <p class="text-primary mb-3">Add a task:</p>
+                <form action="/todos/createTodo" method="POST" class="mb-0">
+                    <select name="petName" class="form-select mb-3">
+                        <% pets.forEach( el => { %>
+                            <option value="<%= el.petName %>"><%= el.petName %></option>
+                    <% }) %>     
+                    </select>
+                    <input type="text" placeholder="Enter Todo Item" name='todoItem' class="form-control" id="floatingTodo">
+                    <label for="floatingTodo" class="mb-0">Email</label>
+                    <input type="submit" class="btn btn-lg btn-primary mt-3">
+                </form>
+            </div>
+            <div class="col-md-6 mx-auto">
+
+                <img class="mb-3" src="https://www.svgrepo.com/show/163512/pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star.svg" alt="a dog and a cat in a circle" width="72" height="57">
+                <p class="text-primary mb-3"><%= user.userName %> has <%= petCount %> pet(s).</p>
+                <ul class="list-group mb-4">
+                <% pets.forEach( el => { %>
+                        <li class='petList list-group-item d-flex justify-content-between align-items-center' data-id='<%=el._id%>'>
+                            <span class='pet text-primary'><%= el.petName %></span>
+                            <span class='delpet badge bg-danger disabled rounded-pill'> Delete </span>
+                        </li>
+                <% }) %>    
+                </ul>
+
+                <img class="mb-3" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="72" height="57">
+                <p class="text-primary mb-3">Add a pet:</p>
+                <form action="/pets/createPet" method="POST" class="mb-0">
+                    <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet">
+                    <label for="floatingPet" class="mb-0">Pet name</label>
+                    <input type="submit" class="btn btn-lg btn-primary mt-3">
+                </form>
+            </div>
+
+            <div class="col-md-6 mx-auto">
+                
+            </div>
         </div>
     </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
