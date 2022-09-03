@@ -14,7 +14,6 @@
         text-decoration: underline; text-underline-offset: 0.2rem;}
     .todoItem {font: 1rem sans-serif;}
     .del, .pet, .delpet {color: #000;}
-    form label {visibility: hidden}
     .form-select {
     display: block;
     width: 100%;
@@ -95,9 +94,66 @@
                         <option value="<%= el.petName %>"><%= el.petName %></option>
                 <% }) %>     
                 </select>
-                <input type="text" placeholder="Enter Todo Item" name='todoItem' class="form-control" id="floatingTodo">
-                <label for="floatingTodo" class="mb-0">Email</label>
-                <input type="submit" class="btn btn-lg btn-primary mt-3">
+                <p class="mb-3 lead">Pick a pre-made task or type one below</p>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios1" value="Feed pet" checked="">
+                    <label class="form-check-label" for="optionsRadios1">
+                      Feed pet
+                    </label>
+                    <img src="https://www.svgrepo.com/show/295889/pet-food-paw.svg" alt="Pet food" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios2" value="Give fresh water" checked="">
+                    <label class="form-check-label" for="optionsRadios2">
+                      Give fresh water
+                    </label>
+                    <img src="https://www.svgrepo.com/show/36235/water.svg" alt="Tap water" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios3" value="Give medicine" checked="">
+                    <label class="form-check-label" for="optionsRadios3">
+                      Give medicine
+                    </label>
+                    <img src="https://www.svgrepo.com/show/65020/medicine.svg" alt="Two medicine pills" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios4" value="Change litter" checked="">
+                    <label class="form-check-label" for="optionsRadios4">
+                      Change litter
+                    </label>
+                    <img src="https://www.svgrepo.com/show/408523/cat-litter-sand.svg" alt="A pack of cat litter sand and a sand scoop" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios5" value="Scoop litter" checked="">
+                    <label class="form-check-label" for="optionsRadios5">
+                      Scoop litter
+                    </label>
+                    <img src="https://www.svgrepo.com/show/408519/cat-litter-box.svg" alt="Cat litter box" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios6" value="Go for a walk" checked="">
+                    <label class="form-check-label" for="optionsRadios6">
+                      Go for a walk
+                    </label>
+                    <img src="https://www.svgrepo.com/show/86881/walking-the-dog.svg" alt="A human walking their dog" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="optionsRadios7" value="Play!" checked="">
+                    <label class="form-check-label" for="optionsRadios7">
+                      Play! Exercise that furbaby!
+                    </label>
+                    <img src="	https://www.svgrepo.com/show/64872/cat-toy.svg" alt="A ball of yarn" width="50" height="50">
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <input type="radio" name="todoItem" id="otherTodo" value="other"> 
+                    <label class="form-check-label my-0 mx-3" for="otherTodo">Custom task:</label>
+                    <input id="inputOtherTodo" type="text"/>
+                  </li>
+                </ul>
+                
+                <input type="submit" class="w-100 btn btn-lg btn-primary mt-3">
+                
             </form>
           </div>
       </div>
