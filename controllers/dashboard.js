@@ -14,5 +14,13 @@ module.exports = {
         } catch (err) {
             console.error(err)
         }
+    },
+    edit: async (req, res) => {
+        try{
+            res.render('edit.ejs')
+        }
+        catch (err) {
+            console.error(err)
+        }
     }
 }
