@@ -1,13 +1,8 @@
 const Todo = require('../models/Todo')
 const Pet = require('../models/Pet')
-var moment = require('moment');
-exports.index = function(req, res) {
-    res.render('index', { moment: moment });
-}
 
 module.exports = {
     getTodos: async (req,res)=>{
-        console.log(req.user)
         try {
             const todoItems = await Todo.find({userId:req.user.id})
             const pets = await Pet.find({userId:req.user.id})
@@ -24,16 +19,15 @@ module.exports = {
             })
             
         }catch (err) {
-            console.log(err)
+            console.error(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
             await Todo.create({todo: req.body.todoItem, petName: req.body.petName, completed: false, userId: req.user.id})
-            console.log('Todo has been added!')
             res.redirect('/todos')
         }catch(err){
-            console.log(err)
+            console.error(err)
         }
     },
     markComplete: async (req, res)=>{
@@ -41,10 +35,9 @@ module.exports = {
             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
                 completed: true
             })
-            console.log('Marked Complete')
             res.json('Marked Complete')
         }catch(err){
-            console.log(err)
+            console.error(err)
         }
     },
     markIncomplete: async (req, res)=>{
@@ -52,20 +45,17 @@ module.exports = {
             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
                 completed: false
             })
-            console.log('Marked Incomplete')
             res.json('Marked Incomplete')
         }catch(err){
-            console.log(err)
+            console.error(err)
         }
     },
     deleteTodo: async (req, res)=>{
-        console.log(req.body.todoIdFromJSFile)
         try{
             await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
-            console.log('Deleted Todo')
             res.json('Deleted It')
         }catch(err){
-            console.log(err)
+            console.error(err)
         }
     },
     // getPreviousDay: async (req, res) => {

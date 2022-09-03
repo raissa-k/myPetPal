@@ -2,6 +2,12 @@ const deleteBtn = document.querySelectorAll('.del')
 const deletePets = document.querySelectorAll('.delpet')
 const todoItem = document.querySelectorAll('span.not')
 const todoComplete = document.querySelectorAll('span.completed')
+const other = document.getElementById('otherTodo')
+const inputOther = document.getElementById('inputOtherTodo')
+
+inputOther.addEventListener('change', () => {
+    other.value = inputOther.value
+})
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
@@ -30,10 +36,9 @@ async function deleteTodo(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -48,10 +53,9 @@ async function deletePet(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -66,10 +70,9 @@ async function markComplete(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -84,9 +87,12 @@ async function markIncomplete(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
+
+// async function todaysDate() {
+
+// }
