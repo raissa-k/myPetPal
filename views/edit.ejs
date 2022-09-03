@@ -43,8 +43,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/dashboard">Pet Dashboard</a>
-              <span class="visually-hidden">(current)</span>
+              <a class="nav-link" href="/dashboard">Pet Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/calendar">Calendar</a>
@@ -58,26 +57,10 @@
     </nav>
 
     <!--Pet Table-->
+    <%if (pets.petName) {%>
     <div class="px-4 py-5 my-3 mx-3 text-center">
-      <h1><%= user.userName %>'s Pet Dashboard</h1>
-        <div class="row mb-5">
-          <div class="col-md-6 mx-auto">
-            <img class="mb-3" src="https://www.svgrepo.com/show/163512/pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star.svg" alt="a dog and a cat in a circle" width="72" height="57">
-            <p class="text-primary mb-3"><%= user.userName %> has <%= petCount %> pet(s).</p>
-            <ul class="list-group mb-4">
-            <% pets.forEach( el => { %>
-                    <li class='petList list-group-item d-flex justify-content-between align-items-center' data-id='<%=el._id%>'>
-                        <span class='pet text-primary'><%= el.petName %></span>
-                        <span class='pet text-primary'><%= el.petBreed %></span>
-                        <span class='pet text-primary'><%= el.petBirthday %></span>
-                        <span class='pet text-primary'><%= el.petAge %></span>
-                        <span class='delpet badge bg-danger disabled rounded-pill'> Delete </span>
-                    </li>
-            <% }) %>    
-            </ul>
-        </div>
-
-      <!--Pet Form-->
+      <h1>Edit <%= pets.petName %></h1>
+          <!--Pet Form-->
           <div class="col-md-6 mx-auto">
             <img class="mb-3" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="72" height="57">
             <p class="text-primary mb-3">Add a pet:</p>
@@ -92,30 +75,10 @@
           </div>
         </div>
     </div>
-
-    <div class="col-md-6 mx-auto">
-      <table class="table table-hover">
-        <tr>
-          <th>Name</th>
-          <th>Breed</th>
-          <th>Birthday</th>
-          <th>Age</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-        <% pets.forEach (el => { %>
-          <tr data-id='<%=el._id%>'>
-            <td><%= el.petName %></td>
-            <td><%= el.petBreed %></td>
-            <td><%= el.petBirthday %></td>
-            <td><%= el.petAge %></td>
-            <td><a href="/edit">Edit</a></td>
-            <td class="delpet">Delete</td>
-          </tr>
-        <% }) %>
-      </table>
-    </div>
-
+    <% } else { %>
+      <div class="px-4 py-5 my-3 mx-3 text-center">
+        <h1>Nothing found with that ID.</h1>
+      <%}%>
   <script src="js/pet.js"></script>
 
 </body>

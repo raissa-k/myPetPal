@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
     <style>
-    .completed{
-        text-decoration: line-through; --bs-text-opacity: 1; color: #868e96;}
-    .not{
-        text-decoration: underline; text-underline-offset: 0.2rem;}
     .todoItem {font: 1rem sans-serif;}
     .del, .pet, .delpet {color: #000;}
     .form-select {
@@ -76,20 +72,22 @@
 			<img class="mb-3" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="72" height="57">
 			<p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>
 
-			<table class="table table-hover">
+			<table class="table table-hover table-sort table-arrows">
 				<thead>
 					<tr>
 						<th scope="col">Pet</th>
 						<th scope="col">Task</th>
 						<th scope="col">Date</th>
+						<th scope="col">Completed</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="calendarData">
 					<% dates.forEach( el => { %>
 						<tr scope="row">
 							<td><%= el.petName %></td>
 							<td><%= el.todo %></td>
 							<td><%= el.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: '2-digit'}) %></td>
+							<td><%= el.completed === true ? 'Completed' : 'Not completed'%></td>
 						</tr>
 					<% }) %>
 				</tbody>

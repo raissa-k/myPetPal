@@ -28,17 +28,5 @@ async function deletePet(){
 
 async function editPet(){
     const petId = this.parentNode.dataset.id
-    try {
-        const response = await fetch('pets/editPet', {
-            method: 'put',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                'petIdFromJSFile': petId
-            })
-        })
-        const data = await response.json()
-        location.reload()
-    } catch (err) {
-        console.error(err)
-    }
+    location.assign(`/edit/pet/${petId}`)
 }
