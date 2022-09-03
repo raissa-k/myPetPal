@@ -1,9 +1,5 @@
 const Todo = require('../models/Todo')
 const Pet = require('../models/Pet')
-var moment = require('moment');
-exports.index = function(req, res) {
-    res.render('index', { moment: moment });
-}
 
 module.exports = {
     getTodos: async (req,res)=>{
