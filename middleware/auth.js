@@ -5,6 +5,13 @@ module.exports = { // if the user is not logged in, they will be redirected to t
       } else {
         res.redirect('/')
       }
+    },
+    ensureGuest: function (req, res, next) {
+      if (req.isAuthenticated()) {
+        res.redirect('/todos')
+      } else {
+        return next()
+      }
     }
   }
   
