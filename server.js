@@ -11,6 +11,7 @@ const mainRoutes = require('./routes/main')
 const todoRoutes = require('./routes/todos')
 const petRoutes = require('./routes/pets')
 const dashboardRoutes = require('./routes/dashboard')
+const calendarRoutes = require('./routes/calendar')
 
 
 require('dotenv').config({path: './config/.env'})
@@ -46,6 +47,7 @@ app.use('/', mainRoutes)
 app.use('/todos', todoRoutes)
 app.use('/pets', petRoutes)
 app.use('/dashboard', dashboardRoutes)
+app.use('/calendar', calendarRoutes)
  
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running, you better catch it!')
