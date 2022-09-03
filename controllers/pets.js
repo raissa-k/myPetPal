@@ -3,21 +3,41 @@ const Pet = require('../models/Pet')
 module.exports = {
     createPet: async (req, res)=>{
         try{
-            await Pet.create({petName: req.body.petName, userId: req.user.id})
-            console.log('Pet has been added!')
-            res.redirect('/todos')
+            await Pet.create({
+                petName: req.body.petName,
+                petAge: req.body.petAge,
+                petBirthday: req.body.petBirthday,
+                petBreed: req.body.petBreed, 
+                userId: req.user.id
+            })
+            res.redirect('/dashboard')
         }catch(err){
-            console.log(err)
+            console.error(err)
         }
     },
     deletePet: async (req, res)=>{
-        console.log(req.body.petIdFromJSFile)
+        console.info(req.body.petIdFromJSFile)
         try{
             await Pet.findOneAndDelete({_id:req.body.petIdFromJSFile})
-            console.log('Deleted pet')
             res.json('Deleted It')
         }catch(err){
-            console.log(err)
+            console.error(err)
+        }
+    },
+    editPet: async (req, res) => {
+        console.info(req.body.petIdFromJSFile)
+        try {
+            await Pet.findOneAndUpdate({
+                _id:req.body.petIdFromJSFile,
+                petName: req.body.petName,
+                petAge: req.body.petAge,
+                petBirthday: req.body.petBirthday,
+                petBreed: req.body.petBreed,
+                userId: req.user.id
+            })
+            res.json('Edited It')
+        } catch (err) {
+            console.error(err)
         }
     }
 }    

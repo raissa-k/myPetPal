@@ -1,15 +1,15 @@
 const deleteBtn = document.querySelectorAll('.del')
-const deletePets = document.querySelectorAll('.delpet')
-const todoItem = document.querySelectorAll('span.not')
-const todoComplete = document.querySelectorAll('span.completed')
-const currentDate = document.getElementById('date').value = new Date().toLocaleString()
+const todoItem = document.querySelectorAll('label.not')
+const todoComplete = document.querySelectorAll('label.completed')
+const other = document.getElementById('otherTodo')
+const inputOther = document.getElementById('inputOtherTodo')
+
+inputOther.addEventListener('change', () => {
+    other.value = inputOther.value
+})
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
-})
-
-Array.from(deletePets).forEach((el)=>{
-    el.addEventListener('click', deletePet)
 })
 
 Array.from(todoItem).forEach((el)=>{
@@ -31,28 +31,9 @@ async function deleteTodo(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
-    }
-}
-
-async function deletePet(){
-    const petId = this.parentNode.dataset.id
-    try{
-        const response = await fetch('pets/deletePet', {
-            method: 'delete',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({
-                'petIdFromJSFile': petId
-            })
-        })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
-    }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -67,10 +48,9 @@ async function markComplete(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
 
@@ -85,9 +65,12 @@ async function markIncomplete(){
             })
         })
         const data = await response.json()
-        console.log(data)
         location.reload()
     }catch(err){
-        console.log(err)
+        console.error(err)
     }
 }
+
+// async function todaysDate() {
+
+// }

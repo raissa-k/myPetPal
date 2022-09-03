@@ -10,6 +10,10 @@ const TodoSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  petName: {
+    type: String,
+    required: true
+  },
   userId: {
     type: String,
     required: true
