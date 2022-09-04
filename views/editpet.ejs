@@ -59,18 +59,30 @@
     <!--Pet Table-->
     <%if (pets.petName) {%>
     <div class="px-4 py-5 my-3 mx-3 text-center">
-      <h1>Edit <%= pets.petName %></h1>
+      <h1><%= pets.petName %></h1>
           <!--Pet Form-->
           <div class="col-md-6 mx-auto">
             <img class="mb-3" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="72" height="57">
-            <p class="text-primary mb-3">Add a pet:</p>
-            <form action="/pets/createPet" method="POST" class="mb-0">
-                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet">
-                <input type="text" placeholder="Enter age" name="petAge" class="form-control" id="floatingPet">
-                <input type="text" placeholder="Enter breed" name="petBreed" class="form-control" id="floatingPet">
-                <input type="text" placeholder="Enter birthday" name="petBirthday" class="form-control" id="floatingPet">
-                <label for="floatingPet" class="mb-0">Pet name</label>
-                <input type="submit" class="btn btn-lg btn-primary mt-3">
+            <h2 class="mb-3">Edit your pet's information:</h2>
+            <form action="/pets/editPet" method="POST" class="form-group" data-id='<%=pets._id%>'>
+              <input type="hidden" name="_method" value="PATCH">
+              <div class="form-floating">
+                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet" value="<%= locals.pets.petName ? pets.petName : '' %>">
+                <label for="floatingPet">Enter pet name</label>
+              </div>
+              <div class="form-floating">
+                <input type="text" placeholder="Enter pet age" name='petAge' class="form-control" id="floatingAge" value="<%= locals.pets.petAge ? pets.petAge : '' %>">
+                <label for="floatingAge">Enter pet age</label>
+              </div>
+              <div class="form-floating">
+                <input type="text" placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingBreed" value="<%= locals.pets.petBreed ? pets.petBreed : '' %>">
+                <label for="floatingBreed">Enter pet breed</label>
+              </div>
+              <div class="form-floating">
+                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBirth" value="<%= locals.pets.petBirthday ? pets.petBirthday : '' %>">
+                <label for="floatingBirth">Enter pet birthday</label>
+              </div>
+                <input type="submit" class="btn btn-lg btn-primary mt-3" id="petEditButton">
             </form>
           </div>
         </div>
@@ -78,8 +90,8 @@
     <% } else { %>
       <div class="px-4 py-5 my-3 mx-3 text-center">
         <h1>Nothing found with that ID.</h1>
-      <%}%>
-  <script src="js/pet.js"></script>
+    <%}%>
 
+<script type="javascript" src="js/edit.js"></script>
 </body>
 </html>

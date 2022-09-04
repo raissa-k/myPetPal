@@ -25,17 +25,19 @@ module.exports = {
         }
     },
     editPet: async (req, res) => {
-        console.info(req.body.petIdFromJSFile)
         try {
-            await Pet.findOneAndUpdate({
-                _id:req.body.petIdFromJSFile,
-                petName: req.body.petName,
-                petAge: req.body.petAge,
-                petBirthday: req.body.petBirthday,
-                petBreed: req.body.petBreed,
-                userId: req.user.id
-            })
-            res.json('Edited It')
+            await Pet.findOneAndUpdate(
+                req.body.petIdFromJSFile,
+                
+                {
+                    petName: req.body.petName,
+                    petAge: req.body.petAge,
+                    petBirthday: req.body.petBirthday,
+                    petBreed: req.body.petBreed,
+                    userId: req.user.id
+                }
+            )
+            res.redirect('/dashboard')
         } catch (err) {
             console.error(err)
         }
