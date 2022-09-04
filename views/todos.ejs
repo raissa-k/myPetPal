@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
     <style>
     .completed{
-        background-color: #ccc;}
-        .completed div {
-          background-color: #ccc;
-        }
+        background-color: #ccc !important;}
     .not{
         text-decoration: dotted underline #ccc; text-underline-offset: 0.2rem;}
     .del, .pet, .delpet {color: #000;}
@@ -86,12 +83,42 @@
 
       <!-- todo list -->
       <div class="row mb-5">
-          <div class="col-md-6 mb-4">
+          <div class="col-lg-8 col-md-6 mb-4">
               <img class="mb-3" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="72" height="57">
               <p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>
+
+              <!-- todo: table style -->
+              <table class="table table-light table-hover">
+                <thead>
+                  <tr class="table-active">
+                    <th scope="col">Completed</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Pet</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% todos.forEach( el => { %>
+                    <tr scope="row" class="<%= el.completed === true ? 'completed' : 'not'%>" data-id='<%=el._id%>'>
+                      <td><input class="form-check-input mx-0" type="checkbox" value="" <%= el.completed === true ? 'checked' : ''%>></td>
+                      <td><%= el.todo %></td>
+                      <td><span class='pet badge bg-warning rounded-pill'><%= el.petName %></span></td>
+                      <td><span class="badge bg-info disabled rounded-pill"><%= el.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: '2-digit'}) %></span></td>
+                      <td class='editTodo'><span class="btn btn-outline-info">Edit</span></td>
+                      <td class='del text-danger'><span class="btn btn-outline-danger">Delete</span></td>
+                    </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+
+              <hr class="col-3 col-md-2 mb-5 mt-5">
+
+              <!-- todo list: flex style -->
               <% todos.forEach( el => { %>
-              <div class="list-group" data-id='<%=el._id%>'>
-                <label class="list-group-item list-group-item-action flex-column align-items-start <%= el.completed === true ? 'completed' : 'not'%>" >
+              <div class="list-group w-auto" >
+                <label class="list-group-item list-group-item-action d-flex gap-3 py-3 align-items-center justify-content-between <%= el.completed === true ? 'completed' : 'not'%>" data-id='<%=el._id%>'>
                   <input class="form-check-input mx-0" type="checkbox" value="" <%= el.completed === true ? 'checked' : ''%>>
                   <span class="mx-4">
                     <%= el.todo %>
@@ -99,13 +126,15 @@
                   
                     <span class='pet badge bg-warning rounded-pill'><%= el.petName %></span>
                     <span class="badge bg-info disabled rounded-pill"><%= el.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: '2-digit'}) %></span>
-                    <span class='del badge lead bg-danger mx-4'> Delete </span>
+                    <button class="editTodo btn btn-outline-info"> Edit </button>
+                    <button class='del btn btn-outline-danger mx-4 w-auto'> Delete </button>
                   </label>
               </div>
               <% }) %>   
           </div>
 
-          <div class="col-md-6 mx-auto">
+          <!-- Add task (form) -->
+          <div class="col-lg-4 col-md-6 mx-auto">
             <img class="mb-3" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" alt="Clipboard with a pencil" width="72" height="57">
             <p class="text-primary mb-3">Add a task:</p>
             <form action="/todos/createTodo" method="POST" class="mb-0 mx-4 w-auto">
@@ -115,14 +144,18 @@
                 <% }) %>     
                 </select>
                 <p class="mb-3 lead">Pick a pre-made task or type one below</p>
+                <!-- FORMAT: -->
                 <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+                  <!-- input: mind name (field to be submitted), value (will be submitted to db) and id -->
                   <input type="radio" name="todoItem" id="optionsRadios1" value="Feed pet" checked="" class="list-group-item-check pe-none">
+                  <!-- label: image (with alt) goes inside, mind the "for" with matching ID -->
                   <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios1">
                       Feed pet
-    <img src="https://www.svgrepo.com/show/295889/pet-food-paw.svg" alt="Pet food" width="50" height="50">
-
+                      <img src="https://www.svgrepo.com/show/295889/pet-food-paw.svg" alt="Pet food" width="50" height="50">
                     </label>
                 </div>
+
+                <!-- format repeats -->
                 <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
                   <input type="radio" name="todoItem" id="optionsRadios2" value="Give fresh water" checked="" class="list-group-item-check pe-none">
                   <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios2">
@@ -171,10 +204,12 @@
                   </label>
                 </div> 
                 
+                <!-- custom input -->
                 <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
                   <input type="radio" name="todoItem" id="otherTodo" value="other" checked="" class="list-group-item-check pe-none">
                   <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="otherTodo">Custom task:
-                  <input id="inputOtherTodo" type="text"/>
+                    <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
+                  <input id="inputOtherTodo" type="text" class="form-control"/>
                   </label>
                 </div>
                 

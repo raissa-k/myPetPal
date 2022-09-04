@@ -50,6 +50,23 @@ module.exports = {
             console.error(err)
         }
     },
+    editTodo: async (req, res) => {
+        try {
+            await Todo.findOneAndUpdate(
+                req.body.todoIdFromJSFile,
+                
+                {
+                    todo: req.body.todoItem, 
+                    petName: req.body.petName, 
+                    completed: false, 
+                    userId: req.user.id
+                }
+            )
+            res.redirect('/todos')
+        } catch (err) {
+            console.error(err)
+        }
+    },
     deleteTodo: async (req, res)=>{
         try{
             await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
