@@ -1,6 +1,6 @@
 const deleteBtn = document.querySelectorAll('.del')
-const todoItem = document.querySelectorAll('label.not')
-const todoComplete = document.querySelectorAll('label.completed')
+const todoItem = document.querySelectorAll('.todo-incomplete')
+const todoComplete = document.querySelectorAll('.todo-complete')
 const editTodo = document.querySelectorAll('.editTodo')
 const other = document.getElementById('otherTodo')
 const inputOther = document.getElementById('inputOtherTodo')
@@ -54,6 +54,7 @@ async function markComplete(){
             })
         })
         const data = await response.json()
+        console.log('Marked complete')
         location.reload()
     }catch(err){
         console.error(err)
@@ -71,6 +72,7 @@ async function markIncomplete(){
             })
         })
         const data = await response.json()
+        console.log('Marked incomplete')
         location.reload()
     }catch(err){
         console.error(err)
