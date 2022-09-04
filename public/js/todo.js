@@ -1,6 +1,7 @@
 const deleteBtn = document.querySelectorAll('.del')
 const todoItem = document.querySelectorAll('label.not')
 const todoComplete = document.querySelectorAll('label.completed')
+const editTodo = document.querySelectorAll('.editTodo')
 const other = document.getElementById('otherTodo')
 const inputOther = document.getElementById('inputOtherTodo')
 
@@ -19,6 +20,11 @@ Array.from(todoItem).forEach((el)=>{
 Array.from(todoComplete).forEach((el)=>{
     el.addEventListener('click', markIncomplete)
 })
+
+Array.from(editTodo).forEach((el)=>{
+    el.addEventListener('click', todoEditPage)
+})
+
 
 async function deleteTodo(){
     const todoId = this.parentNode.dataset.id
@@ -69,6 +75,11 @@ async function markIncomplete(){
     }catch(err){
         console.error(err)
     }
+}
+
+async function todoEditPage(){
+    const todoId = this.parentNode.dataset.id
+    location.assign(`/edit/todo/${todoId}`)
 }
 
 // async function todaysDate() {

@@ -1,6 +1,7 @@
 const deletePets = document.querySelectorAll('.delpet')
 const editPets = document.querySelectorAll('.editpet')
 
+
 Array.from(deletePets).forEach((el)=>{
     el.addEventListener('click', deletePet)
 })
@@ -16,7 +17,7 @@ async function deletePet(){
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'petIdFromJSFile': petId
+                'petIdFromJSFile': petId,
             })
         })
         const data = await response.json()
