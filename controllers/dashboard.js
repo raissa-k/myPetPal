@@ -10,7 +10,6 @@ module.exports = {
                 petCount: petCount, 
                 user: req.user
             })
-            
         } catch (err) {
             console.error(err)
         }

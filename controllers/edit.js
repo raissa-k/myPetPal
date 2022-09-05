@@ -11,7 +11,10 @@ module.exports = {
             const petPage = await Pet.findById(petId)
 
             if (!petPage){
-                return res.status(404).render('edit.ejs', { warning: 'Could not find any entry with this ID'})
+                return res.status(404).render('editpet.ejs', {
+                    pets: {}, 
+                    user: req.user
+                })
             }
             res.render('editpet.ejs', {
                 pets: petPage, 
@@ -28,7 +31,10 @@ module.exports = {
             const todoPage = await Todo.findById(todoId)
 
             if (!todoPage){
-                return res.status(404).render('edit.ejs', { warning: 'Could not find any entry with this ID'})
+                return res.status(404).render('edittodo.ejs', 
+                { todos: {},
+                user: req.user
+            })
             }
             res.render('edittodo.ejs', {
                 todos: todoPage,

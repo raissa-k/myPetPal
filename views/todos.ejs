@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><%= user.userName %>'s To-do List</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f879a2aed7.js" crossorigin="anonymous"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" /> 
     <style>
-    .completed{
-        background-color: #ccc !important;}
-    .not{
-        text-decoration: dotted underline #ccc; text-underline-offset: 0.2rem;}
+    .todo-complete, .todo-incomplete {
+      cursor:pointer;
+    }
     .del, .pet, .delpet {color: #000;}
     .form-select {
     display: block;
@@ -40,8 +44,7 @@
     clip: rect(0, 0, 0, 0);
 }
 .list-group-item-check:checked + .list-group-item {
-    color: #fff;
-    background-color: #17a2b8;
+    background-color: #c8e6c9;
 }
 .list-group-checkable .list-group-item {
     cursor: pointer;
@@ -75,126 +78,150 @@
           </div>
         </div>
     </nav>
-    <div class="px-4 py-5 my-3 mx-3 text-center">
       <!-- users name -->
 
       <!-- ! todo list WIP -->
-      <div class="px-4 py-5 my-3 mx-3 text-center">
-        <h1><%= user.userName %>'s Todo List</h1>
+      <div class="px-4 py-5 text-center">
+        <h1 class="text-success mb-3"><%= user.userName %>'s Todo List</h1>
           <div class="row mb-5">
-            <div class="col-lg-6 mx-auto">
-              <img class="mb-3" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="72" height="57">
-              <p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>
+            <div class="col-lg-6 mx-auto mb-3">
+              <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="50" height="50">
+              <h2 class="text-success mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</h2>
               <div class="table-responsive-md">
                 <table class="table table-hover table-sort table-arrows">
+                  <thead>
+                    <tr class="table-light">
+                      <th scope="col">Done?</th>
+                      <th scope="col">Task</th>
+                      <th scope="col">Pet</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                <tbody>
                   <% todos.forEach (el => { %>
                     <tr data-id='<%=el._id%>'>
-                      <td class="text-primary"><% if (el.completed == true) { %>
-                        <h3><i class="fa-regular fa-square-check todo-complete"></i></h3>
+                      <% if (el.completed == true) { %>
+                        <td class="text-primary todo-complete">
+                          <input type="check" name="todoItem" id="<%=el._id%>" value="Task done. Uncheck to mark incomplete." checked="" class="list-group-item-check pe-none">
+                          <label for="<%=el._id%>">
+                            <i class="fa-regular fa-square-check fa-2xl"></i>
+                          </label>
+                        </td>
                       <% } else if (el.completed == false) { %>
-                       <h3>
-                        <i class="fa-regular fa-square todo-incomplete"></i>
-                       </h3>
+                        <td class="text-primary todo-incomplete">
+                          <input type="check" name="todoItem" id="<%=el._id%>" value="Task not done. Check to mark complete." checked="" class="list-group-item-check pe-none">
+                          <label for="<%=el._id%>">
+                            <i class="fa-regular fa-square fa-2xl"></i>
+                          </label>
+                        </td>
                       <% } %>
-                      </td>
                       <td><%= el.todo %></td>
                       <td><%= el.petName %></td>
                       <td><%= el.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: '2-digit'}) %></td>
-                      <!-- Need to make edit work -->
-                      <td class="editTodo"><span class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></span></td>
-                      <td class="del"><span class="btn btn-danger"><i class="fa-solid fa-trash"></i></span></td>
+                      <td class="editTodo"><button class="btn btn-success" title="Edit task" aria-label="Edit task"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                      <td class="del"><button class="btn btn-danger" title="Delete task" aria-label="Delete task"><i class="fa-solid fa-trash"></i></button></td>
                     </tr>
                     <% }) %>
-                  </table>
-                </div>
+                  </tbody>
+                </table>
+              </div>
           </div>
 
 
           <!-- Add task (form) -->
-          <div class="col-lg-4 col-md-6 mx-auto">
-            <img class="mb-3" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" alt="Clipboard with a pencil" width="72" height="57">
-            <p class="text-primary mb-3">Add a task:</p>
+          <div class="col-lg-4 col-md-6 mx-auto" aria-labelledby="addtask" role="form">
+            <img class="mb-2" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" aria-hidden="true" width="50" height="50">
+            <h2 class="text-success mb-3" id="addtask" aria-hidden="true">Add a task:</h2>
             <form action="/todos/createTodo" method="POST" class="mb-0 mx-4 w-auto">
-                <select name="petName" class="form-select mb-3">
+                <select name="petName" class="form-select mb-3" title="Pick a pet, or create one in the dashboard">
                     <% pets.forEach( el => { %>
                         <option value="<%= el.petName %>"><%= el.petName %></option>
                 <% }) %>     
                 </select>
-                <p class="mb-3 lead">Pick a pre-made task or type one below</p>
+
+                <!-- Date picker -->
+                <div class="mb-3 mx-auto">
+                  <label for="date" class="lead">Choose a date (optional)</label>
+                  <duet-date-picker identifier="date"></duet-date-picker>
+                </div>
+
+                <p class="mb-3 lead">Pick one pre-made task or make one yourself</p>
                 <!-- FORMAT: -->
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <!-- input: mind name (field to be submitted), value (will be submitted to db) and id -->
-                  <input type="radio" name="todoItem" id="optionsRadios1" value="Feed pet" checked="" class="list-group-item-check pe-none">
-                  <!-- label: image (with alt) goes inside, mind the "for" with matching ID -->
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios1">
-                      Feed pet
-                      <img src="https://www.svgrepo.com/show/295889/pet-food-paw.svg" alt="Pet food" width="50" height="50">
+                <div class="row">
+                  <div class="col col-md-6 col-xl-4 list-group list-group-checkable d-grid border-0 w-100">
+                    <!-- input: mind name (field to be submitted), value (will be submitted to db) and id -->
+                    <input type="radio" name="todoItem" id="optionsRadios1" value="Feed pet" checked="" class="list-group-item-check pe-none">
+                    <!-- label: image (with alt) goes inside, mind the "for" with matching ID -->
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between rounded-3 align-items-center py-3" for="optionsRadios1">
+                        Feed pet
+                        <img src="https://www.svgrepo.com/show/295889/pet-food-paw.svg" width="50" height="50">
+                      </label>
+                  </div>
+
+                  <!-- format repeats -->
+                  <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="optionsRadios2" value="Give fresh water" checked="" class="list-group-item-check pe-none">
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios2">
+                      Give fresh water
+                      <img src="https://www.svgrepo.com/show/36235/water.svg" width="50" height="50">
                     </label>
-                </div>
-
-                <!-- format repeats -->
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="optionsRadios2" value="Give fresh water" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios2">
-                    Give fresh water
-                    <img src="https://www.svgrepo.com/show/36235/water.svg" alt="Tap water" width="50" height="50">
-                  </label>
-                </div>
+                  </div>
       
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="optionsRadios3" value="Give medicine" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios3">
-                    Give medicine
-                    <img src="https://www.svgrepo.com/show/65020/medicine.svg" alt="Two medicine pills" width="50" height="50">
-                  </label>
-                </div>
+                  <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="optionsRadios3" value="Give medicine" checked="" class="list-group-item-check pe-none">
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios3">
+                      Give medicine
+                      <img src="https://www.svgrepo.com/show/65020/medicine.svg"  width="50" height="50">
+                    </label>
+                  </div>
 
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="optionsRadios4" value="Change litter" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios4">
-                    Change litter
-                    <img src="https://www.svgrepo.com/show/408523/cat-litter-sand.svg" alt="A pack of cat litter sand and a sand scoop" width="50" height="50">
-                  </label>
-                </div>
+                  <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="optionsRadios4" value="Change litter" checked="" class="list-group-item-check pe-none">
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios4">
+                      Change litter
+                      <img src="https://www.svgrepo.com/show/408523/cat-litter-sand.svg" width="50" height="50">
+                    </label>
+                  </div>
   
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="optionsRadios5" value="Scoop litter" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios5">
-                    Scoop litter
-                    <img src="https://www.svgrepo.com/show/408519/cat-litter-box.svg" alt="Cat litter box" width="50" height="50">
-                  </label>
-                </div>
+                  <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="optionsRadios5" value="Scoop litter" checked="" class="list-group-item-check pe-none">
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios5">
+                      Scoop litter
+                      <img src="https://www.svgrepo.com/show/408519/cat-litter-box.svg" width="50" height="50">
+                    </label>
+                  </div>
 
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="optionsRadios6" value="Go for a walk" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios6">
-                    Go for a walk
-                    <img src="https://www.svgrepo.com/show/86881/walking-the-dog.svg" alt="A human walking their dog" width="50" height="50">
-                  </label>
-                </div>
+                  <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="optionsRadios6" value="Go for a walk" checked="" class="list-group-item-check pe-none">
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios6">
+                      Go for a walk
+                      <img src="https://www.svgrepo.com/show/86881/walking-the-dog.svg" width="50" height="50">
+                    </label>
+                  </div>
 
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="optionsRadios7" value="Play!" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios7">
-                    Play! Exercise that furbaby!
-                    <img src="	https://www.svgrepo.com/show/64872/cat-toy.svg" alt="A ball of yarn" width="50" height="50">
-                  </label>
-                </div> 
+                  <div class="col col-md-auto list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="optionsRadios7" value="Play!" checked="" class="list-group-item-check pe-none">
+                    <label aria-hidden="true" class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="optionsRadios7">
+                      Play! Exercise that furbaby!
+                      <img src="	https://www.svgrepo.com/show/64872/cat-toy.svg" width="50" height="50">
+                    </label>
+                  </div> 
                 
-                <!-- custom input -->
-                <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-                  <input type="radio" name="todoItem" id="otherTodo" value="other" checked="" class="list-group-item-check pe-none">
-                  <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="otherTodo">Custom task:
-                    <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
-                  <input id="inputOtherTodo" type="text" class="form-control"/>
-                  </label>
+                  <!-- custom input -->
+                  <div class="list-group list-group-checkable d-grid border-0 w-100">
+                    <input type="radio" name="todoItem" id="otherTodo" value="other" checked="" class="list-group-item-check pe-none">
+                    <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="otherTodo">Custom task:
+                      <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
+                    <input id="inputOtherTodo" type="text" class="form-control" aria-labelledby="otherTodo"/>
+                    </label>
+                  </div>
                 </div>
-                
                 <input type="submit" class="btn btn-lg btn-primary mt-3">
             </form>
           </div>
-      </div>
-    </div>    
+      </div>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
     <script src="js/todo.js"></script>
 </body>
