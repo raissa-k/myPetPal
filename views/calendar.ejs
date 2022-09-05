@@ -1,101 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title><%= user.userName %>'s Calendar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
-    <style>
-    .todoItem {font: 1rem sans-serif;}
-    .del, .pet, .delpet {color: #000;}
-    .form-select {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 3.3rem 0.5rem 1.1rem;
-    -moz-padding-start: calc(1.1rem - 3px);
-    font-size: 1.1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #343a40;
-    background-color: #fff;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 1.1rem center;
-    background-size: 16px 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 0.375rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <title>
+    <%= user.userName %>'s Calendar
+  </title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css"
+    integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
+
+  <style>
+    .todoItem {
+      font: 1rem sans-serif;
     }
-    </style>
+
+    .del,
+    .pet,
+    .delpet {
+      color: #000;
+    }
+
+    .form-select {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 3.3rem 0.5rem 1.1rem;
+      -moz-padding-start: calc(1.1rem - 3px);
+      font-size: 1.1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #343a40;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1.1rem center;
+      background-size: 16px 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+  </style>
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="/#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/todos">Home
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/dashboard">Pet Dashboard</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="#">Calendar</a>
-				<span class="visually-hidden">(current)</span>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-    <div class="px-4 py-5 my-3 mx-3 text-center">
-      <!-- users name -->
-      <div>
-          <h1 class="text-success fw-bold mb-3"><%= user.userName %>'s Calendar</h1>
-          <p class="lead mb-4">Check your pet events here.</p>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/todos">Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">Pet Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Calendar</a>
+            <span class="visually-hidden">(current)</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
       </div>
+    </div>
+  </nav>
+  <div class="px-4 py-5 my-3 mx-3 text-center">
+    <!-- users name -->
+    <div>
+      <h1 class="text-success fw-bold mb-3">
+        <%= user.userName %>'s Calendar
+      </h1>
+      <p class="lead mb-4">Check your pet events here, or pick the day you want to see.</p>
+    </div>
 
-      <!-- todo list -->
-      	<div class="row mb-5">
-			<img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list" width="50" height="50">
-			<p class="text-primary mb-3"><%= user.userName %> has <%= left %> thing(s) left to do.</p>
+    <!-- todo list -->
+    <div class="row mb-5 mt-5">
+      <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
+        width="50" height="50">
 
-			<table class="table table-hover table-sort table-arrows">
-				<thead>
-					<tr>
-						<th scope="col">Pet</th>
-						<th scope="col">Task</th>
-						<th scope="col">Date</th>
-						<th scope="col">Completed</th>
-					</tr>
-				</thead>
-				<tbody id="calendarData">
-					<% dates.forEach( el => { %>
-						<tr scope="row">
-							<td><%= el.petName %></td>
-							<td><%= el.todo %></td>
-							<td><%= el.date.toLocaleDateString('en', { year: 'numeric', month: 'short', day: '2-digit'}) %></td>
-							<td><%= el.completed === true ? 'Completed' : 'Not completed'%></td>
-						</tr>
-					<% }) %>
-				</tbody>
-			</table>
-		</div>
-    </div>    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-<script src="js/calendar.js"></script>
+      <!-- Datepicker -->
+      <div class="row mx-auto w-auto mt-3">
+        <form action="/todos/getDate/" method="post" id="previous" class="mb-3 w-auto">
+          <duet-date-picker identifier="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
+          </duet-date-picker>
+          <button type="submit" class="btn btn-success mt-3">Pick a date</button>
+        </form>
+      </div>
+        
+      <table class="table table-hover table-sort table-arrows">
+        <thead>
+          <tr>
+            <th scope="col">Pet</th>
+            <th scope="col">Task</th>
+            <th scope="col">Date</th>
+            <th scope="col">Completed</th>
+          </tr>
+        </thead>
+        <tbody id="calendarData">
+          <% dates.forEach( el=> { %>
+            <tr scope="row">
+              <td>
+                <%= el.petName %>
+              </td>
+              <td>
+                <%= el.todo %>
+              </td>
+              <td>
+                <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
+              </td>
+              <td>
+                <%= el.completed===true ? 'Completed' : 'Not completed' %>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+    integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+    crossorigin="anonymous"></script>
+  <script src="js/calendar.js"></script>
 </body>
