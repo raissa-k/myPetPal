@@ -93,7 +93,7 @@
       <p class="lead"><strong>Currently:</strong> <%= todos.todo %> ( <%= todos.petName %> )</p>
       <img class="mb-3" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" alt="Clipboard with a pencil" width="72" height="57">
         <!--Todo Form-->
-        <form action="/todos/editTodo" method="POST" class="mb-0 mx-4 w-auto" data-id='<%=todos._id%>'>
+        <form action="/todos/editTodo/" method="POST" class="mb-0 mx-4 w-auto" data-id='<%=todos._id%>'>
           <!--Hidden field with a special name and value for method-override -->
           <input type="hidden" name="_method" value="PATCH">
           <select name="petName" class="form-select mb-3">
@@ -164,7 +164,7 @@
           
           <!-- custom input -->
           <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
-            <input type="radio" name="todoItem" id="otherTodo" value="other" checked="" class="list-group-item-check pe-none">
+            <input type="radio" name="todoItem" id="otherTodo" value="<%= todos.todo %>>" checked="" class="list-group-item-check pe-none">
             <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="otherTodo">Custom task:
               <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
             <input id="inputOtherTodo" type="text" class="form-control"/>

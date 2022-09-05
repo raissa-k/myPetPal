@@ -36,6 +36,7 @@ module.exports = {
                 completed: true
             })
             res.json('Marked Complete')
+            console.log('Marked Complete')
         }catch(err){
             console.error(err)
         }
@@ -46,6 +47,7 @@ module.exports = {
                 completed: false
             })
             res.json('Marked Incomplete')
+            console.log('Marked Incomplete')
         }catch(err){
             console.error(err)
         }
