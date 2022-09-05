@@ -23,8 +23,17 @@ module.exports = {
         }
     },
     createTodo: async (req, res)=>{
+        let creationDate = req.body.date.replace(/-/g, '\/')
+        if (!creationDate) {
+            creationDate = new Date()
+        }
         try{
-            await Todo.create({todo: req.body.todoItem, petName: req.body.petName, completed: false, userId: req.user.id})
+            await Todo.create({
+                todo: req.body.todoItem, 
+                petName: req.body.petName, 
+                completed: false, 
+                date: creationDate,
+                userId: req.user.id})
             res.redirect('/todos')
         }catch(err){
             console.error(err)
@@ -56,11 +65,11 @@ module.exports = {
         try {
             await Todo.findOneAndUpdate(
                 req.body.todoIdFromJSFile,
-                
                 {
                     todo: req.body.todoItem, 
                     petName: req.body.petName, 
-                    completed: false, 
+                    completed: false,
+                    date: req.body.date.replace(/-/g, '\/'), 
                     userId: req.user.id
                 }
             )
