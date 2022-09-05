@@ -1,5 +1,5 @@
 const deleteBtn = document.querySelectorAll('.del')
-const todoItem = document.querySelectorAll('.todo-incomplete')
+const todoIncomplete = document.querySelectorAll('.todo-incomplete')
 const todoComplete = document.querySelectorAll('.todo-complete')
 const editTodo = document.querySelectorAll('.editTodo')
 const other = document.getElementById('otherTodo')
@@ -13,7 +13,7 @@ Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
 })
 
-Array.from(todoItem).forEach((el)=>{
+Array.from(todoIncomplete).forEach((el)=>{
     el.addEventListener('click', markComplete)
 })
 

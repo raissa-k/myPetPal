@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <script src="https://kit.fontawesome.com/f879a2aed7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
   <title><%= user.userName %>'s Pet Dashboard</title>
-  <style>
+  <style> 
     .todoItem {font: 1rem sans-serif;}
     .del, .pet, .delpet {color: #000;}
     form label {visibility: hidden}
@@ -62,12 +65,12 @@
     </nav>
 
     <!--Pet Table-->
-    <div class="px-4 py-5 my-3 mx-3 text-center">
-      <h1><%= user.userName %>'s Pet Dashboard</h1>
+    <div class="px-4 py-5 mx-3 text-center">
+      <h1 class="text-success mb-5"><%= user.userName %>'s Pet Dashboard</h1>
         <div class="row mb-5">
-          <div class="col-lg-6 mx-auto">
-            <img class="mb-3" src="https://www.svgrepo.com/show/163512/pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star.svg" alt="a dog and a cat in a circle" width="72" height="57">
-            <h2 class="mb-3"><%= user.userName %> has <%= petCount %> pet(s).</h2>
+          <div class="col-lg-6 mx-auto mb-5">
+            <img class="mb-2" src="https://www.svgrepo.com/show/163512/pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star.svg" alt="a dog and a cat in a circle" width="50" height="50">
+            <h2 class="display-5 text-success mb-3"><%= user.userName %> has <%= petCount %> pet(s).</h2>
             <div class="table-responsive-md">
               <table class="table table-hover table-sort table-arrows">
                 <tr>
@@ -84,8 +87,8 @@
                     <td><%= el.petBreed %></td>
                     <td><%= el.petBirthday %></td>
                     <td><%= el.petAge %></td>
-                    <td class="editpet"><span class="btn btn-outline-info">Edit</span></td>
-                    <td class="delpet"><span class="btn btn-outline-danger">Delete</span></td>
+                    <td class="editpet"><button class="btn btn-success" aria-label="Edit pet" title="Edit pet"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                    <td class="delpet"><button class="btn btn-danger" aria-label="Delete pet" title="Delete pet"><i class="fa-solid fa-trash"></i></button></td>
                   </tr>
                   <% }) %>
                 </table>
@@ -93,11 +96,17 @@
         </div>
 
       <!--Pet Form-->
-          <div class="col-lg-6 mx-auto">
-            <img class="mb-3" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="72" height="57">
-            <h2 class="mb-3">Add a pet:</h2>
-            <form action="/pets/createPet" method="POST" class="form-group">
-              <div class="form-floating">
+          <!--Pet Form-->
+      
+      <div class="col-md-6 col-lg-4 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <img class="mb-2" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="50" height="50">
+            <h2 class="text-success mb-3">Add a pet:</h2>
+          </div>
+          <div class="card-content">
+            <form action="/pets/createPet" method="POST" class="form-group col-11 mx-auto">
+              <div class="form-floating mt-5">
                 <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet">
                 <label for="floatingPet">Enter pet name</label>
               </div>
@@ -113,10 +122,11 @@
                 <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBirth">
                 <label for="floatingBirth">Enter pet birthday</label>
               </div>
-                <input type="submit" class="btn btn-lg btn-primary mt-3">
+                <input type="submit" class="btn btn-lg btn-success mb-5 w-50">
             </form>
           </div>
-        </div>
+      </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
   <script src="js/pet.js"></script>
