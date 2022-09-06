@@ -15,7 +15,7 @@
   <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
   <title>
-    <%= user.userName %>'s To-do Editing Form
+    Edit Todo Task
   </title>
   <style>
     .todoItem {
@@ -94,14 +94,15 @@
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/calendar">Home
+            <a class="nav-link active" href="/calendar">Home
+              <span class="visually-hidden">(current)</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/dashboard">Pet Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/todos">Add new tasks</a>
+            <a class="nav-link" href="/todos">Add Tasks</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
