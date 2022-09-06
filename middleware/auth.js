@@ -8,7 +8,7 @@ module.exports = { // if the user is not logged in, they will be redirected to t
     },
     ensureGuest: function (req, res, next) {
       if (req.isAuthenticated()) {
-        res.redirect('/todos')
+        res.redirect('/calendar')
       } else {
         return next()
       }

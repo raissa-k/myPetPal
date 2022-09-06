@@ -36,3 +36,9 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+body {
+    background-image: url('../images/puppy-paw-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
