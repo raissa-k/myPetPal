@@ -53,6 +53,7 @@ To run this project, you will need to add the following environment variables to
 - Add monthly calendar view for tasks color-coded for each pet and/or type of task
 - Increase accessibility by adjusting color contrast, ensuring that all buttons have names & titles, etc.
 - Enable marking tasks complete from All Tasks page
+- Fix current date view - should not show an option to 'Go to current date'
 
 ## Lessons Learned
 
