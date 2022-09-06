@@ -63,9 +63,10 @@
       border: 0 !important;
     }
   </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="puppy-paw-background">
 
   <!--nav bar-->
 
@@ -110,7 +111,7 @@
             <h2 class="text-success mb-3">Edit pet's information:</h2>
           </div>
           <div class="card-content">
-            <form action="/pets/createPet" method="POST" class="form-group col-11 mx-auto" data-id='<%=pets._id%>'>
+            <form action="/pets/editPet" method="POST" class="form-group col-11 mx-auto" data-id='<%=pets._id%>'>
               <input type="hidden" name="_method" value="PATCH">
               <div class="form-floating mt-5">
                 <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet"

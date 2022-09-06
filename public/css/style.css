@@ -1,0 +1,38 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Clear fix hack */
+  .clearfix:after {
+       content: ".";
+       display: block;
+       clear: both;
+       visibility: hidden;
+       line-height: 0;
+       height: 0;
+  }
+  
+  .clear {
+      clear: both;
+  }
+  
+  
+  /******************************************
+  /* LAYOUT
+  /*******************************************/
+  
+  
+  
+  /******************************************
+  /* ADDITIONAL STYLES
+  /*******************************************/
+  
+.puppy-paw-background {
+    background-image: url('../images/puppy-paw-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
