@@ -63,7 +63,7 @@
       border: 0 !important;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body class="puppy-paw-background">
@@ -115,22 +115,22 @@
               <input type="hidden" name="_method" value="PATCH">
               <div class="form-floating mt-5">
                 <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet"
-                  value="<%= locals.pets.petName ? pets.petName : '' %>">
+                  value="<%= locals.pets.petName ? `${pets.petName} (name)` : '' %>">
                 <label for="floatingPet">Enter pet name</label>
               </div>
               <div class="form-floating">
-                <input type="text" placeholder="Enter pet age" name='petAge' class="form-control" id="floatingAge"
-                  value="<%= locals.pets.petAge ? pets.petAge : '' %>">
-                <label for="floatingAge">Enter pet age</label>
+                <input type="text" placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingAge"
+                  value="<%= locals.pets.petBreed ? `${pets.petBreed} (breed)` : '' %>">
+                <label for="floatingAge">Enter pet breed</label>
               </div>
               <div class="form-floating">
-                <input type="text" placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingBreed"
-                  value="<%= locals.pets.petBreed ? pets.petBreed : '' %>">
+                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBreed"
+                  value="<%= locals.pets.petBirthday ? `${pets.petBirthday} (birthday)` : '' %>">
                 <label for="floatingBreed">Enter pet breed</label>
               </div>
               <div class="form-floating">
-                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control"
-                  id="floatingBirth" value="<%= locals.pets.petBirthday ? pets.petBirthday : '' %>">
+                <input type="text" placeholder="Enter pet age" name='petAge' class="form-control"
+                  id="floatingBirth" value="<%= locals.pets.petAge ? `${pets.petAge} (age)` : '' %>">
                 <label for="floatingBirth">Enter pet birthday</label>
               </div>
               <input type="submit" class="btn btn-lg btn-success mb-3 w-50">
