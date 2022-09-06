@@ -29,7 +29,7 @@ Array.from(editTodo).forEach((el) => {
 async function deleteTodo() {
     const todoId = this.parentNode.dataset.id
     try {
-        const response = await fetch('todos/deleteTodo', {
+        const response = await fetch('/todos/deleteTodo', {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -46,7 +46,7 @@ async function deleteTodo() {
 async function markComplete() {
     const todoId = this.parentNode.dataset.id
     try {
-        const response = await fetch('todos/markComplete', {
+        const response = await fetch('/todos/markComplete', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -64,7 +64,7 @@ async function markComplete() {
 async function markIncomplete() {
     const todoId = this.parentNode.dataset.id
     try {
-        const response = await fetch('todos/markIncomplete', {
+        const response = await fetch('/todos/markIncomplete', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

@@ -4,7 +4,7 @@ const User = require('../models/User')
 
  exports.getLogin = (req, res) => { // user clicks login button, this will render the login page.
     if (req.user) {
-      return res.redirect('/todos')
+      return res.redirect('/calendar')
     }
     res.render('login', {
       title: 'Login'
@@ -31,7 +31,7 @@ const User = require('../models/User')
       req.logIn(user, (err) => { // if it does work then onto the /todos page
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/todos')
+        res.redirect(req.session.returnTo || '/calendar')
       })
     })(req, res, next)
   }
@@ -49,7 +49,7 @@ const User = require('../models/User')
   
   exports.getSignup = (req, res) => { // take user to sign-up page if they click sign-up button
     if (req.user) {
-      return res.redirect('/todos')
+      return res.redirect('/calendar')
     }
     res.render('signup', {
       title: 'Create Account'
@@ -89,7 +89,7 @@ const User = require('../models/User')
           if (err) {
             return next(err)
           }
-          res.redirect('/todos')
+          res.redirect('/calendar')
         })
       })
     })
