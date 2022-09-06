@@ -8,7 +8,10 @@ Taking care of our pets is a lot of work! Use this app to keep track of all the 
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Home Page](https://i.imgur.com/4itp9b7l.png)
+![Calendar view](https://i.imgur.com/JBcxCOtl.png)
+![Pet Dashboard](https://i.imgur.com/UhVx5tPl.png)
+![Add tasks](https://i.imgur.com/j4AB1z3l.png)
 
 
 ## Tech Stack
@@ -37,11 +40,13 @@ Install with npm
 ```
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your `.env` file
+To run this project, you will need to add the following environment variables to your `.env` file in `/config/.env`
 
 `PORT: <port>` (can be any port, ex: 3000)
 
 `DB_STRING: <your database uri>`
+
+
 ## Optimizations
 
 - Implemented a date view so users can view tasks for specific dates

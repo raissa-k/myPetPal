@@ -110,7 +110,7 @@
           </div>
           <div class="card-content">
             <form action="/pets/edit" method="POST" class="form-group col-11 mx-auto" data-id='<%=pets._id%>'>
-              <input type="hidden" name="_method" value="PATCH">
+              <input type="hidden" name="_method" value="put">
               <div class="form-floating">
                 <label for="floatingPet" class="col-form-label col-form-label-lg mt-4">Enter pet name</label>
                 <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet"

@@ -46,7 +46,7 @@ module.exports = {
     editPet: async (req, res) => {
         const petId = req.body.petId
         try {
-            await Pet.findOneAndUpdate(
+            await Pet.findOneAndReplace(
                 petId,
                 {
                     petName: req.body.petName,

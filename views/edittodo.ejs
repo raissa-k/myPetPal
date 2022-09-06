@@ -128,13 +128,15 @@
         <!--Todo Form-->
         <form action="/todos/edit/" method="POST" class="mb-0 mx-4 w-auto" data-id='<%=todos._id%>'>
           <!--Hidden field with a special name and value for method-override -->
-          <input type="hidden" name="_method" value="PATCH">
+          <input type="hidden" name="_method" value="put">
           <label for="petSelect" class="col-form-label col-form-label-lg mt-2">Pick a pet</label>
           <select name="petName" id="petSelect" class="form-select mx-auto col col-md-8 col-xl-6" title="Pick a pet, or create one in the dashboard">
             <% todoPets.forEach( el=> { %>
-              <option value="<%= el.petName %>">
-                <%= el.petName %>
-              </option>
+              <% if (el.petName == todos.petName) {%>
+                <option value="<%= el.petName %>" selected><%= el.petName %></option>
+                <% } else { %>
+                <option value="<%= el.petName %>"><%= el.petName %></option>
+                <%}%>
               <% }) %>
           </select>
 
