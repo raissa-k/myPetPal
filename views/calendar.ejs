@@ -74,7 +74,7 @@
             <a class="nav-link" href="/dashboard">Pet Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/todos">Add new tasks</a>
+            <a class="nav-link" href="/todos">Add Tasks</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
@@ -83,26 +83,26 @@
       </div>
     </div>
   </nav>
-  <div class="px-4 py-5 my-3 mx-3 text-center">
+  <div class="px-4 py-1 my-3 mx-3 text-center">
     <!-- users name -->
     <div>
-      <h1 class="text-success fw-bold mb-3">
-        <%= user.userName %>'s Calendar
+      <h1 class="text-success fw-bold mb-2">
+        All Tasks
       </h1>
-      <p class="lead mb-4">Check your pet events here, or pick the day you want to see.</p>
     </div>
 
     <!-- todo list -->
-    <div class="row mb-5 mt-5">
+    <div class="row mb-3 mt-2">
       <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
         width="50" height="50">
 
       <!-- Datepicker -->
-      <div class="row mx-auto w-auto mt-3">
+      <div><p>View tasks by date:</p></div>
+      <div class="row mx-auto w-auto mt-1">
         <form action="/todos/getDate/" method="post" id="previous" class="mb-3 w-auto">
           <duet-date-picker identifier="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
           </duet-date-picker>
-          <button type="submit" class="btn btn-success mt-3">Pick a date</button>
+          <button type="submit" class="btn btn-success mt-3">Go</button>
         </form>
       </div>
         

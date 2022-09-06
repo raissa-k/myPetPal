@@ -80,15 +80,15 @@
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/calendar">Home
+            <a class="nav-link active" href="/calendar">Home
+              <span class="visually-hidden">(current)</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/dashboard">Pet Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/todos">Add new tasks</a>
-            <span class="visually-hidden">(current)</span>
+            <a class="nav-link" href="/todos">Add Tasks</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
@@ -126,7 +126,7 @@
         <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
         width="50" height="50">
         <%if (todos.length > 0 ) {%>
-        <p class="text mb-3">You have <span class="text-success"><strong><%= left %> thing(s)</strong></span> left to do. %>
+        <p class="text">You have <span class="text-success"><strong><%= left %> thing(s)</strong></span> left to do. %>
         </p>
         <div class="table-responsive-md">
           <table class="table table-hover table-sort table-arrows">
