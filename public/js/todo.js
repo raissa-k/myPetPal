@@ -81,5 +81,5 @@ async function markIncomplete() {
 
 async function todoEditPage() {
     const todoId = this.parentNode.dataset.id
-    location.assign(`/edit/todo/${todoId}`)
+    location.assign(`/todos/edit/${todoId}`)
 }
