@@ -85,7 +85,8 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <img role="presentation" class="mb-1 mt-1 mx-3" src="https://www.svgrepo.com/show/194234/pet-house-kennel.svg" width="40"
+        height="40"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -93,14 +94,14 @@
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/todos">Home
+            <a class="nav-link" href="/calendar">Home
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/dashboard">Pet Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/calendar">Calendar</a>
+            <a class="nav-link" href="/todos">Add new tasks</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
@@ -119,15 +120,16 @@
           <%= todos.todo %> on <%= todos.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' ,
               day: '2-digit' }) %>
       </p>
-      <img class="mb-2" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" aria-hidden="true" width="50"
+      <img class="mb-3 mt-3" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" aria-hidden="true" width="50"
         height="50">
 
       <div class="mx-auto" aria-labelledby="addtask" role="form">
         <!--Todo Form-->
-        <form action="/todos/editTodo/" method="POST" class="mb-0 mx-4 w-auto" data-id='<%=todos._id%>'>
+        <form action="/todos/edit/" method="POST" class="mb-0 mx-4 w-auto" data-id='<%=todos._id%>'>
           <!--Hidden field with a special name and value for method-override -->
           <input type="hidden" name="_method" value="PATCH">
-          <select name="petName" class="form-select mb-3" title="Pick a pet, or create one in the dashboard">
+          <label for="petSelect" class="col-form-label col-form-label-lg mt-2">Pick a pet</label>
+          <select name="petName" id="petSelect" class="form-select mx-auto col col-md-8 col-xl-6" title="Pick a pet, or create one in the dashboard">
             <% todoPets.forEach( el=> { %>
               <option value="<%= el.petName %>">
                 <%= el.petName %>
@@ -137,13 +139,14 @@
 
           <!-- Date picker -->
           <!-- If not used, it'll submit the same date -->
-          <div class="mb-3 mx-auto">
-            <label for="date" class="lead">Choose a date (optional)</label>
+          <div class="mx-auto col col-md-8 col-xl-6">
+            <label for="date" class="col-form-label col-form-label-lg mt-4 mb-3">Pick a date, or leave it blank to keep <%= todos.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' ,
+              day: '2-digit' }) %>.</label>
             <duet-date-picker identifier="date" value="<%=todos.date%>"></duet-date-picker>
           </div>
 
 
-          <p class="mb-3 lead">Pick a pre-made task or type one below</p>
+          <label class="col-form-label col-form-label-lg mt-4 mb-3">Pick a pre-made task or type one below</label>
           <!-- FORMAT: -->
           <div class="row">
             <div class="col col-md-6 col-xl-4 list-group list-group-checkable d-grid border-0 w-100">
@@ -233,7 +236,7 @@
               <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="otherTodo">Custom task:
                 <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
-                <input id="inputOtherTodo" type="text" class="form-control" aria-labelledby="otherTodo" />
+                <input id="inputOtherTodo" type="text" class="form-control" aria-labelledby="otherTodo" value="<%= todos.todo %>"/>
               </label>
             </div>
           </div>

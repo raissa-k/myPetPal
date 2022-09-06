@@ -29,5 +29,5 @@ async function deletePet() {
 
 async function editPet() {
     const petId = this.parentNode.dataset.id
-    location.assign(`/edit/pet/${petId}`)
+    location.assign(`/pets/edit/${petId}`)
 }

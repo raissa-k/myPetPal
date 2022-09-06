@@ -71,7 +71,8 @@
 <body class="puppy-paw-background">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <img role="presentation" class="mb-1 mt-1 mx-3" src="https://www.svgrepo.com/show/194234/pet-house-kennel.svg" width="40"
+        height="40"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
         aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -79,15 +80,15 @@
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="/todos">Home
-              <span class="visually-hidden">(current)</span>
+            <a class="nav-link" href="/calendar">Home
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/dashboard">Pet Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/calendar">Calendar</a>
+            <a class="nav-link active" href="/todos">Add new tasks</a>
+            <span class="visually-hidden">(current)</span>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
@@ -194,7 +195,8 @@
           height="50">
         <h2 class="text-success mb-3" id="addtask" aria-hidden="true">Add a task:</h2>
         <form action="/todos/createTodo" method="POST" class="mb-0 mx-4 w-auto">
-          <select name="petName" class="form-select mb-3" title="Pick a pet, or create one in the dashboard">
+          <label for="petSelect" class="col-form-label col-form-label-lg mt-2">Pick a pet:</label>
+          <select id="petSelect" name="petName" class="form-select mb-3" title="Pick a pet, or create one in the dashboard">
             <% pets.forEach( el=> { %>
               <option value="<%= el.petName %>">
                 <%= el.petName %>
@@ -204,12 +206,11 @@
 
           <!-- Date picker -->
           <div class="mb-3 mx-auto">
-            <label for="date" class="lead mb-2">Choose a date (optional). <br> Leave blank to add to this day's
-              list.</label>
+            <label for="date" class="col-form-label col-form-label-lg mb-3">Pick a date, or leave it blank to add to today's list.</label>
             <duet-date-picker identifier="date" value="<%= calendar ? calendar : new Date() %>"></duet-date-picker>
           </div>
 
-          <p class="mb-3 lead">Pick one pre-made task or make one yourself</p>
+          <label class="col-form-label col-form-label-lg mb-3">Pick a pre-made task or type one below</label>
           <!-- FORMAT: -->
           <div class="row">
             <div class="col col-md-6 col-xl-4 list-group list-group-checkable d-grid border-0 w-100">

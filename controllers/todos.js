@@ -40,6 +40,27 @@ module.exports = {
             console.error(err)
         }
     },
+    getEditTodo: async(req, res) => {
+        const todoId = req.params.todoId
+        try {
+            const pets = await Pet.find({userId:req.user.id})
+            const todoPage = await Todo.findById(todoId)
+
+            if (!todoPage){
+                return res.status(404).render('edittodo.ejs', 
+                { todos: {},
+                user: req.user
+            })
+            }
+            res.render('edittodo.ejs', {
+                todos: todoPage,
+                todoPets: pets, 
+                user: req.user
+            }) 
+        }catch (err) {
+            console.error(err)
+        }
+    },
     createTodo: async (req, res) => {
         const creationDate = req.body.date.replace(/-/g, '\/')
         if (!creationDate) {
@@ -59,9 +80,10 @@ module.exports = {
         }
     },
     editTodo: async (req, res) => {
+        const todoId = req.body.todoId
         try {
             await Todo.findOneAndUpdate(
-                req.body.todoIdFromJSFile,
+                todoId,
                 {
                     todo: req.body.todoItem,
                     petName: req.body.petName,
@@ -83,6 +105,7 @@ module.exports = {
             console.error(err)
         }
     },
+   
     /*//////////////////////// 
     MARKING COMPLETE/INCOMPLETE
     ////////////////////////*/
