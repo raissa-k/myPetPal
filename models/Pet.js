@@ -6,7 +6,7 @@ const PetSchema = new mongoose.Schema({
     required: true,
   },
   petAge: {
-    type: Number
+    type: String
   },
   petBreed: {
     type: String
