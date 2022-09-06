@@ -98,35 +98,35 @@
   </nav>
   <!-- users name -->
 
-  <!-- ! todo list WIP -->
-  <div class="px-4 py-5 text-center">
+<div class="container-fluid text-center py-3"><h4 class="text">
+  <%= calendar ? calendar.toLocaleDateString('en',
+  { year: 'numeric' , month: 'short' , day: '2-digit' }) : user.userName %>
+</h4></div>
+
+  <!-- ! todo list -->
+  <div class="px-4 text-center">
     <div class="container-fluid">
       <div class="row justify-content-between">
         <!-- Previous date -->
         <form action="/todos/previous/" method="post" id="previous" role="button" class="mb-3 w-auto">
           <input type="hidden" name="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
-          <button type="submit" class="btn btn-success" id="previousButton">Go back one day</button>  
+          <button type="submit" class="btn btn-outline-success btn-lg" id="previousButton"><i class="fa-solid fa-angle-left"></i> Previous Day</button>  
         </form>
         
-        <!-- Previous date -->
+        <!-- Next date -->
         <form action="/todos/next/" method="post" id="next" role="button" class="mb-5 w-auto">
           <input type="hidden" name="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
-          <button type="submit" class="btn btn-success" id="nextButton">Go to next day</button>  
+          <button type="submit" class="btn btn-outline-success btn-lg" id="nextButton">Next Day <i class="fa-solid fa-angle-right"></i></button>  
         </form>
       </div>
     </div>
-
-    <h1 class="text-success mb-5">
-      <%= calendar ? calendar.toLocaleDateString('en',
-      { year: 'numeric' , month: 'short' , day: '2-digit' }) + ":" : user.userName + "'s" %> To-do List
-    </h1>
     <div class="row mb-5">
       <div class="col-lg-6 mx-auto mb-3">
         <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
         width="50" height="50">
         <%if (todos.length > 0 ) {%>
-        <h2 class="text-success mb-3">You have <%= left %> thing(s) left to do. %>
-        </h2>
+        <p class="text mb-3">You have <span class="text-success"><strong><%= left %> thing(s)</strong></span> left to do. %>
+        </p>
         <div class="table-responsive-md">
           <table class="table table-hover table-sort table-arrows">
             <thead>
@@ -177,12 +177,16 @@
                 <% }) %>
             </tbody>
           </table>
+          <div>
+            <p class="lead"><a class="btn btn-outline-success btn-lg" href="/calendar">View tasks for all dates</a></p>
+            <a class="btn btn-lg btn-outline-primary" href="/todos"> Return to current date </a>
+          </div>
         </div>
         <% } else { %>
           <div class="col-lg-6 mx-auto mb-3">
-            <h2 class="text-danger">Nothing found on that date.</h2>
-            <p class="lead">Why don't you add a new task?</p>
-            <a class="btn btn-lg btn-danger mt-5 w-auto" href="/todos"> Go back to to-do list</a>
+            <h2>No tasks on this day</h2>
+            <p class="lead"><a class="btn btn-outline-success btn-lg" href="/calendar">View tasks for all dates</a></p>
+            <a class="btn btn-lg btn-outline-primary" href="/todos"> Return to current date </a>
           </div>
           <%}%>
         </div>
