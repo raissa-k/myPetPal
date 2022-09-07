@@ -81,18 +81,20 @@ module.exports = {
     },
     editTodo: async (req, res) => {
         const todoId = req.body.todoId
+        const date = req.body.date.replace(/-/g, '\/')
+        const getDate = req.body.date
         try {
-            await Todo.findOneAndUpdate(
+            await Todo.findOneAndReplace(
                 todoId,
                 {
                     todo: req.body.todoItem,
                     petName: req.body.petName,
                     completed: false,
-                    date: req.body.date.replace(/-/g, '\/'),
+                    date: date,
                     userId: req.user.id
                 }
             )
-            res.redirect('/todos')
+            res.redirect(`/todos/${getDate}`)
         } catch (err) {
             console.error(err)
         }
@@ -135,6 +137,9 @@ module.exports = {
     DATES
     ////////////////////////*/
     getTodosByDate: async (req, res) => {
+        if (!req.body.date){
+            req.body.date = req.params.date
+        }
         const date = new Date(req.body.date.replace(/-/g, '\/'))
         const lookUpDate = {
             $gte: startOfDay(date),

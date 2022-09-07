@@ -14,7 +14,7 @@ router.post('/next', todosController.getNextDay)
 
 router.put('/markComplete', todosController.markComplete)
 router.put('/markIncomplete', todosController.markIncomplete)
-router.patch('/edit/', todosController.editTodo)
+router.put('/edit/', todosController.editTodo)
 
 router.delete('/deleteTodo', todosController.deleteTodo)
 

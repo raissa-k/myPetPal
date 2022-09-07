@@ -6,7 +6,7 @@ petEditForm.addEventListener('submit', async (ev) => {
     petId = this.parentNode.dataset.id
     try {
         await fetch(`/pets/edit/${petId}`, {
-            method: 'patch',
+            method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
                 'petIdFromJSFile': petId
@@ -24,7 +24,7 @@ todoEditForm.addEventListener('submit', async (ev) => {
     todoId = this.parentNode.dataset.id
     try {
         await fetch(`/todos/edit/${todoId}`, {
-            method: 'patch',
+            method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
                 'todoIdFromJSFile': todoId
