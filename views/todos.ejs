@@ -186,7 +186,7 @@
         <% } else { %>
           <div class="col-lg-6 mx-auto mb-3">
             <h2>No tasks on this day</h2>
-            <p class="lead"><a class="btn btn-outline-success btn-lg" href="/calendar">View tasks for all dates</a></p>
+            <p class="lead"><a class="btn btn-outline-success btn-lg mt-3" href="/calendar">View tasks for all dates</a></p>
             <a class="btn btn-lg btn-outline-primary" href="/todos"> Return to current date </a>
           </div>
           <%}%>
@@ -200,7 +200,7 @@
         <h2 class="text-success mb-3" id="addtask" aria-hidden="true">Add a task:</h2>
         <form action="/todos/createTodo" method="POST" class="mb-0 mx-4 w-auto">
           <label for="petSelect" class="col-form-label col-form-label-lg mt-2">Pick a pet:</label>
-          <select id="petSelect" name="petName" class="form-select mb-3" title="Pick a pet, or create one in the dashboard">
+          <select id="petSelect" name="petName" class="form-select mb-3" title="Pick a pet, or create one in the dashboard" required>
             <% pets.forEach( el=> { %>
               <option value="<%= el.petName %>">
                 <%= el.petName %>
@@ -214,13 +214,12 @@
             <duet-date-picker identifier="date" value="<%= calendar ? calendar : new Date() %>"></duet-date-picker>
           </div>
 
-          <label class="col-form-label col-form-label-lg mb-3">Pick a pre-made task or type one below</label>
           <!-- FORMAT: -->
-          <div class="row">
+          <fieldset class="row" role="radiogroup" aria-required="true">
+            <legend class="col-form-label col-form-label-lg mb-3">Pick a pre-made task or type one below</legend>
             <div class="col col-md-6 col-xl-4 list-group list-group-checkable d-grid border-0 w-100">
               <!-- input: mind name (field to be submitted), value (will be submitted to db) and id -->
-              <input type="radio" name="todoItem" id="optionsRadios1" value="Feed pet" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios1" value="Feed pet" class="list-group-item-check pe-none" required>
               <!-- label: image (with alt) goes inside, mind the "for" with matching ID -->
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between rounded-3 align-items-center py-3"
@@ -232,8 +231,7 @@
 
             <!-- format repeats -->
             <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="optionsRadios2" value="Give fresh water" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios2" value="Give fresh water" class="list-group-item-check pe-none" required>
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="optionsRadios2">
@@ -243,8 +241,7 @@
             </div>
 
             <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="optionsRadios3" value="Give medicine" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios3" value="Give medicine" class="list-group-item-check pe-none" required>
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="optionsRadios3">
@@ -254,8 +251,7 @@
             </div>
 
             <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="optionsRadios4" value="Change litter" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios4" value="Change litter" class="list-group-item-check pe-none" required>
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="optionsRadios4">
@@ -265,8 +261,7 @@
             </div>
 
             <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="optionsRadios5" value="Scoop litter" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios5" value="Scoop litter" class="list-group-item-check pe-none" required>
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="optionsRadios5">
@@ -276,8 +271,7 @@
             </div>
 
             <div class="col col-md-6 col-xl-4  list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="optionsRadios6" value="Go for a walk" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios6" value="Go for a walk" class="list-group-item-check pe-none" required>
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="optionsRadios6">
@@ -287,8 +281,7 @@
             </div>
 
             <div class="col col-md-auto list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="optionsRadios7" value="Play!" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="optionsRadios7" value="Play!" class="list-group-item-check pe-none" required>
               <label aria-hidden="true"
                 class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="optionsRadios7">
@@ -299,15 +292,14 @@
 
             <!-- custom input -->
             <div class="list-group list-group-checkable d-grid border-0 w-100">
-              <input type="radio" name="todoItem" id="otherTodo" value="other" checked=""
-                class="list-group-item-check pe-none">
+              <input type="radio" name="todoItem" id="otherTodo" value="" class="list-group-item-check pe-none">
               <label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
                 for="otherTodo">Custom task:
                 <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
                 <input id="inputOtherTodo" type="text" class="form-control" aria-labelledby="otherTodo" />
               </label>
             </div>
-          </div>
+          </fieldset>
           <input type="submit" class="btn btn-lg btn-primary mt-3">
         </form>
       </div>

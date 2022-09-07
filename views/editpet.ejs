@@ -95,6 +95,26 @@
     </div>
   </nav>
 
+  <% if (locals.messages.errors) { %>
+    <div class="alertdiv" role="alert">
+        <% messages.errors.forEach( el=> { %>
+            <div class="alert alert-danger">
+                <%= el.msg %>
+            </div>
+            <% }) %>
+    </div>
+    <% } %>
+
+        <% if (locals.messages.info) { %>
+            <div role="alert" class="infodiv">
+                <% messages.info.forEach( el=> { %>
+                    <div class="alert alert-danger">
+                        <%= el.msg %>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>
+
   <!--Pet Table-->
   <%if (pets.petName) {%>
     <div class="px-4 py-5 mx-3 text-center">
@@ -114,22 +134,22 @@
               <div class="form-floating">
                 <label for="floatingPet" class="col-form-label col-form-label-lg mt-4">Enter pet name</label>
                 <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet"
-                  value="<%= pets.petName %>">
+                  value="<%= pets.petName %>" required>
               </div>
               <div class="form-floating">
                 <label for="floatingAge" class="col-form-label col-form-label-lg mt-4">Enter pet breed</label>
                 <input type="text" placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingAge"
-                  value="<%= pets.petBreed %>">
+                  value="<%= pets.petBreed %>" required>
               </div>
               <div class="form-floating">
-                <label for="floatingBreed" class="col-form-label col-form-label-lg mt-4">Enter pet breed</label>
+                <label for="floatingBreed" class="col-form-label col-form-label-lg mt-4">Enter pet birthday</label>
                 <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBreed"
-                  value="<%= pets.petBirthday %>">
+                  value="<%= pets.petBirthday %>" required>
               </div>
               <div class="form-floating">
-                <label for="floatingBirth" class="col-form-label col-form-label-lg mt-4">Enter pet birthday</label>
+                <label for="floatingBirth" class="col-form-label col-form-label-lg mt-4">Enter pet age</label>
                 <input type="text" placeholder="Enter pet age" name='petAge' class="form-control"
-                  id="floatingBirth" value="<%= pets.petAge %>">
+                  id="floatingBirth" value="<%= pets.petAge %>" required>
               </div>
               <input type="submit" class="btn btn-lg btn-success mb-3 mt-4 w-50">
             </form>

@@ -23,18 +23,6 @@
     .delpet {
       color: #000;
     }
-
-    form label {
-      visibility: hidden
-    }
-
-    .form-floating>.form-control,
-    .form-floating>.form-control-plaintext,
-    .form-floating>.form-select {
-      height: calc(3.5rem + 2px);
-      line-height: 1.25;
-    }
-
     .form-select {
       display: block;
       width: 100%;
@@ -106,6 +94,26 @@
     </div>
   </nav>
 
+  <% if (locals.messages.errors) { %>
+    <div class="alertdiv" role="alert">
+        <% messages.errors.forEach( el=> { %>
+            <div class="alert alert-danger">
+                <%= el.msg %>
+            </div>
+            <% }) %>
+    </div>
+    <% } %>
+
+        <% if (locals.messages.info) { %>
+            <div role="alert" class="infodiv">
+                <% messages.info.forEach( el=> { %>
+                    <div class="alert alert-danger">
+                        <%= el.msg %>
+                    </div>
+                    <% }) %>
+            </div>
+            <% } %>
+
   <!--Pet Table-->
   <div class="px-4 py-5 mx-3 text-center">
     <h1 class="text-success mb-5">
@@ -119,6 +127,7 @@
         <h2 class="display-5 text-success mb-3">
           <%= user.userName %> has <%= petCount %> pet(s).
         </h2>
+        <p class="small text-muted">Attention: deleting a pet will also erase all tasks associated with it.</p>
         <div class="table-responsive-md">
           <table class="table table-hover table-sort table-arrows">
             <tr>
@@ -163,23 +172,23 @@
           </div>
           <div class="card-content">
             <form action="/pets/createPet" method="POST" class="form-group col-11 mx-auto">
-              <div class="form-floating mt-5">
-                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet">
-                <label for="floatingPet">Enter pet name</label>
+              <div class="form-floating">
+                <label for="floatingPet" class="col-form-label col-form-label-lg mt-2">Enter pet name</label>
+                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet" required>
               </div>
               <div class="form-floating">
-                <input type=text placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingBreed">
-                <label for="floatingAge">Enter pet breed</label>
+                <label for="floatingAge" class="col-form-label col-form-label-lg mt-2">Enter pet breed</label>
+                <input type=text placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingBreed" required>
               </div>
               <div class="form-floating">
-                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBirthday">
-                <label for="floatingBreed">Enter pet birthday</label>
+                <label for="floatingBreed" class="col-form-label col-form-label-lg mt-2">Enter pet birthday</label>
+                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBirthday" required>
               </div>
               <div class="form-floating">
-                <input type="text" placeholder="Enter pet age" name="petAge" class="form-control" id="floatingAge">
-                <label for="floatingBirth">Enter pet age</label>
+                <label for="floatingBirth" class="col-form-label col-form-label-lg mt-2">Enter pet age</label>
+                <input type="text" placeholder="Enter pet age" name="petAge" class="form-control" id="floatingAge" required>
               </div>
-              <input type="submit" class="btn btn-lg btn-success mb-5 w-50">
+              <input type="submit" class="btn btn-lg btn-success mb-3 mt-4 w-50">
             </form>
           </div>
         </div>

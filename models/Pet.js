@@ -3,16 +3,19 @@ const mongoose = require('mongoose')
 const PetSchema = new mongoose.Schema({
   petName: {
     type: String,
-    required: true,
+    required: true
   },
   petAge: {
-    type: String
+    type: String,
+    required: true
   },
   petBreed: {
-    type: String
+    type: String,
+    required: true
   },
   petBirthday: {
-    type: String
+    type: String,
+    required: true
   },
   userId: {
     type: String,

@@ -89,17 +89,16 @@
       <h1 class="text-success fw-bold mb-2">
         All Tasks
       </h1>
+      <img class="mt-1" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
+        width="50" height="50">
     </div>
 
     <!-- todo list -->
-    <div class="row mb-3 mt-2">
-      <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
-        width="50" height="50">
-
+    <div class="row mb-3">
       <!-- Datepicker -->
-      <div><p>View tasks by date:</p></div>
-      <div class="row mx-auto w-auto mt-1">
+      <div class="row mx-auto w-auto">
         <form action="/todos/getDate/" method="post" id="previous" class="mb-3 w-auto">
+          <label for="date" class="col-form-label col-form-label-lg mt-3 mb-3">View tasks by date:</label>
           <duet-date-picker identifier="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
           </duet-date-picker>
           <button type="submit" class="btn btn-success mt-3">Go</button>
