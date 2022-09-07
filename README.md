@@ -4,7 +4,7 @@
 Taking care of our pets is a lot of work! Use this app to keep track of all the tasks necessary to keep your furry, feathered, & scaley friends happy & healthy.
 
 ## Link to project: 
-[ myPetPal ](https://myPetPal.onrender.com)
+[myPetPal](https://myPetPal.onrender.com)
 
 ```md
 To avoid signing up, you may log in with the following credentials:
