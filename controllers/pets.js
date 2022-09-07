@@ -1,4 +1,5 @@
 const Pet = require('../models/Pet')
+const Todo = require('../models/Todo')
 
 module.exports = {
     createPet: async (req, res)=>{
@@ -35,9 +36,13 @@ module.exports = {
         }
     },
     deletePet: async (req, res)=>{
-        console.info(req.body.petIdFromJSFile)
         try{
-            await Pet.findOneAndDelete({_id:req.body.petIdFromJSFile})
+            const petId = req.body.petIdFromJSFile
+            const petToDelete = await Pet.findById(petId)
+            const petName = petToDelete.petName
+            await Todo.deleteMany({petName:petName})
+            await petToDelete.deleteOne()
+            await Pet.findOneAndDelete({_id:petId})
             res.json('Deleted It')
         }catch(err){
             console.error(err)
@@ -47,7 +52,7 @@ module.exports = {
         const petId = req.body.petId
         try {
             await Pet.findOneAndReplace(
-                petId,
+                {_id:petId},
                 {
                     petName: req.body.petName,
                     petAge: req.body.petAge,
