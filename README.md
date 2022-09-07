@@ -3,7 +3,15 @@
 
 Taking care of our pets is a lot of work! Use this app to keep track of all the tasks necessary to keep your furry, feathered, & scaley friends happy & healthy.
 
-**Link to project:** [example.com/myPetPal](example.com/myPetPal)
+## Link to project: 
+[ myPetPal ](https://myPetPal.onrender.com)
+
+```md
+To avoid signing up, you may log in with the following credentials:
+- Email: tester3@gmail.com
+- Password: testtest
+```
+Feel free to play around and submit an issue should you find any.
 
 
 ## Screenshots
@@ -59,6 +67,9 @@ To run this project, you will need to add the following environment variables to
 - Increase accessibility by adjusting color contrast, ensuring that all buttons have names & titles, etc.
 - Enable marking tasks complete from All Tasks page
 - Fix current date view - should not show an option to 'Go to current date'
+- Reproduce and fix an error where an edited pet is duplicated
+- Clean and minimize css and js files
+- Add template partials
 
 ## Lessons Learned
 

@@ -66,6 +66,7 @@ module.exports = {
         if (!creationDate) {
             creationDate = new Date()
         }
+        const getDate = req.body.date
         try {
             await Todo.create({
                 todo: req.body.todoItem,
@@ -74,7 +75,7 @@ module.exports = {
                 date: creationDate,
                 userId: req.user.id
             })
-            res.redirect('/todos')
+            res.redirect(`/todos/${getDate}`)
         } catch (err) {
             console.error(err)
         }
@@ -82,7 +83,7 @@ module.exports = {
     editTodo: async (req, res) => {
         const todoId = req.body.todoId
         const date = req.body.date.replace(/-/g, '\/')
-        const getDate = req.body.date
+        const getDate = new Date(date)
         try {
             await Todo.findOneAndReplace(
                 todoId,
