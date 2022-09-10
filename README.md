@@ -2,24 +2,57 @@
 # myPetPal
 
 Taking care of our pets is a lot of work! Use this app to keep track of all the tasks necessary to keep your furry, feathered, & scaley friends happy & healthy.
+***
+## Table of Contents
+* [myPetPal](#mypetpal)
+* [Table of Contents](#table-of-contents)
+* [Links:](#links-)
+* [Demo](#demo)
+* [Screenshots](#screenshots)
+  + [Home page](#home-page)
+  + [Calendar](#calendar)
+  + [Pet dashboard](#pet-dashboard)
+  + [Add tasks](#add-tasks)
+* [Tech Stack](#tech-stack)
+* [Features](#features)
+* [Run Locally](#run-locally)
+* [Environment Variables](#environment-variables)
+* [Optimizations](#optimizations)
+* [Roadmap](#roadmap)
+* [Lessons Learned](#lessons-learned)
+* [Authors](#authors)
+***
+## Links: 
+- [Submit a bug/issue](https://github.com/raissa-k/myPetPal/issues)
+- [User flow (in Wiki)](https://github.com/raissa-k/myPetPal/wiki/User-flow)
 
-## Link to project: 
+
+## Demo
+
 [myPetPal](https://myPetPal.onrender.com)
 
-```md
+Note that the website is hosted on Render and may take a while to load if it has been inactive for a while.
+```
 To avoid signing up, you may log in with the following credentials:
 - Email: tester3@gmail.com
 - Password: testtest
 ```
-Feel free to play around and submit an issue should you find any.
 
 
 ## Screenshots
 
+### Home page
 ![Home Page](https://i.imgur.com/4itp9b7l.png)
+
+### Calendar
 ![Calendar view](https://i.imgur.com/JBcxCOtl.png)
+
+### Pet dashboard
 ![Pet Dashboard](https://i.imgur.com/UhVx5tPl.png)
+
+### Add tasks
 ![Add tasks](https://i.imgur.com/j4AB1z3l.png)
+
 
 
 ## Tech Stack
@@ -28,24 +61,45 @@ Feel free to play around and submit an issue should you find any.
 
 **Server:** Node, Express, MongoDB
 
-**Dependencies:** bcrypt, connect-mongo, date-fns, dotenv, ejs, express, express-flash, express-session, method-override, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator
+**Dependencies:** 
+```bcrypt, connect-mongo, date-fns, dotenv, ejs, express, express-flash, express-session, method-override, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator```
+
 
 ## Features
 
 - Secure login with Passport Auth
-- Add multiple pets & assign tasks to pets
-- View tasks by date
+- Add multiple pets & assign tasks to them
+- Filter by date to see a day's to-do list
 - Responsive for desktop & mobile
 
 
-## Installation
+## Run Locally
 
-Install with npm
+Clone the project
 
 ```bash
-  npm init
-  npm install bcrypt connect-mongo date-fns dotenv ejs express express-flash express-session method-override mongodb mongoose morgan nodemon passport passport-local validator
+  git clone https://github.com/raissa-k/myPetPal.git
 ```
+
+Go to the project directory
+
+```bash
+  cd mypetpal
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your `.env` file in `/config/.env`
@@ -55,27 +109,40 @@ To run this project, you will need to add the following environment variables to
 `DB_STRING: <your database uri>`
 
 
+
 ## Optimizations
 
-- Implemented a date view so users can view tasks for specific dates
-- Added ARIA roles
+- Increased readability of controllers
+- Improved accessibility by adding ARIA roles, adding an accessible date picker, and ensuring buttons, labels and inputs had appropriate names/descriptions.
 - Resolved icon issues
 
-**Planned Features & Improvements:**
 
+## Roadmap
+
+- Clean and minimize .css and .js files
 - Add monthly calendar view for tasks color-coded for each pet and/or type of task
-- Increase accessibility by adjusting color contrast, ensuring that all buttons have names & titles, etc.
+- Improve accessibility by adjusting color contrast, reviewing roles, and ensuring keyboard navigation
+- Add accessible modals for task/pet editing.
+- Warn users that deletion is permanent.
 - Enable marking tasks complete from All Tasks page
-- Fix current date view - should not show an option to 'Go to current date'
+- Improve a date's to-do list view
 - Reproduce and fix an error where an edited pet is duplicated
-- Clean and minimize css and js files
 - Add template partials
 
+
 ## Lessons Learned
+As a team:
+- We also learned how important good communication is for successful app development as a team.
+  * Communicating and tracking issues is critical. Even without Jira, Github projects helps keep track of what needs to be done.
+- Having a clear view of the final product is invaluable to guide decisions, especially when there isn't a team lead
+  * Wireframes and user flows, even with no UI/UX professionals around, helps with such a view
 
-We learned about the importance of branching, version control best practices, and resolving conflicts when merging pull requests. We also learned how important good communication is for successful app development as a team.
-
-**What else we learned:** Bootstrap classes, working with date formats and comparing to database values, sorting tables
+On the technical aspect:
+- Handling merge conflicts
+- Bootstrap classes 
+- Working with date formats
+- Sorting tables
+- Method overriding
 
 
 ## Authors
