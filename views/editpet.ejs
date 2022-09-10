@@ -1,99 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css"
-    integrity="sha384-enpDwFISL6M3ZGZ50Tjo8m65q06uLVnyvkFO3rsoW0UC15ATBFz3QEhr3hmxpYsn" crossorigin="anonymous">
-  <title>
-    Edit Pet
-  </title>
-  <style>
-    .todoItem {
-      font: 1rem sans-serif;
-    }
-
-    .del,
-    .pet,
-    .delpet {
-      color: #000;
-    }
-
-    .form-select {
-      display: block;
-      width: 100%;
-      padding: 0.5rem 3.3rem 0.5rem 1.1rem;
-      -moz-padding-start: calc(1.1rem - 3px);
-      font-size: 1.1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #343a40;
-      background-color: #fff;
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-      background-repeat: no-repeat;
-      background-position: right 1.1rem center;
-      background-size: 16px 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 0.375rem;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-    }
-
-    .visually-hidden,
-    .visually-hidden-focusable:not(:focus):not(:focus-within) {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
-  </style>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+<%- include("partials/header", {title: "Edit pet"}); %>
 
 <body class="puppy-paw-background">
-
-  <!--nav bar-->
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <img role="presentation" class="mb-1 mt-1 mx-3" src="https://www.svgrepo.com/show/194234/pet-house-kennel.svg" width="40"
-        height="40"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-        aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="/calendar">Home
-              <span class="visually-hidden">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/dashboard">Pet Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/todos">Add Tasks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <%- include('partials/nav.ejs', {active: ""}) %>
 
   <% if (locals.messages.errors) { %>
     <div class="alertdiv" role="alert">
@@ -116,46 +24,12 @@
             <% } %>
 
   <!--Pet Table-->
-  <%if (pets.petName) {%>
+  <%if ([pets].length) {%>
     <div class="px-4 py-5 mx-3 text-center">
       <h1 class="text-success mb-5">
         <%= pets.petName %>
       </h1>
-      <!--Pet Form-->
-      <div class="col-md-6 col-lg-4 mx-auto">
-        <div class="card">
-          <div class="card-header">
-            <img class="mb-2" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="50" height="50">
-            <h2 class="text-success mb-3">Edit pet's information:</h2>
-          </div>
-          <div class="card-content">
-            <form action="/pets/edit" method="POST" class="form-group col-11 mx-auto" data-id='<%=pets._id%>'>
-              <input type="hidden" name="_method" value="put">
-              <div class="form-floating">
-                <label for="floatingPet" class="col-form-label col-form-label-lg mt-4">Enter pet name</label>
-                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet"
-                  value="<%= pets.petName %>" required>
-              </div>
-              <div class="form-floating">
-                <label for="floatingAge" class="col-form-label col-form-label-lg mt-4">Enter pet breed</label>
-                <input type="text" placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingAge"
-                  value="<%= pets.petBreed %>" required>
-              </div>
-              <div class="form-floating">
-                <label for="floatingBreed" class="col-form-label col-form-label-lg mt-4">Enter pet birthday</label>
-                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBreed"
-                  value="<%= pets.petBirthday %>" required>
-              </div>
-              <div class="form-floating">
-                <label for="floatingBirth" class="col-form-label col-form-label-lg mt-4">Enter pet age</label>
-                <input type="text" placeholder="Enter pet age" name='petAge' class="form-control"
-                  id="floatingBirth" value="<%= pets.petAge %>" required>
-              </div>
-              <input type="submit" class="btn btn-lg btn-success mb-3 mt-4 w-50">
-            </form>
-          </div>
-        </div>
-      </div>
+      <%- include("partials/form-pet", {title: "Edit pet's information", edit: true}); %>
     </div>
     <% } else { %>
       <div class="px-4 py-5 mx-3 text-center">
