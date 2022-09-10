@@ -24,46 +24,12 @@
             <% } %>
 
   <!--Pet Table-->
-  <%if (pets.petName) {%>
+  <%if ([pets].length) {%>
     <div class="px-4 py-5 mx-3 text-center">
       <h1 class="text-success mb-5">
         <%= pets.petName %>
       </h1>
-      <!--Pet Form-->
-      <div class="col-md-6 col-lg-4 mx-auto">
-        <div class="card">
-          <div class="card-header">
-            <img class="mb-2" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="50" height="50">
-            <h2 class="text-success mb-3">Edit pet's information:</h2>
-          </div>
-          <div class="card-content">
-            <form action="/pets/edit" method="POST" class="form-group col-11 mx-auto" data-id='<%=pets._id%>'>
-              <input type="hidden" name="_method" value="put">
-              <div class="">
-                <label for="floatingPet" class="col-form-label col-form-label-lg mt-4">Enter pet name</label>
-                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet"
-                  value="<%= pets.petName %>" required>
-              </div>
-              <div class="">
-                <label for="floatingAge" class="col-form-label col-form-label-lg mt-4">Enter pet breed</label>
-                <input type="text" placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingAge"
-                  value="<%= pets.petBreed %>" required>
-              </div>
-              <div class="">
-                <label for="floatingBreed" class="col-form-label col-form-label-lg mt-4">Enter pet birthday</label>
-                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBreed"
-                  value="<%= pets.petBirthday %>" required>
-              </div>
-              <div class="">
-                <label for="floatingBirth" class="col-form-label col-form-label-lg mt-4">Enter pet age</label>
-                <input type="text" placeholder="Enter pet age" name='petAge' class="form-control"
-                  id="floatingBirth" value="<%= pets.petAge %>" required>
-              </div>
-              <input type="submit" class="btn btn-lg btn-success mb-3 mt-4 w-50">
-            </form>
-          </div>
-        </div>
-      </div>
+      <%- include("partials/form-pet", {title: "Edit pet's information", edit: true}); %>
     </div>
     <% } else { %>
       <div class="px-4 py-5 mx-3 text-center">

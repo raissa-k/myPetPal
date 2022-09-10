@@ -72,36 +72,7 @@
       </div>
 
       <!--Pet Form-->
-
-      <div class="col-md-6 col-lg-4 mx-auto">
-        <div class="card">
-          <div class="card-header">
-            <img class="mb-2" src="https://www.svgrepo.com/show/126218/pet.svg" alt="Pet paw" width="50" height="50">
-            <h2 class="text-success mb-3">Add a pet:</h2>
-          </div>
-          <div class="card-content">
-            <form action="/pets/createPet" method="POST" class="form-group col-11 mx-auto">
-              <div class="">
-                <label for="floatingPet" class="col-form-label col-form-label-lg mt-2">Enter pet name</label>
-                <input type="text" placeholder="Enter pet name" name='petName' class="form-control" id="floatingPet" required>
-              </div>
-              <div class="">
-                <label for="floatingAge" class="col-form-label col-form-label-lg mt-2">Enter pet breed</label>
-                <input type=text placeholder="Enter pet breed" name='petBreed' class="form-control" id="floatingBreed" required>
-              </div>
-              <div class="">
-                <label for="floatingBreed" class="col-form-label col-form-label-lg mt-2">Enter pet birthday</label>
-                <input type="text" placeholder="Enter pet birthday" name='petBirthday' class="form-control" id="floatingBirthday" required>
-              </div>
-              <div class="">
-                <label for="floatingBirth" class="col-form-label col-form-label-lg mt-2">Enter pet age</label>
-                <input type="text" placeholder="Enter pet age" name="petAge" class="form-control" id="floatingAge" required>
-              </div>
-              <input type="submit" class="btn btn-lg btn-success mb-3 mt-4 w-50">
-            </form>
-          </div>
-        </div>
-      </div>
+      <%- include("partials/form-pet", {title: "Add a pet", edit: false}); %>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
