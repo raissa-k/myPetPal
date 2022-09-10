@@ -25,7 +25,18 @@
   /* LAYOUT
   /*******************************************/
   
-  
+  .list-group-item-check {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .list-group-item-check:checked+.list-group-item {
+    background-color: #c8e6c9;
+  }
+
+  .list-group-checkable .list-group-item {
+    cursor: pointer;
+  }
   
   /******************************************
   /* ADDITIONAL STYLES

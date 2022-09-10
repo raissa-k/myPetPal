@@ -54,7 +54,7 @@ module.exports = {
             }
             res.render('edittodo.ejs', {
                 todos: todoPage,
-                todoPets: pets, 
+                pets: pets, 
                 user: req.user
             }) 
         }catch (err) {
