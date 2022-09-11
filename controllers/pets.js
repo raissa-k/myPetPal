@@ -50,6 +50,7 @@ module.exports = {
     },
     editPet: async (req, res) => {
         const petId = req.body.petId
+        console.log(req.body)
         try {
             await Pet.findOneAndReplace(
                 {_id:petId},
@@ -61,7 +62,7 @@ module.exports = {
                     userId: req.user.id
                 }
             )
-            res.redirect('/dashboard')
+        res.json('Edited pet')
         } catch (err) {
             console.error(err)
         }
