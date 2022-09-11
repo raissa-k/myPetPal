@@ -1,0 +1,70 @@
+<!-- Modal -->
+<div class="modal fade" id="todoEdit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-title"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content text-center">
+			<div class="modal-header">
+				<h3 class="modal-title text-success" id="modal-title">Update your task</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="todoEdit-form" method="dialog" action="/todos/edit/">
+					<input type="hidden" name="todoId" id="modalId" />
+					<label for="modalPet" class="col-form-label col-form-label-lg">Want to change pets?</label>
+					<select name="petName" id="modalPet" class="form-select mx-auto col-md-10"
+						title="Pick a pet, or create one in the dashboard">
+						<% pets.forEach( el=> { %>
+							<% if (el.petName==todos.petName) {%>
+								<option value="<%= el.petName %>" selected>
+									<%= el.petName %>
+								</option>
+								<% } else { %>
+									<option value="<%= el.petName %>">
+										<%= el.petName %>
+									</option>
+									<%}%>
+						<% }) %>
+					</select>
+
+					<!-- Date picker -->
+					<div class="mx-auto col-md-11">
+						<label for="date" class="col-form-label col-form-label-lg mt-3">Pick a new date, or keep the current one.</label>
+						<duet-date-picker required identifier="modalDate"></duet-date-picker>
+					</div>
+
+					<!-- FORMAT: -->
+					<fieldset class="row mx-auto mt-3 px-1" role="radiogroup" aria-required="true">
+						<legend class="col-form-label col-form-label-lg mb-1">Pick a pre-made task or type one below</legend>
+
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio1", value: "Feed pet", imglink: "https://www.svgrepo.com/show/295889/pet-food-paw.svg"}) %>
+						
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio2", value: "Give fresh water", imglink: "https://www.svgrepo.com/show/36235/water.svg"}) %>
+						
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio3", value: "Give medicine", imglink: "https://www.svgrepo.com/show/65020/medicine.svg"}) %>
+
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio4", value: "Change litter", imglink: "https://www.svgrepo.com/show/408523/cat-litter-sand.svg"}) %>
+
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio5", value: "Scoop litter", imglink: "https://www.svgrepo.com/show/408519/cat-litter-box.svg"}) %>
+
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio6", value: "Go for a walk", imglink: "https://www.svgrepo.com/show/86881/walking-the-dog.svg"}) %>
+
+						<%- include('todoitem-form-radio.ejs', {id: "modalradio7", value: "Play!", imglink: "https://www.svgrepo.com/show/64872/cat-toy.svg"}) %>
+
+						<!-- custom input -->
+						<div class="list-group list-group-checkable d-grid border-0 w-100">
+							<input type="radio" name="todoItem" id="modal-otherTodo" value="" checked class="list-group-item-check pe-none" />
+							<label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3" for="otherTodo">
+								Custom task:
+								<input id="modal-inputOtherTodo" type="text" class="form-control" aria-labelledby="otherTodo" value="" checked />
+							</label>
+						</div>
+					</fieldset>
+					<div class="mt-4 text-end">
+						<button id="todoEdit-dismiss" type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" id="todoEdit-button" class="btn btn-lg btn-success">Submit</button>
+					</div>
+				</form>
+			</div>
+	  	</div>
+	</div>
+</div>

@@ -58,20 +58,19 @@ async function editPet() {
     location.assign(`/pets/edit/${petId}`)
 }
 
-petEditButton.addEventListener('click', sendByButton)
-
-async function sendByButton() {       
+petEditForm.addEventListener('submit', async function(e){
+    e.preventDefault()       
     const petId = petEditField['petId'].value
     const petName = petEditField['petName'].value
     const petBreed = petEditField['petBreed'].value
     const petBirthday = petEditField['petBirthday'].value
     const petAge = petEditField['petAge'].value
 
-    if (!petId || !petName || !petBreed || !petBirthday || !petAge){
+    /* if (!petId || !petName || !petBreed || !petBirthday || !petAge){
         formAlert()
         return
     }
-    console.log(petEditField['petId'].value)
+    console.log(petEditField['petId'].value) */
 
     try {
         const response = await fetch(`/pets/edit/${petId}`, {
@@ -99,4 +98,4 @@ async function sendByButton() {
             alert.classList.toggle('show')
         }, 5000);
     }
-}
+})
