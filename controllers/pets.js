@@ -16,25 +16,6 @@ module.exports = {
             console.error(err)
         }
     },
-    getEditPet: async(req, res) => {
-        const petId = req.params.petId
-        try {
-            const petPage = await Pet.findById(petId)
-
-            if (!petPage){
-                return res.status(404).render('editpet.ejs', {
-                    pets: {}, 
-                    user: req.user
-                })
-            }
-            res.render('editpet.ejs', {
-                pets: petPage, 
-                user: req.user
-            }) 
-        }catch (err) {
-            console.error(err)
-        }
-    },
     deletePet: async (req, res)=>{
         try{
             const petId = req.body.petIdFromJSFile
@@ -50,6 +31,7 @@ module.exports = {
     },
     editPet: async (req, res) => {
         const petId = req.body.petId
+        console.log(req.body)
         try {
             await Pet.findOneAndReplace(
                 {_id:petId},
@@ -61,7 +43,7 @@ module.exports = {
                     userId: req.user.id
                 }
             )
-            res.redirect('/dashboard')
+        res.json('Edited pet')
         } catch (err) {
             console.error(err)
         }

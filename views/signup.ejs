@@ -2,7 +2,7 @@
 
 <body class="text-center puppy-paw-background">
     <% if (locals.messages.errors) { %>
-        <div class="alertdiv" role="alert">
+        <div role="alert">
             <% messages.errors.forEach( el=> { %>
                 <div class="alert alert-danger">
                     <%= el.msg %>
@@ -12,9 +12,9 @@
     <% } %>
 
     <% if (locals.messages.info) { %>
-        <div role="alert" class="infodiv">
+        <div role="alert">
             <% messages.info.forEach( el=> { %>
-                <div class="alert alert-danger">
+                <div class="alert alert-warning">
                     <%= el.msg %>
                 </div>
             <% }) %>
@@ -57,26 +57,21 @@
         padding-bottom: 40px;
     }
 
-    .alertdiv {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-    }
-
-    .infodiv {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-    }
-
     main {
         max-width: 330px;
         padding: 15px;
+    }
+
+    .alert {
+        position: absolute;
     }
 
     form label {
         visibility: hidden
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+      crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,9 +1,8 @@
 <%- include("partials/header", {title: "Pet dashboard"}); %>
 
 <body class="puppy-paw-background">
-  <%- include('partials/nav.ejs', {active: "dashboard"}) %>
-
-  <% if (locals.messages.errors) { %>
+  <%- include('partials/nav', {active: "dashboard"}) %>
+    <% if (locals.messages.errors) { %>
     <div class="alertdiv" role="alert">
         <% messages.errors.forEach( el=> { %>
             <div class="alert alert-danger">
@@ -23,6 +22,7 @@
             </div>
             <% } %>
 
+  <%- include('partials/modal-pet') %>
   <!--Pet Table-->
   <div class="px-4 py-5 mx-3 text-center">
     <h1 class="text-success mb-5">
@@ -61,7 +61,7 @@
                 <td>
                   <%= el.petAge %>
                 </td>
-                <td class="editpet"><button class="btn btn-success" aria-label="Edit pet" title="Edit pet"><i
+                <td class="editpet"><button class="btn btn-success" aria-label="Edit pet" title="Edit pet" data-bs-toggle="modal" data-bs-target="#petEdit-modal" data-id='<%=el._id%>' data-name='<%=el.petName%>' data-breed='<%=el.petBreed%>' data-birthday='<%=el.petBirthday%>' data-age='<%=el.petAge%>'><i
                       class="fa-solid fa-pen-to-square"></i></button></td>
                 <td class="delpet"><button class="btn btn-danger" aria-label="Delete pet" title="Delete pet"><i
                       class="fa-solid fa-trash"></i></button></td>

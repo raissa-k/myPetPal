@@ -37,6 +37,10 @@
   .list-group-checkable .list-group-item {
     cursor: pointer;
   }
+
+  #form-alert {
+    position: absolute;
+  }
   
   /******************************************
   /* ADDITIONAL STYLES

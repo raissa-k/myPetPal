@@ -16,7 +16,6 @@ module.exports = {
             $lte: endOfDay(new Date())
         }
         const calendar = new Date()
-        const formDate = calendar
         try {
             const todoItems = await Todo.find({
                 date: lookUpDate,
@@ -33,40 +32,18 @@ module.exports = {
                 pets: pets,
                 left: itemsLeft,
                 user: req.user,
-                calendar: calendar,
-                formDate: formDate
+                calendar: calendar
             })
         } catch (err) {
             console.error(err)
         }
     },
-    getEditTodo: async(req, res) => {
-        const todoId = req.params.todoId
-        try {
-            const pets = await Pet.find({userId:req.user.id})
-            const todoPage = await Todo.findById(todoId)
-
-            if (!todoPage){
-                return res.status(404).render('edittodo.ejs', 
-                { todos: {},
-                user: req.user
-            })
-            }
-            res.render('edittodo.ejs', {
-                todos: todoPage,
-                pets: pets, 
-                user: req.user
-            }) 
-        }catch (err) {
-            console.error(err)
-        }
-    },
     createTodo: async (req, res) => {
-        const creationDate = req.body.date.replace(/-/g, '\/')
+        const creationDate = req.body.date.replace(/-/g, '/')
         if (!creationDate) {
             creationDate = new Date()
         }
-        const getDate = req.body.date
+        const getDate = new Date(req.body.date).toISOString().slice(0,10)
         try {
             await Todo.create({
                 todo: req.body.todoItem,
@@ -82,10 +59,9 @@ module.exports = {
     },
     editTodo: async (req, res) => {
         const todoId = req.body.todoId
-        const date = req.body.date.replace(/-/g, '\/')
-        const getDate = new Date(date)
+        const date = req.body.date.replace(/-/g, '/')
         try {
-            await Todo.findOneAndReplace(
+            await Todo.findOneAndUpdate(
                 todoId,
                 {
                     todo: req.body.todoItem,
@@ -95,7 +71,7 @@ module.exports = {
                     userId: req.user.id
                 }
             )
-            res.redirect(`/todos/${getDate}`)
+            res.json('Edited task')
         } catch (err) {
             console.error(err)
         }
@@ -141,7 +117,7 @@ module.exports = {
         if (!req.body.date){
             req.body.date = req.params.date
         }
-        const date = new Date(req.body.date.replace(/-/g, '\/'))
+        const date = new Date(req.body.date.replace(/-/g, '/'))
         const lookUpDate = {
             $gte: startOfDay(date),
             $lte: endOfDay(date)
@@ -169,7 +145,7 @@ module.exports = {
         }
     },
     getPreviousDay: async (req, res) => {
-        const date = new Date(req.body.date.replace(/-/g, '\/'))
+        const date = new Date(req.body.date.replace(/-/g, '/'))
         const previous = subDays(date, 1)
         const lookUpDate = {
             $gte: startOfDay(previous),
@@ -199,7 +175,7 @@ module.exports = {
         }
     },
     getNextDay: async (req, res) => {
-        const date = new Date(req.body.date.replace(/-/g, '\/'))
+        const date = new Date(req.body.date.replace(/-/g, '/'))
         const next = addDays(date, 1)
         const lookUpDate = {
             $gte: startOfDay(next),
