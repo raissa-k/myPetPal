@@ -71,7 +71,7 @@ async function markIncomplete() {
 }
 
 /********************************************************************
- * Creation form 
+ * Disabling the custom input on creation form
 ********************************************************************/
 
 const other = document.getElementById('otherTodo')
