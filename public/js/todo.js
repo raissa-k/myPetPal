@@ -1,24 +1,23 @@
 /********************************************************************
- * Deleting, marking complete/incomplete 
-********************************************************************/
-const deleteBtn = document.querySelectorAll('.del')
-const todoIncomplete = document.querySelectorAll('.todo-incomplete')
-const todoComplete = document.querySelectorAll('.todo-complete')
+ * Deleting (bootstrap modal) 
+ ********************************************************************/
+const deleteBtn = document.getElementById('del')
+const todoDeleteModal = document.getElementById('todoDelete-modal')
+const todoDeleteDismiss = document.getElementById('todoDelete-dismiss')
 
-Array.from(deleteBtn).forEach((el) => {
-    el.addEventListener('click', deleteTodo)
-})
+deleteBtn.addEventListener('click', deleteTodo)
 
-Array.from(todoIncomplete).forEach((el) => {
-    el.addEventListener('click', markComplete)
-})
+todoDeleteModal.addEventListener('show.bs.modal', function(event) {
+    let button = event.relatedTarget
 
-Array.from(todoComplete).forEach((el) => {
-    el.addEventListener('click', markIncomplete)
+    let todoId = button.getAttribute('data-id')
+    let todoDeleteId = document.getElementById('todoDelete-id')
+
+    todoDeleteId.value = todoId
 })
 
 async function deleteTodo() {
-    const todoId = this.parentNode.dataset.id
+    const todoId = document.getElementById('todoDelete-id').value
     try {
         const response = await fetch('/todos/deleteTodo', {
             method: 'delete',
@@ -27,12 +26,27 @@ async function deleteTodo() {
                 todoId: todoId
             })
         })
+        todoDeleteDismiss.click()
         const data = await response.json()
         location.reload()
     } catch (err) {
         console.error(err)
     }
 }
+
+/********************************************************************
+ * Marking complete/incomplete 
+********************************************************************/
+const todoIncomplete = document.querySelectorAll('.todo-incomplete')
+const todoComplete = document.querySelectorAll('.todo-complete')
+
+Array.from(todoIncomplete).forEach((el) => {
+    el.addEventListener('click', markComplete)
+})
+
+Array.from(todoComplete).forEach((el) => {
+    el.addEventListener('click', markIncomplete)
+})
 
 async function markComplete() {
     const todoId = this.parentNode.dataset.id
@@ -77,8 +91,13 @@ async function markIncomplete() {
 const other = document.getElementById('otherTodo')
 const inputOther = document.getElementById('inputOtherTodo')
 
+if (other, inputOther){
 const todoForm = document.getElementById('todo-form')
 const radioButtons = todoForm.querySelectorAll('input[name="todoItem"]')
+
+inputOther.addEventListener('change', () => {
+    other.value = inputOther.value
+})
 
 Array.from(radioButtons).forEach((el) => {
     el.addEventListener('click', () => {
@@ -90,7 +109,7 @@ Array.from(radioButtons).forEach((el) => {
         }
     })
 })
-
+}
 /********************************************************************
  * Edit (modal) form 
 ********************************************************************/
@@ -112,10 +131,6 @@ Array.from(modalRadioButtons).forEach((el) => {
             modalInputOther.disabled = true;
         }
     })
-})
-
-inputOther.addEventListener('change', () => {
-    other.value = inputOther.value
 })
 
 modalInputOther.addEventListener('change', () => {

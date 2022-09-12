@@ -5,6 +5,7 @@
   <!-- users name -->
 
   <%- include('partials/modal-todo') %>
+  <%- include('partials/modal-todo-delete') %>
 <div class="container-fluid text-center py-3"><h4 class="text">
   <%= calendar ? calendar.toLocaleDateString('en',
   { year: 'numeric' , month: 'short' , day: '2-digit' }) : user.userName %>
@@ -78,10 +79,8 @@
                         <td>
                           <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
                         </td>
-                        <td class="editTodo"><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i
-                              class="fa-solid fa-pen-to-square"></i></button></td>
-                        <td class="del"><button class="btn btn-danger" title="Delete task" aria-label="Delete task"><i
-                              class="fa-solid fa-trash"></i></button></td>
+                        <td><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i class="fa-solid fa-pen-to-square"></i></button></td>
+                        <td><button class="btn btn-danger" title="Delete task" aria-label="Delete task" data-bs-toggle="modal" data-bs-target="#todoDelete-modal" data-id='<%=el._id%>'><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 <% }) %>
             </tbody>
