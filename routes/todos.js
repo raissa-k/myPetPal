@@ -3,8 +3,8 @@ const router = express.Router()
 const todosController = require('../controllers/todos')
 const { ensureAuth } = require('../middleware/auth')
 
-router.get('/', ensureAuth, todosController.getTodos)
-router.get('/:date', todosController.getTodosByDate)
+router.get('/', ensureAuth, todosController.getTodoPage)
+router.get('/:date', ensureAuth, todosController.getTodosByDate)
 
 router.post('/createTodo', todosController.createTodo)
 router.post('/getDate', todosController.getTodosByDate)

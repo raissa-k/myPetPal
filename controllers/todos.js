@@ -10,7 +10,7 @@ module.exports = {
     /*//////////////////////// 
     BASIC CRUD FIRST
     ////////////////////////*/
-    getTodos: async (req, res) => {
+    getTodoPage: async (req, res) => {
         const lookUpDate = {
             $gte: startOfDay(new Date()),
             $lte: endOfDay(new Date())
@@ -43,7 +43,7 @@ module.exports = {
         if (!creationDate) {
             creationDate = new Date()
         }
-        const getDate = new Date(req.body.date).toISOString().slice(0,10)
+        const getDate = new Date(creationDate).toISOString().slice(0,10)
         try {
             await Todo.create({
                 todo: req.body.todoItem,
@@ -59,26 +59,31 @@ module.exports = {
     },
     editTodo: async (req, res) => {
         const todoId = req.body.todoId
+        const todo = req.body.todoItem
+        const petName = req.body.petName
         const date = req.body.date.replace(/-/g, '/')
+
+        let todoToEdit
         try {
-            await Todo.findOneAndUpdate(
-                todoId,
-                {
-                    todo: req.body.todoItem,
-                    petName: req.body.petName,
-                    completed: false,
-                    date: date,
-                    userId: req.user.id
-                }
-            )
-            res.json('Edited task')
+            todoToEdit = await Todo.findById(todoId)
         } catch (err) {
             console.error(err)
         }
+
+        todoToEdit.todo = todo
+        todoToEdit.petName = petName
+        todoToEdit.date = date
+
+        try {
+            await todoToEdit.save()
+        } catch (error) {
+            console.error(error)
+        }
+        res.json('Edited task')
     },
     deleteTodo: async (req, res) => {
         try {
-            await Todo.findOneAndDelete({ _id: req.body.todoIdFromJSFile })
+            await Todo.findOneAndDelete({ _id: req.body.todoId })
             res.json('Deleted It')
         } catch (err) {
             console.error(err)
@@ -90,7 +95,7 @@ module.exports = {
     ////////////////////////*/
     markComplete: async (req, res) => {
         try {
-            await Todo.findOneAndUpdate({ _id: req.body.todoIdFromJSFile }, {
+            await Todo.findOneAndUpdate({ _id: req.body.todoId }, {
                 completed: true
             })
             res.json('Marked Complete')
@@ -101,7 +106,7 @@ module.exports = {
     },
     markIncomplete: async (req, res) => {
         try {
-            await Todo.findOneAndUpdate({ _id: req.body.todoIdFromJSFile }, {
+            await Todo.findOneAndUpdate({ _id: req.body.todoId }, {
                 completed: false
             })
             res.json('Marked Incomplete')

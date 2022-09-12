@@ -1,22 +1,37 @@
 /********************************************************************
- * Deleting pets 
+ * Deleting pets (modal) 
  ********************************************************************/
-const deletePets = document.querySelectorAll('.delpet')
+ const petDeleteModal = document.getElementById('petDelete-modal')
 
-Array.from(deletePets).forEach((el) => {
-    el.addEventListener('click', deletePet)
+ petDeleteModal.addEventListener('show.bs.modal', function(event) {
+    let button = event.relatedTarget
+
+    let petId = button.getAttribute('data-id')
+    let petDeleteId = document.getElementById('petDelete-id')
+    console.log(button.getAttribute('data-name'))
+    let petName = button.getAttribute('data-name')
+    let deleteText = document.getElementById('petDelete-text')
+
+    petDeleteId.value = petId
+    deleteText.textContent = 'You are deleting ' + petName + '.'
 })
 
+const deletePetButton = document.getElementById('delpet')
+const petDeleteDismiss = document.getElementById('petDelete-dismiss')
+
+deletePetButton.addEventListener('click', deletePet)
+
 async function deletePet() {
-    const petId = this.parentNode.dataset.id
+    const petId = document.getElementById('petDelete-id').value
     try {
         const response = await fetch('pets/deletePet', {
             method: 'delete',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                'petIdFromJSFile': petId,
+                'petId': petId,
             })
         })
+        petDeleteDismiss.click()
         const data = await response.json()
         location.reload()
     } catch (err) {
