@@ -1,0 +1,19 @@
+<div class="modal fade" id="todoDelete-modal" tabindex="-1" aria-labelledby="todoDelete-title" aria-modal="true" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h3 class="modal-title text-danger" id="todoDelete-title">Delete task</h3>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  <p>This action is permanent.</p>
+		  <p>Do you wish to proceed?</p>
+		  <input type="hidden" name="todoId" id="todoDelete-id" />
+		</div>
+		<div class="modal-footer">
+		  <button type="button" id="todoDelete-dismiss" class="btn btn-secondary" data-bs-dismiss="modal">No, go back</button>
+		  <button type="button" id="del" class="btn btn-danger">Delete task</button>
+		</div>
+	  </div>
+	</div>
+  </div>

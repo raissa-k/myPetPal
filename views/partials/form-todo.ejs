@@ -1,51 +1,69 @@
-	<form id="todo-form" action="/todos/createTodo" method="POST" class="mb-0 mx-4 w-auto">
-	<label for="petSelect" class="col-form-label col-form-label-lg mt-2">Pick a pet</label>
-	<select name="petName" id="petSelect" class="form-select mx-auto col"
-	  title="Pick a pet, or create one in the dashboard">
-	  <% pets.forEach( el=> { %>
-		<% if (el.petName==todos.petName) {%>
-		  <option value="<%= el.petName %>" selected>
-			<%= el.petName %>
-		  </option>
-		  <% } else { %>
-			<option value="<%= el.petName %>">
-			  <%= el.petName %>
-			</option>
-			<%}%>
-			  <% }) %>
-	</select>
+<div class="col-md-6 col-lg-4 mx-auto">
+	<div class="card">
+		<div class="card-header">
+			<img class="mb-2" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" aria-hidden="true" width="50"
+				height="50">
+			<h2 class="text-success mb-3" id="addtask" aria-hidden="true">Add a task:</h2>
+		</div>
+		<div class="card-content">
+			<form id="todo-form" action="/todos/createTodo" method="POST" class="form-group col-11 mx-auto">
+				<label for="petSelect" class="col-form-label col-form-label-lg mt-2">Pick a pet</label>
+				<select name="petName" id="petSelect" class="form-select mx-auto col"
+					title="Pick a pet, or create one in the dashboard">
+					<% pets.forEach( el=> { %>
+						<% if (el.petName==todos.petName) {%>
+							<option value="<%= el.petName %>" selected>
+								<%= el.petName %>
+							</option>
+							<% } else { %>
+								<option value="<%= el.petName %>">
+									<%= el.petName %>
+								</option>
+								<%}%>
+									<% }) %>
+				</select>
 
-	<div class="mb-3 mx-auto">
-		<label for="date" class="col-form-label col-form-label-lg mb-3 mt-2">Pick a date, or<br> leave it blank to add to today's list.</label>
-		<duet-date-picker identifier="date" value="<%= calendar ? calendar : new Date() %>"></duet-date-picker>
+				<div class="mb-3 mx-auto">
+					<label for="date" class="col-form-label col-form-label-lg mb-3 mt-2">Pick a date, or<br> leave it
+						blank to add to today's list.</label>
+					<duet-date-picker identifier="date" value="<%= calendar ? calendar : new Date() %>">
+					</duet-date-picker>
+				</div>
+
+				<!-- FORMAT: -->
+				<fieldset class="row no-gutters" role="radiogroup" aria-required="true">
+					<legend class="col-form-label col-form-label-lg mb-3">Pick a pre-made task or <br>type one below
+					</legend>
+					<%- include('todoitem-form-radio.ejs', {id: "radio1" , value: "Feed pet" ,
+						imglink: "https://www.svgrepo.com/show/295889/pet-food-paw.svg" }) %>
+
+					<%- include('todoitem-form-radio.ejs', {id: "radio2" , value: "Give fresh water" , imglink: "https://www.svgrepo.com/show/36235/water.svg" }) %>
+
+					<%- include('todoitem-form-radio.ejs', {id: "radio3" , value: "Give medicine" , imglink: "https://www.svgrepo.com/show/65020/medicine.svg" }) %>
+
+					<%- include('todoitem-form-radio.ejs', {id: "radio4" , value: "Change litter" , imglink: "https://www.svgrepo.com/show/408523/cat-litter-sand.svg" }) %>
+
+					<%- include('todoitem-form-radio.ejs', {id: "radio5" , value: "Scoop litter" , imglink: "https://www.svgrepo.com/show/408519/cat-litter-box.svg" }) %>
+
+					<%- include('todoitem-form-radio.ejs', {id: "radio6" , value: "Go for a walk" , imglink: "https://www.svgrepo.com/show/86881/walking-the-dog.svg" }) %>
+
+					<%- include('todoitem-form-radio.ejs', {id: "radio7" , value: "Play!" , imglink: "https://www.svgrepo.com/show/64872/cat-toy.svg" }) %>
+
+					<!-- custom input -->
+					<div class="list-group list-group-checkable d-grid border-0 w-100">
+						<input type="radio" name="todoItem" id="otherTodo"
+							class="list-group-item-check pe-none">
+						<label
+							class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
+							for="otherTodo">Custom task:
+							<!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
+							<input id="inputOtherTodo" type="text" class="form-control"
+								aria-labelledby="otherTodo" />
+						</label>
+					</div>
+				</fieldset>
+				<input type="submit" class="btn btn-lg btn-primary mt-3" id="todoEditButton">
+			</form>
+		</div>
 	</div>
-
-	<!-- FORMAT: -->
-	<fieldset class="row no-gutters" role="radiogroup" aria-required="true">
-	  <legend class="col-form-label col-form-label-lg mb-3">Pick a pre-made task or <br>type one below</legend>
-	  <%- include('todoitem-form-radio.ejs', {id: "radio1", value: "Feed pet", imglink: "https://www.svgrepo.com/show/295889/pet-food-paw.svg"}) %>
-	 
-	  <%- include('todoitem-form-radio.ejs', {id: "radio2", value: "Give fresh water", imglink: "https://www.svgrepo.com/show/36235/water.svg"}) %>
-	  
-	  <%- include('todoitem-form-radio.ejs', {id: "radio3", value: "Give medicine", imglink: "https://www.svgrepo.com/show/65020/medicine.svg"}) %>
-
-	  <%- include('todoitem-form-radio.ejs', {id: "radio4", value: "Change litter", imglink: "https://www.svgrepo.com/show/408523/cat-litter-sand.svg"}) %>
-
-	  <%- include('todoitem-form-radio.ejs', {id: "radio5", value: "Scoop litter", imglink: "https://www.svgrepo.com/show/408519/cat-litter-box.svg"}) %>
-
-	  <%- include('todoitem-form-radio.ejs', {id: "radio6", value: "Go for a walk", imglink: "https://www.svgrepo.com/show/86881/walking-the-dog.svg"}) %>
-
-	  <%- include('todoitem-form-radio.ejs', {id: "radio7", value: "Play!", imglink: "https://www.svgrepo.com/show/64872/cat-toy.svg"}) %>
-
-	  <!-- custom input -->
-	  <div class="list-group list-group-checkable d-grid border-0 w-100">
-		<input type="radio" name="todoItem" id="otherTodo" class="list-group-item-check pe-none">
-		<label class="list-group-item d-flex justify-content-between  rounded-3 align-items-center py-3"
-		  for="otherTodo">Custom task:
-		  <!-- javascript adds the inner text of this input to the radio button which will be the one submitted -->
-		  <input id="inputOtherTodo" type="text" class="form-control" aria-labelledby="otherTodo"/>
-		</label>
-	  </div>
-	</fieldset>
-<input type="submit" class="btn btn-lg btn-primary mt-3" id="todoEditButton">
-</form>
+</div>

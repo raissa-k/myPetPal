@@ -23,6 +23,7 @@
             <% } %>
 
   <%- include('partials/modal-pet') %>
+  <%- include('partials/modal-pet-delete') %>
   <!--Pet Table-->
   <div class="px-4 py-5 mx-3 text-center">
     <h1 class="text-success mb-5">
@@ -63,8 +64,7 @@
                 </td>
                 <td class="editpet"><button class="btn btn-success" aria-label="Edit pet" title="Edit pet" data-bs-toggle="modal" data-bs-target="#petEdit-modal" data-id='<%=el._id%>' data-name='<%=el.petName%>' data-breed='<%=el.petBreed%>' data-birthday='<%=el.petBirthday%>' data-age='<%=el.petAge%>'><i
                       class="fa-solid fa-pen-to-square"></i></button></td>
-                <td class="delpet"><button class="btn btn-danger" aria-label="Delete pet" title="Delete pet"><i
-                      class="fa-solid fa-trash"></i></button></td>
+                <td><button class="btn btn-danger" aria-label="Delete pet" title="Delete pet" data-bs-toggle="modal" data-bs-target="#petDelete-modal" data-id="<%=el._id%>" data-name="<%=el.petName%>"><i class="fa-solid fa-trash"></i></button></td>
               </tr>
               <% }) %>
           </table>
@@ -72,7 +72,7 @@
       </div>
 
       <!--Pet Form-->
-      <%- include("partials/form-pet", {title: "Add a pet", edit: false}); %>
+      <%- include("partials/form-pet"); %>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
