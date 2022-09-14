@@ -32,14 +32,16 @@
 
   .list-group-item-check:checked+.list-group-item {
     background-color: #c8e6c9;
+    color:#14643f;
   }
 
   .list-group-checkable .list-group-item {
     cursor: pointer;
   }
 
-  #form-alert {
-    position: absolute;
+  .list-group-checkable .list-group-item:hover {
+    background-color: #e3f3e4;
+    color:#198754;
   }
   
   /******************************************
