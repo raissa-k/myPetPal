@@ -17,7 +17,6 @@ Taking care of our pets is a lot of work! Use this app to keep track of all the 
 * [Features](#features)
 * [Run Locally](#run-locally)
 * [Environment Variables](#environment-variables)
-* [Optimizations](#optimizations)
 * [Roadmap](#roadmap)
 * [Lessons Learned](#lessons-learned)
 * [Authors](#authors)
@@ -109,25 +108,20 @@ To run this project, you will need to add the following environment variables to
 `DB_STRING: <your database uri>`
 
 
-
-## Optimizations
-
-- Increased readability of controllers
-- Improved accessibility by adding ARIA roles, adding an accessible date picker, and ensuring buttons, labels and inputs had appropriate names/descriptions.
-- Resolved icon issues
-
-
 ## Roadmap
 
-- Clean and minimize .css and .js files
-- Add monthly calendar view for tasks color-coded for each pet and/or type of task
-- Improve accessibility by adjusting color contrast, reviewing roles, and ensuring keyboard navigation
-- Add accessible modals for task/pet editing.
-- Warn users that deletion is permanent.
-- Enable marking tasks complete from All Tasks page
-- Improve a date's to-do list view
-- Reproduce and fix an error where an edited pet is duplicated
-- Add template partials
+- [x] ~~Increased readability of controllers~~
+- [x] ~~Improved accessibility by adding ARIA roles, adding an accessible date picker, and ensuring buttons, labels and inputs had appropriate names/descriptions.~~
+- [ ] Clean and minimize .css and .js files
+- [ ] Add monthly calendar view for tasks color-coded for each pet and/or type of task
+- [ ] Improve accessibility by adjusting color contrast, reviewing roles, and ensuring keyboard navigation
+- [x] ~~Add accessible modals for task/pet editing.~~
+- [x] ~~Warn users that deletion is permanent.~~
+- [ ] Enable marking tasks complete from All Tasks page
+- [x] ~~Improve a date's to-do list view~~
+- [x] ~~Reproduce and fix an error where an edited pet is duplicated~~
+- [x] ~~Add template partials~~
+- [ ] Re-style the app into a more elegant template
 
 
 ## Lessons Learned
@@ -146,9 +140,8 @@ On the technical aspect:
 
 
 ## Authors
-
-- [@AdamRobinsonSE](https://www.github.com/AdamRobinsonSE)
 - [@raissa-k](https://www.github.com/raissa-k)
+- [@AdamRobinsonSE](https://www.github.com/AdamRobinsonSE)
 - [@valerievozza](https://www.github.com/valerievozza)
 - [@HauntedHamburger](https://www.github.com/HauntedHamburger)
 - [@Jaehwajh](https://www.github.com/Jaehwajh)

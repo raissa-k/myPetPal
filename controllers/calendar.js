@@ -4,10 +4,10 @@ const Pet = require('../models/Pet')
 module.exports = {
     getCalendar: async (req, res) => {
         try {
-            const todos = await Todo.find({userId:req.user.id})
-            const pets = await Pet.find({userId:req.user.id})
-            const newDate = new Date()
-			const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false})
+            const todos = await Todo.find({userId:req.user.id}).lean()
+            const pets = await Pet.find({userId:req.user.id}).lean()
+            const newDate = new Date().toISOString().slice(0, 10)
+			const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false}).lean()
             res.render('calendar.ejs', {
                 todos: todos,
                 pets: pets,

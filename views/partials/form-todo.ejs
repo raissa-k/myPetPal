@@ -1,4 +1,4 @@
-<div class="col-md-6 col-lg-4 mx-auto">
+<div class="col-md-5 mx-auto">
 	<div class="card">
 		<div class="card-header">
 			<img class="mb-2" src="https://www.svgrepo.com/show/177647/clipboard-list.svg" aria-hidden="true" width="50"
@@ -26,8 +26,7 @@
 				<div class="mb-3 mx-auto">
 					<label for="date" class="col-form-label col-form-label-lg mb-3 mt-2">Pick a date, or<br> leave it
 						blank to add to today's list.</label>
-					<duet-date-picker identifier="date" value="<%= calendar ? calendar : new Date() %>">
-					</duet-date-picker>
+					<input class="form-control col-form" type="date" name="date" id="date" value="<%= calendar ? calendar : new Date() %>">
 				</div>
 
 				<!-- FORMAT: -->

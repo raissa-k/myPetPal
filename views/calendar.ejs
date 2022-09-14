@@ -17,24 +17,23 @@
     <!-- todo list -->
     <div class="row mb-3">
       <!-- Datepicker -->
-      <div class="row mx-auto w-auto">
-        <form action="/todos/getDate/" method="post" id="previous" class="mb-3 w-auto">
-          <label for="date" class="col-form-label col-form-label-lg mt-3 mb-3">View tasks by date:</label>
-          <duet-date-picker identifier="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
-          </duet-date-picker>
-          <button type="submit" class="btn btn-success mt-3">Go</button>
+      <div class="mx-auto w-auto">
+        <form action="/todos/getDate/" method="post" id="previous" class="vstack gap-3 me-auto">
+          <label for="date" class="form-label form-label-lg mt-3 w-100 ms-auto">View tasks by date:</label>
+          <input class="form-control form" type="date" name="date" id="date" value="<%= calendar ? calendar : new Date().toISOString().slice(0, 10) %>">
+          <button type="submit" class="btn btn-success mb-3">Go</button>
         </form>
       </div>
-        
-      <table class="table table-hover table-sort table-arrows">
+       <div class="table-responsive"> 
+      <table class="table table-hover datatable">
         <thead>
           <tr>
-            <th scope="col">Pet</th>
-            <th scope="col">Task</th>
-            <th scope="col">Date</th>
-            <th scope="col">Completed</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th class="text-center" scope="col">Pet</th>
+            <th class="text-center" scope="col">Task</th>
+            <th class="text-center" scope="col">Date</th>
+            <th class="text-center" scope="col">Completed</th>
+            <th class="text-center" data-sortable="false" scope="col">Edit</th>
+            <th class="text-center" data-sortable="false" scope="col">Delete</th>
           </tr>
         </thead>
         <tbody id="calendarData">
@@ -47,7 +46,7 @@
                 <%= el.todo %>
               </td>
               <td>
-                <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
+                <a class="link-success" href="/todos/<%= new Date(el.date).toISOString().slice(0,10) %>"><%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %></a>
               </td>
               <td>
                 <%= el.completed===true ? 'Completed' : 'Not completed' %>
@@ -59,10 +58,17 @@
         </tbody>
       </table>
     </div>
+    </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-    integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-    crossorigin="anonymous"></script>
-  <script src="js/calendar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <script>window.onload = function createtables(){
+    const datatables = document.querySelectorAll('.datatable')
+  datatables.forEach(datatable => {
+    new simpleDatatables.DataTable(datatable, {columns: [
+        { select: 2, sort: "asc" }
+      ]})
+    })
+  }
+  </script>
   <script src="js/todo.js"></script>
 </body>

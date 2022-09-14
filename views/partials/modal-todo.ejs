@@ -29,7 +29,7 @@
 					<!-- Date picker -->
 					<div class="mx-auto col-md-11">
 						<label for="date" class="col-form-label col-form-label-lg mt-3">Pick a new date, or keep the current one.</label>
-						<duet-date-picker required identifier="modalDate"></duet-date-picker>
+						<input class="form-control col-form" type="date" name="date" id="modalDate" value="<%= calendar ? calendar : new Date() %>" required>
 					</div>
 
 					<!-- FORMAT: -->

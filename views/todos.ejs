@@ -28,84 +28,89 @@
     </div>
     <div class="px-4 mx-3 text-center">
     <div class="row mb-5">
-      <div class="col-lg-6 mx-auto mb-3">
-        <img class="mb-2" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
-        width="50" height="50">
-        <%if (todos.length > 0 ) {%>
-        <p class="text">You have <span class="text-success"><strong><%= left %> thing(s)</strong></span> left to do. %>
-        </p>
-        <div class="table-responsive-md">
-          <table class="table table-hover table-sort table-arrows">
-            <thead>
-              <tr class="table-light">
-                <th scope="col">Done?</th>
-                <th scope="col">Task</th>
-                <th scope="col">Pet</th>
-                <th scope="col">Date</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% todos.forEach (el=> { %>
-                <tr data-id='<%=el._id%>'>
-                  <% if (el.completed==true) { %>
-                    <td class="text-primary todo-complete">
-                      <input type="checkbox" name="todoItem" id="<%=el._id%>"
-                        checked="" class="list-group-item-check pe-none">
-                      <label for="<%=el._id%>">
-                        <span class="sr-only">Task done. Uncheck to mark incomplete.</span>
-                        <i class="fa-regular fa-square-check fa-2xl"></i>
-                      </label>
-                    </td>
-                    <% } else if (el.completed==false) { %>
-                      <td class="text-primary todo-incomplete">
-                        <input type="checkbox" name="todoItem" id="<%=el._id%>"
-                          checked=""
-                          class="list-group-item-check pe-none">
-                        <label for="<%=el._id%>">
-                          <span class="sr-only">Task not done. Check to mark complete.</span>
-                          <i class="fa-regular fa-square fa-2xl"></i>
-                        </label>
-                      </td>
-                      <% } %>
-                        <td>
-                          <%= el.todo %>
-                        </td>
-                        <td>
-                          <%= el.petName %>
-                        </td>
-                        <td>
-                          <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
-                        </td>
-                        <td><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i class="fa-solid fa-pen-to-square"></i></button></td>
-                        <td><button class="btn btn-danger" title="Delete task" aria-label="Delete task" data-bs-toggle="modal" data-bs-target="#todoDelete-modal" data-id='<%=el._id%>'><i class="fa-solid fa-trash"></i></button></td>
-                </tr>
-                <% }) %>
-            </tbody>
-          </table>
-        </div>
-          <div>
-            <p class="lead"><a class="btn btn-outline-success" href="/calendar">View all dates</a></p>
-            <a class="btn btn-outline-primary" href="/todos" <%= calendar.toISOString().slice(0, 10) != new Date().toISOString().slice(0,10) ? "" : "hidden" %>>View today's list</a>
+      <div class="col-md-7 mx-auto">
+        <div class="card">
+          <div class="card-header">
+            <img class="mb-2 mt-1" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
+            width="50" height="50">
+          <%if (todos.length > 0 ) {%>
+            <h2>You have <span class="text-success"><strong><%= (left > 0) ? left : "no" %> <%= (left > 1) ? "tasks" : "task" %></strong></span> left to do. %></h2>
           </div>
+          <div class="card-content">
+            <div class="table-responsive-lg">
+              <table class="table table-hover table-sort table-arrows">
+                <thead>
+                  <tr>
+                    <th scope="col">Done?</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Pet</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% todos.forEach (el=> { %>
+                    <tr data-id='<%=el._id%>'>
+                      <% if (el.completed==true) { %>
+                        <td class="text-primary todo-complete">
+                          <input type="checkbox" name="todoItem" id="<%=el._id%>"
+                            checked="" class="list-group-item-check pe-none">
+                          <label for="<%=el._id%>">
+                            <span class="sr-only">Task done. Uncheck to mark incomplete.</span>
+                            <i class="fa-regular fa-square-check fa-2xl"></i>
+                          </label>
+                        </td>
+                        <% } else if (el.completed==false) { %>
+                          <td class="text-primary todo-incomplete">
+                            <input type="checkbox" name="todoItem" id="<%=el._id%>"
+                              checked=""
+                              class="list-group-item-check pe-none">
+                            <label for="<%=el._id%>">
+                              <span class="sr-only">Task not done. Check to mark complete.</span>
+                              <i class="fa-regular fa-square fa-2xl"></i>
+                            </label>
+                          </td>
+                          <% } %>
+                            <td>
+                              <%= el.todo %>
+                            </td>
+                            <td>
+                              <%= el.petName %>
+                            </td>
+                            <td>
+                              <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
+                            </td>
+                            <td><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i class="fa-solid fa-pen-to-square"></i></button></td>
+                            <td><button class="btn btn-danger" title="Delete task" aria-label="Delete task" data-bs-toggle="modal" data-bs-target="#todoDelete-modal" data-id='<%=el._id%>'><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center mx-auto mb-4 mt-3 gap-3">
+              <a class="btn btn-outline-success" href="/calendar">View all dates</a>
+              <a class="btn btn-outline-primary" href="/todos" <%= calendar.toISOString().slice(0, 10) != new Date().toISOString().slice(0,10) ? "" : "hidden" %>>View today's list</a>
+            </div>
+          </div>
+        </div>
         <% } else { %>
-          <div class="col-lg-6 mx-auto mb-3">
-            <h2>No tasks on this day</h2>
-            <p class="lead"><a class="btn btn-outline-success mt-3" href="/calendar">View all dates</a></p>
+          <h2>No tasks on this day</h2>
+        </div>
+        <div class="card-content">
+          <div class="d-flex flex-wrap justify-content-center mx-auto mb-4 mt-3 gap-3">
+            <a class="btn btn-outline-success" href="/calendar">View all dates</a>
             <a class="btn btn-outline-primary" href="/todos" <%= calendar.toISOString().slice(0, 10) != new Date().toISOString().slice(0,10) ? "" : "hidden" %>> View today's list </a>
           </div>
-          <%}%>
         </div>
-
-
+      </div>
+          <%}%>
+    </div>
       <!-- Add task (form) -->
         <%- include("partials/form-todo") %>
     </div>
   </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-      crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="/js/todo.js"></script>
 </body>
 

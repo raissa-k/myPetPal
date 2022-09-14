@@ -35,11 +35,11 @@
           src="https://www.svgrepo.com/show/163512/pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star.svg"
           alt="a dog and a cat in a circle" width="50" height="50">
         <h2 class="text-success mb-3">
-          <%= user.userName %> has <%= petCount %> pet(s).
+          <%= user.userName %> has <%= petCount %> <%= (petCount > 1) ? "pets" : "pet" %>.
         </h2>
         <p class="text-muted">Attention: deleting a pet will also erase all tasks associated with it.</p>
         <div class="table-responsive-md">
-          <table class="table table-hover table-sort table-arrows">
+          <table class="table table-hover datatable">
             <tr>
               <th>Name</th>
               <th>Breed</th>
@@ -75,11 +75,8 @@
       <%- include("partials/form-pet"); %>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="js/pet.js"></script>
-    <script src="js/calendar.js"></script>
 
 </body>
 
