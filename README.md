@@ -61,14 +61,13 @@ To avoid signing up, you may log in with the following credentials:
 **Server:** Node, Express, MongoDB
 
 **Dependencies:** 
-```bcrypt, connect-mongo, date-fns, dotenv, ejs, express, express-flash, express-session, method-override, mongodb, mongoose, morgan, nodemon, passport, passport-local, validator```
+```bcrypt, connect-mongo, cross-fetch, date-fns, dotenv, ejs, express, express-flash, express-session, method-override, mongodb, mongoose, morgan, node-cache, nodemon, passport, passport-local, validator```
 
 
 ## Features
 
 - Secure login with Passport Auth
-- Add multiple pets & assign tasks to them
-- Filter by date to see a day's to-do list
+- Cache for external API calls
 - Responsive for desktop & mobile
 
 
@@ -110,11 +109,12 @@ To run this project, you will need to add the following environment variables to
 
 ## Roadmap
 
+- [x] ~~Add cache method for external API calls, namely Unsplash for the index picture~~
 - [x] ~~Increased readability of controllers~~
 - [x] ~~Improved accessibility by adding ARIA roles, adding an accessible date picker, and ensuring buttons, labels and inputs had appropriate names/descriptions.~~
 - [ ] Clean and minimize .css and .js files
 - [ ] Add monthly calendar view for tasks color-coded for each pet and/or type of task
-- [ ] Improve accessibility by adjusting color contrast, reviewing roles, and ensuring keyboard navigation
+- [x] ~~Improve accessibility by adjusting color contrast, reviewing roles, and ensuring keyboard navigation~~
 - [x] ~~Add accessible modals for task/pet editing.~~
 - [x] ~~Warn users that deletion is permanent.~~
 - [ ] Enable marking tasks complete from All Tasks page
@@ -135,7 +135,7 @@ On the technical aspect:
 - Handling merge conflicts
 - Bootstrap classes 
 - Working with date formats
-- Sorting tables
+- Storing external API calls in local cache
 - Method overriding
 
 
