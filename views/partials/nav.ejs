@@ -9,18 +9,15 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link <%if(active=="calendar"){%>active<%}%>" href="/calendar">Home
-				<%if(active=="calendar"){%><span class="visually-hidden">(current)</span><%}%>
+            <a class="nav-link <%if(active=="calendar"){%>active<%}%>" href="/calendar">Your calendar
             </a>
           </li>
           <li class="nav-item">
-			<a class="nav-link <%if(active=="dashboard"){%>active<%}%>" href="/dashboard">Pet Dashboard
-				<%if(active=="dashboard"){%><span class="visually-hidden">(current)</span><%}%>
-			</a>
+      <a class="nav-link <%if(active=="todos"){%>active<%}%>" href="/todos">Daily to-do list
+      </a>
           </li>
           <li class="nav-item">
-			<a class="nav-link <%if(active=="todos"){%>active<%}%>" href="/todos">Add tasks
-				<%if(active=="todos"){%><span class="visually-hidden">(current)</span><%}%>
+			<a class="nav-link <%if(active=="dashboard"){%>active<%}%>" href="/dashboard">Dashboard
 			</a>
           </li>
           <li class="nav-item">

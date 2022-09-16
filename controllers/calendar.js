@@ -6,7 +6,7 @@ module.exports = {
         try {
             const todos = await Todo.find({userId:req.user.id}).lean()
             const pets = await Pet.find({userId:req.user.id}).lean()
-            const newDate = new Date().toISOString().slice(0, 10)
+            const newDate = new Date()
 			const itemsLeft = await Todo.countDocuments({userId:req.user.id,completed: false}).lean()
             res.render('calendar.ejs', {
                 todos: todos,

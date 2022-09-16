@@ -19,7 +19,7 @@
 	<div class="mb-3 text-start">
 		<label for="date" class="col-form-label">Pick a date, or leave it
 			blank to add to today's list.</label>
-		<input class="form-control col-form" type="date" name="date" id="date" value="<%= calendar ? calendar : new Date() %>">
+		<input class="form-control col-form" type="date" name="date" id="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10) %>">
 	</div>
 
 	<!-- FORMAT: -->
