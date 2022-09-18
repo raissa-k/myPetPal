@@ -8,9 +8,7 @@ const flash = require('express-flash')
 const logger = require('morgan')
 const connectDB = require('./config/database')
 const methodOverride = require('method-override')
-
-const NodeCache = require('node-cache')
-const cache = new NodeCache({ stdTTL: 15 });
+const apicache = require('apicache')
 
 const mainRoutes = require('./routes/main')
 const todoRoutes = require('./routes/todos')
