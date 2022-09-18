@@ -1,0 +1,24 @@
+
+<form id="petEdit-form" method="dialog" action="/pet/edit/">
+	<input type="hidden" name="petId" id="modalId" />
+	<div class="form-floating mb-3">
+		<input type="text" placeholder="Enter pet name" name="petName" class="form-control" id="modalName" required />
+		<label for="modalName">Pet name</label>
+	</div>
+	<div class="form-floating mb-3">
+		<input type="text" placeholder="Enter pet breed" name="petBreed" class="form-control" id="modalBreed" required />
+		<label for="modalBreed">Pet breed</label>
+	</div>
+	<div class="form-floating mb-3">
+		<input type="text" placeholder="Enter pet birthday" name="petBirthday" class="form-control" id="modalBirthday" required />
+		<label for="modalBirthday">Pet birthday</label>
+	</div>
+	<div class="form-floating mb-3">
+		<input type="text" placeholder="Enter pet age" name="petAge" class="form-control" id="modalAge" required />
+		<label for="modalAge">Pet age</label>
+	</div>
+	<div class="mt-4 text-end">
+		<button id="petEdit-dismiss" type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
+		<button type="submit" id="petEdit-button" class="btn btn-lg btn-success">Submit</button>
+	</div>
+</form>

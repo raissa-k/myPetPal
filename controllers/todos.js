@@ -20,13 +20,13 @@ module.exports = {
             const todoItems = await Todo.find({
                 date: lookUpDate,
                 userId: req.user.id
-            })
-            const pets = await Pet.find({ userId: req.user.id })
+            }).lean()
+            const pets = await Pet.find({ userId: req.user.id }).lean()
             const itemsLeft = await Todo.countDocuments({
                 userId: req.user.id,
                 completed: false,
                 date: lookUpDate
-            })
+            }).lean()
             res.render('todos.ejs', {
                 todos: todoItems,
                 pets: pets,
@@ -39,7 +39,7 @@ module.exports = {
         }
     },
     createTodo: async (req, res) => {
-        const creationDate = req.body.date.replace(/-/g, '/')
+        let creationDate = req.body.date.replace(/-/g, '/')
         if (!creationDate) {
             creationDate = new Date()
         }
@@ -131,13 +131,13 @@ module.exports = {
             const todoItems = await Todo.find({
                 date: lookUpDate,
                 userId: req.user.id
-            })
-            const pets = await Pet.find({ userId: req.user.id })
+            }).lean()
+            const pets = await Pet.find({ userId: req.user.id }).lean()
             const itemsLeft = await Todo.countDocuments({
                 userId: req.user.id,
                 completed: false,
                 date: lookUpDate
-            })
+            }).lean()
             res.render('todos.ejs', {
                 todos: todoItems,
                 pets: pets,
@@ -161,13 +161,13 @@ module.exports = {
             const todoItems = await Todo.find({
                 date: lookUpDate,
                 userId: req.user.id
-            })
+            }).lean()
             const pets = await Pet.find({ userId: req.user.id })
             const itemsLeft = await Todo.countDocuments({
                 userId: req.user.id,
                 completed: false,
                 date: lookUpDate
-            })
+            }).lean()
             res.render('todos.ejs', {
                 todos: todoItems,
                 pets: pets,
@@ -191,13 +191,13 @@ module.exports = {
             const todoItems = await Todo.find({
                 date: lookUpDate,
                 userId: req.user.id
-            })
-            const pets = await Pet.find({ userId: req.user.id })
+            }).lean()
+            const pets = await Pet.find({ userId: req.user.id }).lean()
             const itemsLeft = await Todo.countDocuments({
                 userId: req.user.id,
                 completed: false,
                 date: lookUpDate
-            })
+            }).lean()
             res.render('todos.ejs', {
                 todos: todoItems,
                 pets: pets,

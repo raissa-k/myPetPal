@@ -2,67 +2,75 @@
 
 <body class="puppy-paw-background">
   <%- include('partials/nav.ejs', {active: "calendar"}) %>
-  <%- include('partials/modal-todo') %>
-  <%- include('partials/modal-todo-delete') %>
-  <div class="px-4 py-1 my-3 mx-3 text-center">
-    <!-- users name -->
-    <div>
-      <h1 class="text-success fw-bold mb-2">
-        All Tasks
-      </h1>
-      <img class="mt-1" src="https://www.svgrepo.com/show/177662/clipboard-list.svg" alt="Clipboard with list"
-        width="50" height="50">
-    </div>
 
-    <!-- todo list -->
-    <div class="row mb-3">
-      <!-- Datepicker -->
-      <div class="row mx-auto w-auto">
-        <form action="/todos/getDate/" method="post" id="previous" class="mb-3 w-auto">
-          <label for="date" class="col-form-label col-form-label-lg mt-3 mb-3">View tasks by date:</label>
-          <duet-date-picker identifier="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date() %>">
-          </duet-date-picker>
-          <button type="submit" class="btn btn-success mt-3">Go</button>
-        </form>
-      </div>
-        
-      <table class="table table-hover table-sort table-arrows">
-        <thead>
-          <tr>
-            <th scope="col">Pet</th>
-            <th scope="col">Task</th>
-            <th scope="col">Date</th>
-            <th scope="col">Completed</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody id="calendarData">
-          <% todos.forEach( el=> { %>
-            <tr scope="row">
-              <td>
-                <%= el.petName %>
-              </td>
-              <td>
-                <%= el.todo %>
-              </td>
-              <td>
-                <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
-              </td>
-              <td>
-                <%= el.completed===true ? 'Completed' : 'Not completed' %>
-              </td>
-              <td><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i class="fa-solid fa-pen-to-square"></i></button></td>
-              <td><button class="btn btn-danger" title="Delete task" aria-label="Delete task" data-bs-toggle="modal" data-bs-target="#todoDelete-modal" data-id='<%=el._id%>'><i class="fa-solid fa-trash"></i></button></td>
+  <main class="mx-auto p-4" id="content">
+
+    <h1 class="text-success mb-4"><%= user.userName %>'s Calendar</h1>
+
+      <div class="card">
+          <div class="card-header d-flex align-items-center">
+            <i class="fa-solid fa-calendar-days text-success fa-2xl align-self-baseline mt-2  me-3"></i>
+          <p class="lead mt-2">Search, edit a task, delete it, or click on a date to see that date's list of tasks!</p>
+        </div>
+        <div class="card-body table-responsive"> 
+          <table class="table table-hover" id="taskTable">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Task</th>
+              <th scope="col">Pet</th>
+              <th scope="col">Completion</th>
+              <th data-sortable="false" scope="col">Edit</th>
+              <th data-sortable="false" scope="col">Delete</th>
             </tr>
-            <% }) %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-    integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-    crossorigin="anonymous"></script>
-  <script src="js/calendar.js"></script>
-  <script src="js/todo.js"></script>
+          </thead>
+          <tbody id="calendarData">
+            <% todos.forEach( el=> { %>
+              <tr scope="row">
+                <td>
+                  <a class="link-success" href="/todos/<%= new Date(el.date).toISOString().slice(0,10) %>"><%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %></a>
+                </td>
+                <td>
+                  <%= el.todo %>
+                </td>
+                <td>
+                  <%= el.petName %>
+                </td>
+                <td>
+                  <%= el.completed===true ? 'Completed' : 'Not completed' %>
+                </td>
+                <td><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i class="fa-solid fa-pen-to-square"></i></button></td>
+                <td><button class="btn btn-danger" title="Delete task" aria-label="Delete task" data-bs-toggle="modal" data-bs-target="#todoDelete-modal" data-id='<%=el._id%>'><i class="fa-solid fa-trash"></i></button></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+
+  </main>
+
+  <!--Modals-->
+        <%- include("partials/modal-blank", {id: "todoEdit-modal", title: "Edit a task", textcolor: "text-success", partial: "form-todo-edit", footer: "no" }) %>
+
+        <%- include("partials/modal-blank", {id: "todoDelete-modal", title: "Delete a task", textcolor: "text-danger", partial: "form-todo-delete", footer: "no" }) %>   
+
+<script>window.onload = function createtables(){
+  new simpleDatatables.DataTable("#taskTable",
+  { perPage: 10, layout: { 
+    top: "{search}{select}", 
+    bottom: "{info}{pager}"
+  }, 
+  labels: {
+    placeholder: "Search tasks",
+    noRows: "No entries found"
+  }, columns: [{
+    select: 0, sort: "asc" 
+  }]
+})
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="/js/todo.js"></script>
 </body>

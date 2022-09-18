@@ -1,13 +1,17 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const passport = require('passport') // handles authentication for us
-const session = require('express-session') // has to deal with saving something about our session
+const passport = require('passport') 
+const session = require('express-session') 
 const MongoStore = require('connect-mongo')(session)
-const flash = require('express-flash') // lets us render messages without refreshing page
-const logger = require('morgan') // logs requests to the console
+const flash = require('express-flash')
+const logger = require('morgan')
 const connectDB = require('./config/database')
 const methodOverride = require('method-override')
+
+const NodeCache = require('node-cache')
+const cache = new NodeCache({ stdTTL: 15 });
+
 const mainRoutes = require('./routes/main')
 const todoRoutes = require('./routes/todos')
 const petRoutes = require('./routes/pets')

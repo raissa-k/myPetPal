@@ -1,0 +1,50 @@
+<form id="todo-form" action="/todos/createTodo" method="POST" class="form-group mx-auto gap-3">
+	<div class="form-floating mt-3 mb-3">
+		<select name="petName" id="petSelect" class="form-select"
+			title="Pick a pet, or create one in the dashboard">
+			<% pets.forEach( el=> { %>
+				<option value="<%= el.petName %>">
+					<%= el.petName %>
+				</option>
+			<% }) %>
+		</select>
+		<label for="petSelect">Pick a pet</label>
+	</div>
+	<div class="mb-3 text-start">
+		<label for="date" class="col-form-label">Pick a date, or leave it
+			blank to add to today's list.</label>
+		<input class="form-control col-form" type="date" name="date" id="date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10) %>">
+	</div>
+
+	<!-- FORMAT: -->
+	<fieldset class="row gx-0 gy-2" role="radiogroup" aria-required="true">
+		<legend class="text-start fs-6">Pick a pre-made task or type one below
+		</legend>
+		<%- include('todoitem-form-radio.ejs', {id: "radio1" , value: "Feed pet" ,
+			icon: "fa-bowl-food" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio2" , value: "Give fresh water" , icon: "fa-droplet" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio3" , value: "Give medicine" , icon: "fa-pills" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio4" , value: "Change litter" , icon: "fa-sack-xmark" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio5" , value: "Scoop litter" , icon: "fa-person-digging" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio6" , value: "Go for a walk" , icon: "fa-dog" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio7" , value: "Play!" , icon: "fa-baseball" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "radio8" , value: "Vet appointment" , icon: "fa-notes-medical" }) %>
+
+		<!-- custom input -->
+		<div class="input-group">
+			<input class="btn-check" type="radio" value="" aria-label="Select to input a custom task" name="todoItem" id="otherTodo">
+			<label class="btn btn-outline-success border border-success rounded-start" for="otherTodo"><i class="fa-solid fa-marker"></i>Custom task
+			</label>
+			<input id="inputOtherTodo" type="text" class="form-control border-success"
+			aria-label="Text input for your custom task" />
+		</div>
+	</fieldset>
+	<input type="submit" class="btn btn-lg btn-success mt-3 mx-auto">
+</form>

@@ -1,6 +1,6 @@
 <%- include("partials/header", {title: "Login" }); %>
 
-<body class="text-center puppy-paw-background">
+<body class="text-center">
     <% if (locals.messages.errors) { %>
             <% messages.errors.forEach( el=> { %>
                 <div role="alert" class="alert alert-danger">
@@ -17,49 +17,43 @@
             <% }) %>
     <% } %>
 
-    <main class="w-100 m-auto">
+    <main class="form-signin w-100 m-auto">
         <form action="/login" method="POST" class="mb-4">
-            <img class="mb-3" src="https://www.svgrepo.com/show/177658/clipboard-list.svg"
-                alt="Clipboard with a lock" width="50" height="50">
-            <h1 class="display-4 text-success mb-5 fw-normal">Log in</h1>
-            <div>
-                <input type="email" name="email" class="form-control" id="floatingEmail"
-                    placeholder="Email">
-                <label for="floatingEmail" class="mb-0">Email</label>
-            </div>
-            <div>
-                <input type="password" class="form-control" id="floatingPassword" name="password"
-                    placeholder="Password">
-                <label for="floatingPassword" class="mb-0">Password</label>
-                <input type="submit" class="w-100 btn btn-lg btn-success">
-            </div>
+          <img class="mb-2" src="/images/pet-house-kennel.svg"
+          role="presentation" alt="" width="72" height="57">
+          <h1 class="h3 mb-3 fw-normal text-success">Log in</h1>
+          <div class="form-floating mb-2">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+            <label for="floatingInput">Email address</label>
+          </div>
+          <div class="form-floating mb-2">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+            <label for="floatingPassword">Password</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-success " type="submit">Log in</button>
         </form>
-        <a href="/signup" class="btn btn-outline-success g-2 px-4">Or Sign Up</a>
+        <p class="small">Don't have an account?
+            <a href="/signup">Sign up</a>
+        </p>
+        <a class="mt-5 py-3 text-muted" href="/">Go to main page</a>
     </main>
 <style>
-    body {
-        display: flex;
-        align-items: center;
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-
-    main {
+    .form-signin {
         max-width: 330px;
         padding: 15px;
     }
-
-    .alert {
-        position: absolute;
-    }
-
-    form label {
-        visibility: hidden
-    }
+    body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: url('../images/puppy-paw-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+    
 </style>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-      crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 
 </html>
