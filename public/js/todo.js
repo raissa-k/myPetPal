@@ -59,7 +59,6 @@ async function markComplete() {
             })
         })
         const data = await response.json()
-        console.log('Marked complete')
         location.reload()
     } catch (err) {
         console.error(err)
@@ -77,7 +76,6 @@ async function markIncomplete() {
             })
         })
         const data = await response.json()
-        console.log('Marked incomplete')
         location.reload()
     } catch (err) {
         console.error(err)
@@ -101,7 +99,6 @@ inputOther.addEventListener('change', () => {
 
 Array.from(radioButtons).forEach((el) => {
     el.addEventListener('click', () => {
-        console.log(el)
         if (other.checked) {
             inputOther.disabled = false;
         } else {

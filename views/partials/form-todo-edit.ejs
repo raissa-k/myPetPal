@@ -25,32 +25,36 @@
 	</div>
 
 	<!-- FORMAT: -->
-	<fieldset class="row px-2" role="radiogroup" aria-required="true">
-		<legend class="text-start px-1 fs-6">Pick a pre-made task or type one below</legend>
+	<fieldset class="row gx-0 gy-2" role="radiogroup" aria-required="true">
+		<legend class="text-start fs-6">Pick a pre-made task or type one below
+		</legend>
+		<%- include('todoitem-form-radio.ejs', {id: "editradio1" , value: "Feed pet" ,
+			icon: "fa-bowl-food" }) %>
 
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio1", value: "Feed pet", imglink: "https://www.svgrepo.com/show/295889/pet-food-paw.svg"}) %>
-		
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio2", value: "Give fresh water", imglink: "https://www.svgrepo.com/show/36235/water.svg"}) %>
-		
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio3", value: "Give medicine", imglink: "https://www.svgrepo.com/show/65020/medicine.svg"}) %>
+		<%- include('todoitem-form-radio.ejs', {id: "editradio2" , value: "Give fresh water" , icon: "fa-droplet" }) %>
 
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio4", value: "Change litter", imglink: "https://www.svgrepo.com/show/408523/cat-litter-sand.svg"}) %>
+		<%- include('todoitem-form-radio.ejs', {id: "editradio3" , value: "Give medicine" , icon: "fa-pills" }) %>
 
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio5", value: "Scoop litter", imglink: "https://www.svgrepo.com/show/408519/cat-litter-box.svg"}) %>
+		<%- include('todoitem-form-radio.ejs', {id: "editradio4" , value: "Change litter" , icon: "fa-sack-xmark" }) %>
 
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio6", value: "Go for a walk", imglink: "https://www.svgrepo.com/show/86881/walking-the-dog.svg"}) %>
+		<%- include('todoitem-form-radio.ejs', {id: "editradio5" , value: "Scoop litter" , icon: "fa-person-digging" }) %>
 
-		<%- include('todoitem-form-radio.ejs', {id: "modalradio7", value: "Play!", imglink: "https://www.svgrepo.com/show/64872/cat-toy.svg"}) %>
+		<%- include('todoitem-form-radio.ejs', {id: "editradio6" , value: "Go for a walk" , icon: "fa-dog" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "editradio7" , value: "Play!" , icon: "fa-baseball" }) %>
+
+		<%- include('todoitem-form-radio.ejs', {id: "editradio8" , value: "Vet appointment" , icon: "fa-notes-medical" }) %>
 
 		<!-- custom input -->
-		<div class="list-group list-group-checkable d-grid border-0 px-1 w-100">
-			<input type="radio" name="todoItem" id="modal-otherTodo" value="" checked class="list-group-item-check pe-none" />
-			<label class="list-group-item d-flex justify-content-between rounded-3 align-items-center py-3" for="otherTodo">
-				Custom task:
-				<input id="modal-inputOtherTodo" type="text" class="form-control mx-2" aria-labelledby="otherTodo" value="" checked />
+		<div class="input-group">
+			<input class="btn-check" type="radio" value="" aria-label="Select to edit or input a custom task" name="todoItem" id="modal-otherTodo" checked>
+			<label class="btn btn-outline-success border border-success rounded-start" for="otherTodo"><i class="fa-solid fa-marker"></i>Custom task
 			</label>
+			<input id="modal-inputOtherTodo" class="form-control border-success"
+			aria-label="Text input for your custom task" />
 		</div>
 	</fieldset>
+		
 	<div class="mt-4 text-end">
 		<button id="todoEdit-dismiss" type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
 		<button type="submit" id="todoEdit-button" class="btn btn-lg btn-success">Submit</button>

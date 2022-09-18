@@ -1,7 +1,3 @@
-<div class="col col-sm-6 px-1 py-1 mx-auto list-group list-group-checkable d-grid border-0 w-100">
-	<input type="radio" name="todoItem" id="<%= id %>" value="<%= value %>"
-	  class="list-group-item-check pe-none" required>
-	<label aria-hidden="true" class="list-group-item d-flex justify-content-between rounded-3 align-items-center py-3" for="<%= id %>"><%= value %>
-	  <img src="<%= imglink %>" width="50" height="50">
-	</label>
-  </div>
+<input type="radio" class="btn-check" name="todoItem" id="<%= id %>" value="<%= value %>" required>
+<label class="btn btn-outline-success" for="<%= id %>"><i class="fa-solid <%= icon %>"></i> <%= value %></label>  
+
