@@ -58,7 +58,10 @@ app.use('/todos', todoRoutes)
 app.use('/pets', petRoutes)
 app.use('/dashboard', dashboardRoutes)
 app.use('/calendar', calendarRoutes)
+app.use(function (req, res, next) {
+    res.status(404).render('404.ejs')
+  })
 
 app.listen(process.env.PORT, () => {
-  console.log('Server is running, you better catch it!')
+  console.log('Server running.')
 })
