@@ -6,7 +6,7 @@ const { ensureAuth, ensureGuest } = require('../middleware/auth')
 const apicache = require('apicache')
 const cache = apicache.middleware
 
-router.get('/', [ensureGuest, cache('15 minutes')], homeController.getIndex)
+router.get('/', [ensureGuest, cache('3 minutes')], homeController.getIndex)
 router.get('/login', authController.getLogin)
 router.post('/login', authController.postLogin)
 router.get('/logout', authController.logout)
