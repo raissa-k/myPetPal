@@ -4,7 +4,12 @@
     <main class="container">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5 rounded-3 shadow-lg">
             <div class="col-10 col-sm-8 col-lg-6 px-5">
-                <img src="<%= pictureUrl %>" role="presentation" class="d-block mx-lg-auto img-fluid border rounded-3 shadow-lg" alt="A random image of a pet" width="700" height="500" loading="lazy">
+                <figure>
+                    <img src="<%= datapicture %>" class="d-block mx-lg-auto img-fluid border rounded-3 shadow-lg" alt="A random image of a pet" width="700" height="500" loading="lazy">
+                </figure>
+                <figcaption>
+                    <p class="small text-muted">Photo by <a class="text-muted" href="<%= data.user.links.html %>?utm_source=myPetPal&utm_medium=referral"><%= data.user.name %></a> on <a class="text-muted" href="https://unsplash.com/?utm_source=myPetPal&utm_medium=referral">Unsplash</a></p>
+                </figcaption>
             </div>
             <div class="col-lg-6 px-5">
                 <h1 class="display-5 fw-bold lh-1 mb-3">Welcome to myPetPal</h1>

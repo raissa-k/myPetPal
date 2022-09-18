@@ -62,6 +62,7 @@
     "nodemon": "^2.0.19",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
+    "unsplash-js": "^7.0.15",
     "validator": "^13.7.0"
   }
 }
