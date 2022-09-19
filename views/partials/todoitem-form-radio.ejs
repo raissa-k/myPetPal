@@ -1,3 +1,8 @@
-<input type="radio" class="btn-check" name="todoItem" id="<%= id %>" value="<%= value %>" required>
-<label class="btn btn-outline-success" for="<%= id %>"><i class="fa-solid <%= icon %>"></i> <%= value %></label>  
+<label class="list-group-item d-flex gap-2 py-3">
+	<input class="form-check-input flex-shrink-0" type="radio" name="todoItem" id="<%= id %>" value="<%= value %>" required>
+	<span>
+		<i class="fa-solid <%= icon %> mt-1 mb-1 d-block text-muted"></i>
+		<%= value %>
+	</span>
+  </label>
 
