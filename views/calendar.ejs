@@ -3,7 +3,7 @@
 <body class="puppy-paw-background">
   <%- include('partials/nav.ejs', {active: "calendar"}) %>
 
-  <main class="mx-auto p-4" id="content">
+  <main class="col col-sm-12 col-md-10 col-lg-8 mx-auto px-2 px-md-4 py-4" id="content">
 
     <h1 class="text-success mb-4"><%= user.userName %>'s Calendar</h1>
 
@@ -15,32 +15,65 @@
         <div class="card-body table-responsive"> 
           <table class="table table-hover" id="taskTable">
           <thead>
-            <tr>
+            <tr class="gap-3 flex-grow-1">
               <th scope="col">Date</th>
               <th scope="col">Task</th>
-              <th scope="col">Pet</th>
-              <th scope="col">Completion</th>
-              <th data-sortable="false" scope="col">Edit</th>
-              <th data-sortable="false" scope="col">Delete</th>
             </tr>
           </thead>
           <tbody id="calendarData">
             <% todos.forEach( el=> { %>
               <tr scope="row">
-                <td>
+                <td class="py-md-4 py-sm-2">
                   <a class="link-success" href="/todos/<%= new Date(el.date).toISOString().slice(0,10) %>"><%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %></a>
                 </td>
-                <td>
-                  <%= el.todo %>
+                <td class="list-group w-auto">
+                  <div class="list-group-item list-group-item-action d-flex flex-column gap-3 py-md-3 py-sm-1 flex-wrap">
+
+                    <div class="d-flex gap-3 w-100 justify-content-between w-auto">
+                      <span class="pt-1 <%= el.completed===true ? 'text-muted' : ' ' %>">
+                        <strong><%= el.todo %></strong>
+                        <small class="d-block">
+                          <i class="fa-solid fa-paw"></i>
+                          Pet: <%= el.petName %>
+                        </small>
+                      </span>
+                    </div>
+                    <div class="accordion me-auto border rounded-3" id="accordion-<%=el._id%>">
+                      <div class="accordion-item">
+
+                      <h2 class="accordion-header rounded-3" id="flush-heading-<%=el._id%>">
+                        <button class="accordion-button p-2 p-md-3 collapsed <%= el.completed===true ? 'text-bg-success' : 'text-bg-secondary' %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%=el._id%>" aria-expanded="true" aria-controls="collapse-<%=el._id%>">
+                          <span class="fw-bold">
+                            <%= el.completed===true ? 'Completed. ' : 'Not completed. ' %>
+                          <br>
+                          <small class="fw-normal">Click to edit or delete task.</small>
+                        </span>
+                        </button>
+                      </h2>
+                      <div id="collapse-<%=el._id%>" class="accordion-collapse collapse" aria-labelledby="flush-heading-<%=el._id%>" data-bs-parent="#accordion-<%=el._id%>">
+                        <div class="accordion-body">
+                          <button class="btn btn-outline-success mt-2 me-md-3 me-sm-0" title="Edit task"
+                          data-bs-toggle="modal"
+                          data-bs-target="#todoEdit-modal"
+                          data-id='<%=el._id%>'
+                          data-todo='<%=el.todo%>'
+                          data-pet='<%=el.petName%>'
+                          data-date='<%=el.date%>'>
+                          <i class="fa-solid fa-pen-to-square pe-sm-3 pe-md-2"></i>Edit
+                          </button>
+
+                          <button class="btn btn-outline-danger mt-2" title="Delete task" 
+                          data-bs-toggle="modal" 
+                          data-bs-target="#todoDelete-modal" 
+                          data-id='<%=el._id%>'>
+                          <i class="fa-solid fa-trash me-1"></i>Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
                 </td>
-                <td>
-                  <%= el.petName %>
-                </td>
-                <td>
-                  <%= el.completed===true ? 'Completed' : 'Not completed' %>
-                </td>
-                <td><button class="btn btn-success" title="Edit task" aria-label="Edit task"  data-bs-toggle="modal" data-bs-target="#todoEdit-modal" data-id='<%=el._id%>' data-todo='<%=el.todo%>' data-pet='<%=el.petName%>' data-date='<%=el.date%>'><i class="fa-solid fa-pen-to-square"></i></button></td>
-                <td><button class="btn btn-danger" title="Delete task" aria-label="Delete task" data-bs-toggle="modal" data-bs-target="#todoDelete-modal" data-id='<%=el._id%>'><i class="fa-solid fa-trash"></i></button></td>
               </tr>
               <% }) %>
             </tbody>
@@ -63,7 +96,7 @@
     bottom: "{info}{pager}"
   }, 
   labels: {
-    placeholder: "Search tasks",
+    placeholder: "Search through tasks",
     noRows: "No entries found"
   }, columns: [{
     select: 0, sort: "asc" 
