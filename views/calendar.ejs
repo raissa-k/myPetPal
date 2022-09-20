@@ -1,4 +1,4 @@
-<%- include("partials/header", {title: "Home"}); %>
+<%- include("partials/header", {title: "Home, your Calendar"}); %>
 
 <body class="puppy-paw-background">
   <%- include('partials/nav.ejs', {active: "calendar"}) %>
@@ -42,7 +42,7 @@
                       <div class="accordion-item">
 
                       <h2 class="accordion-header rounded-3" id="flush-heading-<%=el._id%>">
-                        <button class="accordion-button p-2 p-md-3 collapsed <%= el.completed===true ? 'text-bg-success' : 'text-bg-secondary' %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%=el._id%>" aria-expanded="true" aria-controls="collapse-<%=el._id%>">
+                        <button class="accordion-button p-2 p-md-3 collapsed <%= el.completed===true ? 'text-bg-light' : 'text-bg-secondary' %>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%=el._id%>" aria-expanded="true" aria-controls="collapse-<%=el._id%>">
                           <span class="fw-bold">
                             <%= el.completed===true ? 'Completed. ' : 'Not completed. ' %>
                           <br>
@@ -104,6 +104,7 @@
 })
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="/js/todo.js"></script>
 </body>

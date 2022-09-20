@@ -44,6 +44,7 @@
             <p class="lead text-start w-auto">You have <span class="text-success"><strong><%= (left > 0) ? left : "no" %> <%= (left > 1) ? "tasks" : "task" %></strong></span> left to do. %> Would you like to add more?</p>
             <button class="btn btn-success btn-lg mb-3" type="button" data-bs-toggle="modal" data-bs-target="#createTodo-modal" aria-expanded="false" aria-controls="createTodo-modal">
               <i class="fa-solid fa-circle-plus"></i> Add task
+              <span class="visually-hidden">, this opens a modal</span>
             </button>  
           <div class="list-group gap-3">
           <% todos.forEach (el=> { %>
@@ -51,7 +52,7 @@
               <div class="list-group-item list-group-item-action justify-content-between d-flex gap-3 py-3 flex-wrap" data-id='<%=el._id%>'>
                 <label class="d-flex gap-3 w-100 justify-content-between w-auto <%= el.completed===true ? 'todo-complete' : 'todo-incomplete' %>">
                   <input class="form-check-input flex-shrink-0" type="checkbox" value="" style="font-size: 1.375em;" <%= el.completed===true ? 'checked' : ' ' %>>
-                  <span class="visually-hidden"><%= el.completed===true ? 'Task done' : 'Task not done' %></span>
+                  <span class="visually-hidden"><%= el.completed===true ? 'Task done, check to change status' : 'Task not done, uncheck to change status' %></span>
                   <span class="pt-1 <%= el.completed===true ? 'text-muted' : ' ' %>">
                     <strong><%= el.todo %></strong>
                     <small class="d-block">
@@ -70,13 +71,15 @@
                   data-pet='<%=el.petName%>' 
                   data-date='<%=el.date%>'>
                   <i class="fa-solid fa-pen-to-square"></i> Edit task
+                  <span class="visually-hidden">, this opens a modal</span>
                   </button>
                   <!-- data to fill delete modal -->
                   <button class="btn btn-outline-danger mt-2" title="Delete task" 
                   data-bs-toggle="modal" 
                   data-bs-target="#todoDelete-modal" 
                   data-id='<%=el._id%>'>
-                  <i class="fa-solid fa-trash"></i> Delete task
+                  <i class="fa-solid fa-trash"></i> Delete task                  
+                  <span class="visually-hidden">, this opens a modal</span>
                   </button>
                 </div>
               </div>
@@ -97,6 +100,7 @@
           data-bs-target="#createTodo-modal" 
           aria-expanded="false" aria-controls="createTodo-modal">
             <i class="fa-solid fa-circle-plus"></i> Add task
+            <span class="visually-hidden">, this opens a modal</span>
           </button>  
         </div><!-- end card body -->
         <div class="card-footer d-flex flex-wrap justify-content-center gap-3">
