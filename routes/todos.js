@@ -7,7 +7,7 @@ router.get('/', ensureAuth, todosController.getTodoPage)
 router.get('/:date', ensureAuth, todosController.getTodosByDate)
 
 router.post('/createTodo', todosController.createTodo)
-router.post('/getDate', todosController.getTodosByDate)
+router.post('/getDate', todosController.formTodosByDate)
 router.post('/previous', todosController.getPreviousDay)
 router.post('/next', todosController.getNextDay)
 

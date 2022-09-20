@@ -11,11 +11,11 @@ module.exports = {
     BASIC CRUD FIRST
     ////////////////////////*/
     getTodoPage: async (req, res) => {
+        const localeDate = new Date().toLocaleDateString()
         const lookUpDate = {
-            $gte: startOfDay(new Date()),
-            $lte: endOfDay(new Date())
+            $gte: startOfDay(new Date(localeDate)),
+            $lte: endOfDay(new Date(localeDate))
         }
-        const calendar = new Date()
         try {
             const todoItems = await Todo.find({
                 date: lookUpDate,
@@ -32,17 +32,17 @@ module.exports = {
                 pets: pets,
                 left: itemsLeft,
                 user: req.user,
-                calendar: calendar
+                calendar: new Date(localeDate),
+                localeDate: localeDate
             })
+            console.log(localeDate, new Date(localeDate))
         } catch (err) {
             console.error(err)
         }
     },
     createTodo: async (req, res) => {
         let creationDate = req.body.date.replace(/-/g, '/')
-        if (!creationDate) {
-            creationDate = new Date()
-        }
+
         const getDate = new Date(creationDate).toISOString().slice(0,10)
         try {
             await Todo.create({
@@ -145,66 +145,34 @@ module.exports = {
                 user: req.user,
                 calendar: date
             })
+            console.log(date)
+        } catch (err) {
+            console.error(err)
+        }
+    },
+    formTodosByDate: async (req, res) => {
+        let creationDate = req.body.date.replace(/-/g, '/')
+        const getDate = new Date(creationDate).toISOString().slice(0,10)
+        try {
+            res.redirect(`/todos/${getDate}`)
         } catch (err) {
             console.error(err)
         }
     },
     getPreviousDay: async (req, res) => {
         const date = new Date(req.body.date.replace(/-/g, '/'))
-        const previous = subDays(date, 1)
-        const lookUpDate = {
-            $gte: startOfDay(previous),
-            $lte: endOfDay(previous)
-        }
-        const calendar = previous
+        const previous = subDays(date, 1).toISOString().slice(0,10)
         try {
-            const todoItems = await Todo.find({
-                date: lookUpDate,
-                userId: req.user.id
-            }).lean()
-            const pets = await Pet.find({ userId: req.user.id })
-            const itemsLeft = await Todo.countDocuments({
-                userId: req.user.id,
-                completed: false,
-                date: lookUpDate
-            }).lean()
-            res.render('todos.ejs', {
-                todos: todoItems,
-                pets: pets,
-                left: itemsLeft,
-                user: req.user,
-                calendar: calendar
-            })
+            res.redirect(`/todos/${previous}`)
         } catch (err) {
             console.error(err)
         }
     },
     getNextDay: async (req, res) => {
         const date = new Date(req.body.date.replace(/-/g, '/'))
-        const next = addDays(date, 1)
-        const lookUpDate = {
-            $gte: startOfDay(next),
-            $lte: endOfDay(next)
-        }
-        const calendar = next
+        const next = addDays(date, 1).toISOString().slice(0,10)
         try {
-            const todoItems = await Todo.find({
-                date: lookUpDate,
-                userId: req.user.id
-            }).lean()
-            const pets = await Pet.find({ userId: req.user.id }).lean()
-            const itemsLeft = await Todo.countDocuments({
-                userId: req.user.id,
-                completed: false,
-                date: lookUpDate
-            }).lean()
-            res.render('todos.ejs', {
-                todos: todoItems,
-                pets: pets,
-                left: itemsLeft,
-                user: req.user,
-                calendar: calendar
-            })
+            res.redirect(`/todos/${next}`)
         } catch (err) {
             console.error(err)
         }

@@ -24,7 +24,7 @@
             <% todos.forEach( el=> { %>
               <tr scope="row">
                 <td class="py-md-4 py-sm-2">
-                  <a class="link-success" href="/todos/<%= new Date(el.date).toISOString().slice(0,10) %>"><%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %></a>
+                  <a class="link-success" href="/todos/<%= new Date(el.date).toISOString().slice(0,10) %>"><%= new Date(el.date).toLocaleDateString('en', { year: 'numeric' , month: 'long' , day: '2-digit' }) %></a>
                 </td>
                 <td class="list-group w-auto">
                   <div class="list-group-item list-group-item-action d-flex flex-column gap-3 py-md-3 py-sm-1 flex-wrap">
