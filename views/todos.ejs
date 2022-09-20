@@ -4,9 +4,9 @@
   <%- include('partials/nav.ejs', {active: "todos"}) %>
   
   <!-- Modals -->
-  <%- include("partials/modal-blank", {id: "createTodo-modal", title: "Create a task", textcolor: " ", partial: "form-todo-create", footer: "no" }) %>
+  <%- include("partials/modal-blank", {id: "createTodo-modal", title: "Create a task", textcolor: "text-dark", partial: "form-todo-create", footer: "no" }) %>
 
-  <%- include("partials/modal-blank", {id: "todoEdit-modal", title: "Edit a task", textcolor: "text-success", partial: "form-todo-edit", footer: "no" }) %>
+  <%- include("partials/modal-blank", {id: "todoEdit-modal", title: "Edit a task", textcolor: "text-dark", partial: "form-todo-edit", footer: "no" }) %>
 
   <%- include("partials/modal-blank", {id: "todoDelete-modal", title: "Delete a task", textcolor: "text-danger", partial: "form-todo-delete", footer: "no" }) %> 
 
@@ -38,82 +38,52 @@
           </h1>
         </div>
         
-        <div class="card-body">
+      <div class="card-body">
         <%if (todos.length > 0 ) {%>
           <!-- card body with tasks -->
-          <p class="lead text-start">You have <span class="text-success"><strong><%= (left > 0) ? left : "no" %> <%= (left > 1) ? "tasks" : "task" %></strong></span> left to do. %> Would you like to add more?</p>
-          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#createTodo-modal" aria-expanded="false" aria-controls="createTodo-modal">
-            <i class="fa-solid fa-circle-plus"></i> Add task
-          </button>  
-          
-          <!-- task table -->
-          <div class="table-responsive-lg mt-3">
-            <table class="table table-hover table-sort table-arrows">
-              <thead>
-                <tr>
-                  <th scope="col">Completion</th>
-                  <th scope="col">Task</th>
-                  <th scope="col">Pet</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Edit</th>
-                  <th scope="col">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% todos.forEach (el=> { %>
-                <!-- marking complete/incomplete -->
-                <tr data-id='<%=el._id%>'>
-                  <% if (el.completed==true) { %>
-                  <td class="todo-complete">
-                    <input type="checkbox" name="todoItem" id="<%=el._id%>"
-                      class="form-check-input" checked>
-                    <label for="<%=el._id%>" class="fw-bold form-check-label text-success">
-                      Done
-                      <span class="visually-hidden">. Uncheck to mark incomplete.</span>
-                    </label>
-                  </td>
-                  <% } else if (el.completed==false) { %>
-                  <td class="todo-incomplete">
-                    <input type="checkbox" name="todoItem" id="<%=el._id%>" class="form-check-input" autocomplete="off">
-                    <label for="<%=el._id%>" class="fw-bold form-check-label text-danger">
-                      Not done
-                      <span class="visually-hidden">. Check to mark complete.</span>
-                    </label>
-                  </td>
-                  <% } %>
-                  <td><%= el.todo %></td>
-                  <td><%= el.petName %></td>
-                  <td>
-                    <%= el.date.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
-                  </td>
-                  <td>
-                    <!-- data to fill in edit modal -->
-                    <button class="btn btn-success" title="Edit task" aria-label="Edit task"
-                    data-bs-toggle="modal" 
-                    data-bs-target="#todoEdit-modal" 
-                    data-id='<%=el._id%>' 
-                    data-todo='<%=el.todo%>' 
-                    data-pet='<%=el.petName%>' 
-                    data-date='<%=el.date%>'>
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                  </td>
+            <p class="lead text-start w-auto">You have <span class="text-success"><strong><%= (left > 0) ? left : "no" %> <%= (left > 1) ? "tasks" : "task" %></strong></span> left to do. %> Would you like to add more?</p>
+            <button class="btn btn-success btn-lg mb-3" type="button" data-bs-toggle="modal" data-bs-target="#createTodo-modal" aria-expanded="false" aria-controls="createTodo-modal">
+              <i class="fa-solid fa-circle-plus"></i> Add task
+            </button>  
+          <div class="list-group gap-3">
+          <% todos.forEach (el=> { %>
+            <div class="list-group w-auto">
+              <div class="list-group-item list-group-item-action justify-content-between d-flex gap-3 py-3 flex-wrap" data-id='<%=el._id%>'>
+                <label class="d-flex gap-3 w-100 justify-content-between w-auto <%= el.completed===true ? 'todo-complete' : 'todo-incomplete' %>">
+                  <input class="form-check-input flex-shrink-0" type="checkbox" value="" style="font-size: 1.375em;" <%= el.completed===true ? 'checked' : ' ' %>>
+                  <span class="visually-hidden"><%= el.completed===true ? 'Task done' : 'Task not done' %></span>
+                  <span class="pt-1 <%= el.completed===true ? 'text-muted' : ' ' %>">
+                    <strong><%= el.todo %></strong>
+                    <small class="d-block">
+                      <i class="fa-solid fa-paw"></i>
+                      Pet: <%= el.petName %>
+                    </small>
+                  </span>
+                </label>
+                <!-- data to fill in edit modal -->
+                <div data-id='<%=el._id%>' class="d-inline">
+                  <button class="btn btn-outline-success mt-2 me-3" title="Edit task"
+                  data-bs-toggle="modal" 
+                  data-bs-target="#todoEdit-modal" 
+                  data-id='<%=el._id%>' 
+                  data-todo='<%=el.todo%>' 
+                  data-pet='<%=el.petName%>' 
+                  data-date='<%=el.date%>'>
+                  <i class="fa-solid fa-pen-to-square"></i> Edit task
+                  </button>
                   <!-- data to fill delete modal -->
-                  <td>
-                    <button class="btn btn-danger" title="Delete task" aria-label="Delete task" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#todoDelete-modal" 
-                    data-id='<%=el._id%>'>
-                    <i class="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                <% }) %>
-              </tbody>
-            </table>
-          </div><!-- end task table -->
-        </div><!-- end card body -->
-
+                  <button class="btn btn-outline-danger mt-2" title="Delete task" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#todoDelete-modal" 
+                  data-id='<%=el._id%>'>
+                  <i class="fa-solid fa-trash"></i> Delete task
+                  </button>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
         <!-- card footer -->
         <div class="card-footer d-flex flex-wrap justify-content-center gap-3">
           <a class="btn btn-outline-success my-3" href="/calendar">View all dates</a>
@@ -122,7 +92,7 @@
       <% } else { %>
         <!-- card body without tasks -->
           <p class="lead text-start">No tasks on this day. Would you like to add any?</p>
-          <button class="btn btn-success" type="button" 
+          <button class="btn btn-lg btn-success" type="button" 
           data-bs-toggle="modal" 
           data-bs-target="#createTodo-modal" 
           aria-expanded="false" aria-controls="createTodo-modal">

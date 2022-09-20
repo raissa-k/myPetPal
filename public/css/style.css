@@ -38,29 +38,19 @@
 	border-top: 1px solid #d9d9d9;
 }
 
-.dataTable-wrapper.no-footer .dataTable-container {
-	border-bottom: 1px solid #d9d9d9;
-}
-
 .dataTable-top, .dataTable-bottom {
-  width: 100%;
-  --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
+    margin-inline-end: 1.5rem;;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
 .dataTable-selector {
   display: block;
-  width: 100%;
   padding: .375rem 2.25rem .375rem .75rem;
   -moz-padding-start: calc(0.75rem - 3px);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
   color: #212529;
   background-color: #fff;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
@@ -77,7 +67,6 @@
 
 .dataTable-input {
 	margin-bottom: 1rem!important;
-  margin-top: 1rem!important;
   display: block;
   width: auto;
   padding: .375rem .75rem;

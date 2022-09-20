@@ -1,4 +1,4 @@
-<form id="todoEdit-form" method="dialog" action="/todos/edit/" class="form-group mx-auto gap-3">
+<form id="todoEdit-form" method="dialog" action="/todos/edit/" class="form-group mx-auto px-2 gap-3">
 	<input type="hidden" name="todoId" id="modalId" />
 	<div class="form-floating mb-3">
 		<select name="petName" id="modalPet" class="form-select"
@@ -20,13 +20,13 @@
 
 	<!-- Date picker -->
 	<div class="mb-3 text-start">
-		<label for="modalDate" class="form-label">Pick a new date, or keep the current one.</label>
+		<label for="modalDate" class="fs-5 form-label">Pick a new date, or keep the current one.</label>
 		<input class="form-control col-form" type="date" name="date" id="modalDate" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10) %>" required>
 	</div>
 
 	<!-- FORMAT: -->
-	<fieldset class="row gx-0 gy-2" role="radiogroup" aria-required="true">
-		<legend class="text-start fs-6">Pick a pre-made task or type one below
+	<fieldset class="list-group mx-0 w-auto rounded-top" role="radiogroup" aria-required="true">
+		<legend class="text-start fs-5">Pick a pre-made task or type one below
 		</legend>
 		<%- include('todoitem-form-radio.ejs', {id: "editradio1" , value: "Feed pet" ,
 			icon: "fa-bowl-food" }) %>
@@ -46,17 +46,19 @@
 		<%- include('todoitem-form-radio.ejs', {id: "editradio8" , value: "Vet appointment" , icon: "fa-notes-medical" }) %>
 
 		<!-- custom input -->
-		<div class="input-group">
-			<input class="btn-check" type="radio" value="" aria-label="Select to edit or input a custom task" name="todoItem" id="modal-otherTodo" checked>
-			<label class="btn btn-outline-success border border-success rounded-start" for="otherTodo"><i class="fa-solid fa-marker"></i>Custom task
+		<div class="list-group-item justify-content-between d-flex flex-wrap py-3">
+			<label class="d-flex gap-2 mb-1">
+				<input class="form-check-input flex-shrink-0" type="radio" aria-label="Select to edit or input a custom task" name="todoItem" id="modal-otherTodo" checked  value="">
+				<i class="fa-solid mt-1 fa-marker text-muted"></i>Custom task
 			</label>
-			<input id="modal-inputOtherTodo" class="form-control border-success"
-			aria-label="Text input for your custom task" />
+			<div class="d-inline mt-1">
+				<input id="modal-inputOtherTodo" class="form-control" aria-label="Text input for your custom task" />
+			</div>
 		</div>
 	</fieldset>
 		
-	<div class="mt-4 text-end">
-		<button id="todoEdit-dismiss" type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal">Close</button>
-		<button type="submit" id="todoEdit-button" class="btn btn-lg btn-success">Submit</button>
+	<div class="mt-2 d-flex justify-content-between flex-wrap">
+		<button id="todoEdit-dismiss" type="button" class="btn btn-lg btn-secondary mt-2" data-bs-dismiss="modal">Close</button>
+		<button type="submit" id="todoEdit-button" class="btn btn-lg btn-success mt-2">Submit</button>
 	</div>
 </form>
