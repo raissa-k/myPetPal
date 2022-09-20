@@ -31,10 +31,10 @@
   <div class="row mx-2 mb-4">
     <div class="col col-sm-12 col-md-10 col-lg-8 mx-auto">
       <div class="card">
-        <div class="card-header d-flex align-items-center">
-          <i class="fa-solid fa-list-check text-success fa-2xl align-self-baseline mt-2  me-3"></i>
+        <div class="card-header d-flex align-items-center px-2">
+          <i class="fa-solid fa-list-check text-success fa-xl align-self-baseline mt-2 pt-sm-1 me-1 me-sm-2"></i>
           <h1 class="fs-2 py-1">
-            <%= calendar.toLocaleDateString('en', { year: 'numeric' , month: 'short' , day: '2-digit' }) %>
+            <%= calendar.toLocaleDateString('en', { year: 'numeric' , month: 'long' , day: '2-digit' }) %>
           </h1>
         </div>
         
