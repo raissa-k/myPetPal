@@ -13,7 +13,7 @@
 	<div class="mb-3 text-start">
 		<label for="create-date" class="col-form-label fs-5">Pick a date, or leave it
 			blank to add to this day's list.</label>
-		<input class="form-control mx-auto" type="date" name="date" id="create-date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10) %>">
+		<input class="form-control mx-auto" type="date" name="date" id="create-date" value="<%= calendar ? calendar.toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10) %>" required>
 	</div>
 
 	<!-- FORMAT: -->

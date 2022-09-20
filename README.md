@@ -12,7 +12,7 @@ Taking care of our pets is a lot of work! Use this app to keep track of all the 
   + [Home page](#home-page)
   + [Calendar](#calendar)
   + [Pet dashboard](#pet-dashboard)
-  + [Add tasks](#add-tasks)
+  + [Daily task view](#daily-task-view)
 * [Tech Stack](#tech-stack)
 * [Features](#features)
 * [Run Locally](#run-locally)
@@ -41,16 +41,16 @@ To avoid signing up, you may log in with the following credentials:
 ## Screenshots
 
 ### Home page
-![Home Page](https://i.imgur.com/4itp9b7l.png)
+![Home Page](https://i.imgur.com/OnfyBIIl.png)
 
 ### Calendar
-![Calendar view](https://i.imgur.com/JBcxCOtl.png)
+![Calendar view](https://i.imgur.com/g0rZS3Hl.png)
 
 ### Pet dashboard
-![Pet Dashboard](https://i.imgur.com/UhVx5tPl.png)
+![Pet Dashboard](https://i.imgur.com/xZ5pYUvl.png)
 
-### Add tasks
-![Add tasks](https://i.imgur.com/j4AB1z3l.png)
+### Daily task view
+![Daily Task View](https://i.imgur.com/wi5GZthl.png)
 
 
 
@@ -61,7 +61,7 @@ To avoid signing up, you may log in with the following credentials:
 **Server:** Node, Express, MongoDB
 
 **Dependencies:** 
-```bcrypt, connect-mongo, cross-fetch, date-fns, dotenv, ejs, express, express-flash, express-session, method-override, mongodb, mongoose, morgan, node-cache, nodemon, passport, passport-local, validator```
+```apicache, bcrypt, connect-mongo, node-fetch, date-fns, dotenv, ejs, express, express-flash, express-session, method-override, mongodb, mongoose, morgan, node-cache, nodemon, passport, passport-local, unsplash-js, validator```
 
 
 ## Features
@@ -93,6 +93,14 @@ Install dependencies
 
 Start the server
 
+  a) With nodemon
+
+```bash
+  npm run dev
+```
+
+  b) With node
+
 ```bash
   npm run start
 ```
@@ -112,16 +120,19 @@ To run this project, you will need to add the following environment variables to
 - [x] ~~Add cache method for external API calls, namely Unsplash for the index picture~~
 - [x] ~~Increased readability of controllers~~
 - [x] ~~Improved accessibility by adding ARIA roles, adding an accessible date picker, and ensuring buttons, labels and inputs had appropriate names/descriptions.~~
-- [ ] Clean and minimize .css and .js files
-- [ ] Add monthly calendar view for tasks color-coded for each pet and/or type of task
+- [x] ~~Add monthly calendar view for tasks color-coded for each pet and/or type of task~~
 - [x] ~~Improve accessibility by adjusting color contrast, reviewing roles, and ensuring keyboard navigation~~
 - [x] ~~Add accessible modals for task/pet editing.~~
 - [x] ~~Warn users that deletion is permanent.~~
-- [ ] Enable marking tasks complete from All Tasks page
 - [x] ~~Improve a date's to-do list view~~
 - [x] ~~Reproduce and fix an error where an edited pet is duplicated~~
 - [x] ~~Add template partials~~
-- [ ] Re-style the app into a more elegant template
+- [x] ~~Re-style the app into a more elegant template~~
+- [ ] Enable marking tasks complete from All Tasks page
+- [ ] Add different profile pictures for pets, depending on species
+- [ ] Enable password change/reset
+- [ ] Clean and minimize .css and .js files
+- [ ] Add tests
 
 
 ## Lessons Learned
@@ -129,11 +140,10 @@ As a team:
 - We also learned how important good communication is for successful app development as a team.
   * Communicating and tracking issues is critical. Even without Jira, Github projects helps keep track of what needs to be done.
 - Having a clear view of the final product is invaluable to guide decisions, especially when there isn't a team lead
-  * Wireframes and user flows, even with no UI/UX professionals around, helps with such a view
+  * Wireframes and user flows, even with no UI/UX professionals around, help with such a view
 
 On the technical aspect:
 - Handling merge conflicts
-- Bootstrap classes 
 - Working with date formats
 - Storing external API calls in local cache
 - Method overriding
