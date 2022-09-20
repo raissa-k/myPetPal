@@ -41,7 +41,7 @@
           <div class="d-flex flex-wrap flex-column justify-content-between gap-2 mb-2">
             <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#createTodo-modal" aria-expanded="false" aria-controls="createTodo-modal">
               <i class="fa-solid fa-circle-plus"></i> Add task 
-              <span class="visually-hidden">, note that this will open a modal</span>
+              <span class="visually-hidden">, this opens a modal</span>
             </button>
 
             <a class="btn btn-outline-success" href="/todos">View today's list</a>
@@ -75,14 +75,22 @@
             </div>
             <button class="btn btn-success my-2" type="button" data-bs-toggle="modal" data-bs-target="#createPet-modal" aria-expanded="false" aria-controls="createPet-modal">
               <i class="fa-solid fa-circle-plus"></i> Add pet
-              <span class="visually-hidden">, note that this will open a modal</span>
+              <span class="visually-hidden">, this opens a modal</span>
             </button>
           </div>
           <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs mt-3" role="tablist">
+            <ul class="nav nav-pills card-header-pills mt-3" role="tablist">
               <% pets.forEach (el=> { %>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link text-decoration-underline text-dark" id="tab-<%=el._id%>" data-bs-toggle="tab" data-bs-target="#tab-pane-<%=el._id%>" type="button" role="tab" aria-controls="tab-pane-<%=el._id%>" aria-selected="true"><%= el.petName %></button>
+                <li class="nav-item me-1" role="presentation">
+                  <button class="nav-link"
+                  id="tab-<%=el._id%>" 
+                  data-bs-toggle="tab" 
+                  data-bs-target="#tab-pane-<%=el._id%>" 
+                  type="button" role="tab" 
+                  aria-controls="tab-pane-<%=el._id%>" 
+                  aria-selected="true">
+                  <%= el.petName %>
+                </button>
                 </li>
                 <% }) %>
             </ul>
@@ -145,7 +153,6 @@
   <%- include("partials/modal-blank", {id: "petEdit-modal", title: "Edit a pet", textcolor: "text-success", partial: "form-pet-edit", footer: "no" }) %>
 
   <%- include("partials/modal-blank", {id: "petDelete-modal", title: "Delete a pet", textcolor: "text-danger", partial: "form-pet-delete", footer: "no" }) %>   
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="js/pet.js"></script>
