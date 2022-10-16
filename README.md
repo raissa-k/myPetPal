@@ -28,9 +28,8 @@ Taking care of our pets is a lot of work! Use this app to keep track of all the 
 
 ## Demo
 
-[myPetPal](https://myPetPal.onrender.com)
+[myPetPal](https://my-petpal.up.railway.app/)
 
-Note that the website is hosted on Render and may take a while to load if it has been inactive for a while.
 ```
 To avoid signing up, you may log in with the following credentials:
 - Email: tester3@gmail.com
