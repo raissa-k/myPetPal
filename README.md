@@ -28,7 +28,7 @@ Taking care of our pets is a lot of work! Use this app to keep track of all the 
 
 ## Demo
 
-[myPetPal](https://my-petpal.up.railway.app/)
+[myPetPal](https://mypetpal.raissak.com/)
 
 ```
 To avoid signing up, you may log in with the following credentials:
