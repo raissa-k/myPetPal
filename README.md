@@ -9,10 +9,6 @@ Taking care of our pets is a lot of work! Use this app to keep track of all the 
 * [Links:](#links-)
 * [Demo](#demo)
 * [Screenshots](#screenshots)
-  + [Home page](#home-page)
-  + [Calendar](#calendar)
-  + [Pet dashboard](#pet-dashboard)
-  + [Daily task view](#daily-task-view)
 * [Tech Stack](#tech-stack)
 * [Features](#features)
 * [Run Locally](#run-locally)
@@ -39,6 +35,12 @@ To avoid signing up, you may log in with the following credentials:
 
 ## Screenshots
 
+<details><summary>
+  
+  ### Screenshots
+  
+  </summary>
+
 ### Home page
 ![Home Page](https://i.imgur.com/OnfyBIIl.png)
 
@@ -50,8 +52,10 @@ To avoid signing up, you may log in with the following credentials:
 
 ### Daily task view
 ![Daily Task View](https://i.imgur.com/wi5GZthl.png)
+  
+  </details>
 
-
+![Gif animation of navigation through the project](https://user-images.githubusercontent.com/91985540/197553472-f03c6ce4-cc50-457b-981e-15697d3381ce.gif)
 
 ## Tech Stack
 
